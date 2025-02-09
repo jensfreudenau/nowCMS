@@ -1,0 +1,62 @@
+@import url('https://fonts.bunny.net/css?family=Nunito');
+@import 'dropzone/src/dropzone';
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+@import '@fortawesome/fontawesome-free/css/fontawesome.css';
+@import '@fortawesome/fontawesome-free/css/regular.css';
+@import '@fortawesome/fontawesome-free/css/solid.css';
+@import '@fortawesome/fontawesome-free/css/brands.css';
+@import 'venobox/dist/venobox.min.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+    background-color: white;
+    color: black;
+}
+
+article .content a {
+    text-decoration-line: underline;
+}
+
+article .content p {
+    font-weight: 100;
+}
+
+article ul li {
+    font-weight: 100;
+}
+
+article ul {
+    padding-left: 0.75rem;
+}
+
+#dt-length-0 {
+    width: 70px;
+}
+
+.stackedit-button-wrapper img {
+    width: 1.6em;
+    height: 1.6em;
+    vertical-align: bottom;
+    margin-right: 0.33em;
+}
+
+.vbox-title {
+    background-color: #CCCCCC;
+    font-size: 15px;
+}
+
+//.vbox-child {
+//    max-width: 2500px;
+//}
+
+.vbox-container img {
+    //max-width: 1400px;
+    //max-height: 1400px;
+}
+
+.admin img {
+    max-height: 150px;
+}
+
