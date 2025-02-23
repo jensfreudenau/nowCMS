@@ -59,6 +59,7 @@ class MediaController extends BaseController
                 ['URL' => env('APP_BASE_DOMAIN_NAME'), 'name' => env('APP_BASE_DOMAIN_NAME')],
                 ['URL' => env('APP_BERLINER_PHOTO_BLOG_DOMAIN_NAME'), 'name' => env('APP_BERLINER_PHOTO_BLOG_DOMAIN_NAME')],
                 ['URL' => env('APP_STREET_PHOTO_BLOG_DOMAIN_NAME'), 'name' => env('APP_STREET_PHOTO_BLOG_DOMAIN_NAME')],
+                ['URL' => env('APP_FREUDE_NOW_BLOG_DOMAIN_NAME'), 'name' => env('APP_FREUDE_NOW_BLOG_DOMAIN_NAME')],
             ]
         ]);
     }

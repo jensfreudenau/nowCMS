@@ -52,8 +52,7 @@ class ContentController extends BaseController
         $request->merge(['slug' => $slug]);
         $request->merge(['active' => $request->has('active')]);
         $request->merge(['single' => $request->has('single')]);
-        $websites = Websites::cases();
-        $request->merge(['website' => $websites[$request->website]->value]);
+
         $content = Content::create($request->all());
         $tags = $this->createTags($request->input('tags'));
         $this->saveToStorage($request, $content);

@@ -12,6 +12,7 @@ use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
+use \Illuminate\Support\Facades\Request as RequestFacade;
 
 class FrontendController extends BaseController
 {
@@ -24,6 +25,7 @@ class FrontendController extends BaseController
             ->whereLike('website', config('app.base_domain_path') . '%')
             ->orderByDesc('created_at')
             ->simplePaginate(config('app.blog_entries_per_page'));
+
         $heading = $meta = 'Reisen';
         if (config('app.base_domain_path') === '') {
             Log::error($request->fullUrl());

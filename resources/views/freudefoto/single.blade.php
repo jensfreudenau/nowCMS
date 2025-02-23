@@ -8,7 +8,7 @@
 <x-freudefoto.layout>
     @push('meta_after')
         <meta name="description" content="{{config('app.freudefoto_title')}} - {{$content['metadescription']}}">
-        <link rel="canonical" href="https://freudefoto.de/single/{{$content->slug}}">
+        <link rel="canonical" href="{{Config::get('app.base_domain')}}/single/{{$content->slug}}">
         <title>{{config('app.freudefoto_title')}} - {!! Str::words($content->header, 10) !!}</title>
     @endpush
     <x-slot:heading></x-slot:heading>

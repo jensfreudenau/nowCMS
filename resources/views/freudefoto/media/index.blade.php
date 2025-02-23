@@ -1,6 +1,6 @@
 @push('meta_after')
     <meta name="description" content="{{config('app.freudefoto_title')}} - Archive">
-    <link rel="canonical" href="https://freudefoto.de/media">
+    <link rel="canonical" href="{{Config::get('app.base_domain')}}/media">
     <title>{{config('app.freudefoto_title')}} Archive</title>
 @endpush
 <x-freudefoto.layout>

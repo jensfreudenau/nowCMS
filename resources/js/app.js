@@ -21,12 +21,14 @@ import Moment from 'moment';
 import languageDE from 'datatables.net-plugins/i18n/de-DE.mjs';
 import VenoBox from 'VenoBox';
 import Tagify from '@yaireo/tagify'
+import hljs from 'highlight.js';
 // import EditorJS from '@editorjs/editorjs';
 // import Header from '@editorjs/header';
 // import Embed from '@editorjs/embed';
 
 window.VenoBox = VenoBox;
 window.Tagify = Tagify;
+window.hljs = hljs;
 window.DataTable = dataTable;
 window.Moment = Moment;
 window.languageDE = languageDE;

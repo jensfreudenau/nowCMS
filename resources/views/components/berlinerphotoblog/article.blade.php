@@ -8,7 +8,10 @@
         @php
             $media = $content->getFirstMedia('images');
         @endphp
-        <x-berlinerphotoblog.imageLink :media="$media" :content="$content"></x-berlinerphotoblog.imageLink>
+        @if($media)
+            <x-berlinerphotoblog.imageLink :media="$media" :content="$content"></x-berlinerphotoblog.imageLink>
+        @endif
+
     </div>
     @php
         $tags = $content?->tags->pluck('name', 'id');

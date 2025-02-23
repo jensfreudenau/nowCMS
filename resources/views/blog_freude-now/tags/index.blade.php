@@ -1,6 +1,6 @@
-<x-streetphotoberlin.layout>
+<x-blog_freude-now.layout>
     @push('meta_after')
-        <meta name="description" content="{{config('app.streetphoto_title')}} - tag {{$tag->name}}">
+        <meta name="description" content="{{config('app.freude_now_blog_title')}} - tag {{$tag->name}}">
         <link rel="canonical" href="{{Config::get('app.base_domain')}}/tags/{{$tag->name}}">
         <title>{{config('app.streetphoto_title')}} - tag {{$tag->name}}</title>
     @endpush
@@ -8,6 +8,6 @@
             <h2 class="font-thin text-5xl text-gray-900 lowercase">Tag: #{{$tag->name}}</h2>
         </div>
     @foreach($contents as $content)
-        <x-streetphotoberlin.article :content="$content" single="false"></x-streetphotoberlin.article>
+        <x-blog_freude-now.article :content="$content" single="false"></x-blog_freude-now.article>
     @endforeach
-</x-streetphotoberlin.layout>
+</x-blog_freude-now.layout>

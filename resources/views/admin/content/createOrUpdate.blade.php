@@ -58,24 +58,24 @@
                         <div class="px-12">
                             <div>
                                 <select name="website">
-                                    @foreach ($websites as $key => $website)
-                                        <option value="{{$website->value}}" {{(old('website', $website->value) == $contentWebsite ? 'selected' : '')}} > {{$website->name}} </option>
+                                    @foreach (\App\Enums\Websites::cases() as $case) {
+                                        <option value="{{$case->value}}">{{$case->label()}}</option>;
                                     @endforeach
                                 </select>
                             </div>
                         </div>
-                        <div class="p-12">
-                            <div>
-                                <label for="category" class="pr-4">Kategorie</label>
-                                <select id="category" name="category_id" class="border-0">
-                                    @foreach($categories as $key => $category)
-                                        <option value="{{$key}}" {{(old('category_id', $content->category_id) == $key ? 'selected' : '')}} > {{$category}} </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
+{{--                        <div class="p-12">--}}
+{{--                            <div>--}}
+{{--                                <label for="category" class="pr-4">Kategorie</label>--}}
+{{--                                <select id="category" name="category_id" class="border-0">--}}
+{{--                                    @foreach($categories as $key => $category)--}}
+{{--                                        <option value="{{$key}}" {{(old('category_id', $content->category_id) == $key ? 'selected' : '')}} > {{$category}} </option>--}}
+{{--                                    @endforeach--}}
+{{--                                </select>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                         <div class="px-12">
-                            <x-forms.textarea :text="Str::markdown(old('text', $content->text ?? ''))" name="text" id="contentText"/>
+                            <x-forms.textarea :text="old('text', $content->text ?? '')" name="text" id="contentText"/>
                         </div>
                         <fieldset>
                             <div class="px-12 pt-10">

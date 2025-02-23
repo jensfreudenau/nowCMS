@@ -1,9 +1,9 @@
 @push('meta_after')
-    <meta name="description" content="s{{config('app.streetphoto_title')}} - media overview">
+    <meta name="description" content="{{config('app.freude_now_blog_title')}} - media overview">
     <link rel="canonical" href="{{Config::get('app.base_domain')}}/archive">
     <title>{{config('app.streetphoto_title')}} - media</title>
 @endpush
-<x-streetphotoberlin.layout>
+<x-blog_freude-now.layout>
     <div class="mt-4 p-6 border-gray-50 shadow-sm bg-white border">
         <h2 class="font-thin text-5xl text-gray-900" >Medias
         </h2>
@@ -17,7 +17,7 @@
                         @if(Str::before($content->website, '.') === Str::before(config('app.base_domain', env('APP_BASE_DOMAIN')), '.'))
                             @php $imageItems = $content->getMedia('images'); @endphp
                             @foreach($imageItems as $imageItem)
-                                <x-streetphotoberlin.imageLink :media="$imageItem" :content="$content"></x-streetphotoberlin.imageLink>
+                                <x-blog_freude-now.imageLink :media="$imageItem" :content="$content"></x-blog_freude-now.imageLink>
                             @endforeach
                         @endif
                     @endforeach
@@ -39,4 +39,4 @@
             });
         </script>
     @endpush
-</x-streetphotoberlin.layout>
+</x-blog_freude-now.layout>

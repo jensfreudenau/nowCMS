@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\DispatcherController;
@@ -11,13 +10,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QueuesController;
 use App\Http\Controllers\TagController;
 use App\Models\Content;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
-
-
-
 
 
 Route::domain(config('app.berliner_photo_blog_domain'))->group(function () {
@@ -30,8 +25,6 @@ Route::domain(config('app.freude_foto_domain'))->group(function () {
 Route::domain(config('app.street_photo_blog_domain'))->group(function () {
     Route::get('/archive', [MediaController::class, 'streetphotoindex']);
 });
-
-
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
 Route::get('category', [CategoryController::class, 'index'])->name('category');
@@ -47,8 +40,6 @@ Route::get('/feed/atom', function () {
 Route::get('/feed/rss', function () {
     return redirect('/feed', 303);
 });
-
-
 
 Route::middleware(['auth'])->group(function () {
     Route::get('tag/list', [TagController::class, 'list'])->name('tag/list');
@@ -118,14 +109,12 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('categories/{category}', [CategoryController::class, 'destroy'])->name('category.destroy');
     Route::post('categories/store', [CategoryController::class, 'store'])->name('categories.store');
     Route::put('categories/{id}', [CategoryController::class, 'update'])->name('categories.update');
-
 });
 Route::get('/tag/{tagId}', [TagController::class, 'index']);
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 Route::get('/', [FrontendController::class, 'index'])->name('dashboard');
 
 Route::fallback(function () {
-
     $path = request()->path();
     // Try to find a similar page
     $similarPage = Content::where('slug', 'like', '%' . Str::slug(Str::words($path, 1, '')) . '%')

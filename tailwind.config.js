@@ -9,7 +9,14 @@ export default {
         './resources/views/**/*.blade.php',
         './src/**/*.{html,js}'
     ],
-
+    layers: {
+        'no-tailwindcss': {
+            // Add any styles you want to disable here
+            '.no-tailwindcss': {
+                all: 'unset',
+            },
+        },
+    },
     theme: {
         extend: {
             colors: {
@@ -37,8 +44,10 @@ export default {
             },
         },
     },
-
+    safelist: [{
+        pattern: /hljs+/,
+    }],
     plugins: [
-        forms
+        forms, require('tailwind-highlightjs')
     ],
 };

@@ -1,7 +1,7 @@
 @php use Carbon\Carbon; @endphp
 @push('meta_after')
     <meta name="description" content="streetphoto {{$content->metadescription}}">
-    <link rel="canonical" href="https://streetphotoberlin.com/single/{{$content->slug}}">
+    <link rel="canonical" href="{{Config::get('app.base_domain')}}/single/{{$content->slug}}">
     <title>{{config('app.streetphoto_title')}} - {{$content->header}}</title>
 @endpush
 <x-streetphotoberlin.layout>

@@ -14,22 +14,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import 'nord/src/sass/nord.scss';
 
+article p {
+    padding-bottom: 10px;
+}
 article p a {
     text-decoration-line: underline;
 }
-body {
-    background-color: $nord0;
-    color: $nord8;
-}
 
+code{
+    background-color: #f0f0f0;
+    margin-bottom: 12px;
+}
 article .content a {
     text-decoration-line: underline;
-}
-
-article .content p {
-    font-weight: 100;
 }
 
 article ul li {

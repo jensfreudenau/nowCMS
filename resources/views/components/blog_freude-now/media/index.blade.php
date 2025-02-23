@@ -1,9 +1,7 @@
-@push('meta_after')
-    <meta name="description" content="{{config('app.berliner_photo_blog_title')}} - Media">
-    <link rel="canonical" href="{{Config::get('app.base_domain')}}/archive">
-    <title>{{config('app.berliner_photo_blog_title')}} - media</title>
-@endpush
-<x-berlinerphotoblog.layout>
+@section('title', ' Photo Blog from Berlin - Archive')
+<x-blog_freude-now.layout>
+    <x-slot:heading></x-slot:heading>
+    <x-slot:meta>Photo Blog from Berlin Archive</x-slot:meta>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Archiv') }}
@@ -12,7 +10,8 @@
     <div class="text-gray-900 pl-10">
         <div class="container mx-auto">
             @foreach($categories as $category)
-                <article class=" m-4 p-6 bg-gray-100 border border-gray-50 shadow-sm" id="gallery"> {{$category->name}}
+                <article class=" m-4 p-6 bg-gray-100 border border-gray-50 shadow-sm" id="gallery">
+                {{$category->name}}
                     <div class="p-5 sm:p-8">
                         <div class="columns-1 gap-5 sm:columns-2 sm:gap-8 md:columns-3 lg:columns-3 [&>img:not(:first-child)]:mt-8">
                             @foreach($category->contents as $content)
@@ -20,13 +19,13 @@
                                     @php $imageItems = $content->getMedia('images'); @endphp
                                     @foreach($imageItems as $imageItem)
                                         <a
-                                            class="my-image-links w-1/2"
+                                            class="my-image-links"
                                             title="{{$content->header}}"
                                             data-overlay="#ffffff"
                                             data-maxwidth="800px"
                                             data-gall="{{$category->name}}"
-                                            href="{{asset('storage/')}}/{{$imageItem->getPathRelativeToRoot()}}">
-                                                <img class="w-full max-w-full rounded-lg mb-6" src="{{asset('storage/')}}/{{$imageItem->getPathRelativeToRoot('big_square')}}" alt="{{$imageItem->headline}}" />
+                                            href="{{$imageItem->getUrl()}}">
+                                                <img class="w-full max-w-full rounded-lg mb-6" src="{{$imageItem->getUrl('thumb')}}" alt="{{$imageItem->headline}}" />
                                         </a>
                                     @endforeach
                                 @endif
@@ -50,4 +49,4 @@
             });
         </script>
     @endpush
-</x-berlinerphotoblog.layout>
+</x-blog_freude-now.layout>

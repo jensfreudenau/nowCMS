@@ -43,6 +43,7 @@
         "moment": "^2.30.1",
         "nord": "^0.2.1",
         "sortablejs": "^1.15.3",
+        "tailwind-highlightjs": "^2.0.1",
         "venobox": "^2.1.8"
     }
 }
