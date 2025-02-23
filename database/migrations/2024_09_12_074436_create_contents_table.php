@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('category_id');
             $table->string('date', 12)->default('');
             $table->string('header', 250)->default('');
-            $table->string('metadescription', 250)->nullable();
+            $table->longText('metadescription', 250)->nullable();
             $table->string('slug', 250)->default('');
             $table->longText('text');
             $table->boolean('album')->nullable();

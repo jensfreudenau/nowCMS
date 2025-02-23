@@ -15,10 +15,10 @@ enum Websites: string
     public function label(): string
     {
         return match($this) {
-            self::FREUDEFOTO => 'freudefoto',
-            self::BERLINERPHOTOBLOG => 'berlinerphotoblog',
-            self::STREETPHOTOBERLIN => 'streetphotoberlin',
-            self::FREUDE_NOW => 'freude_now',
+            self::freudefoto => 'freudefoto',
+            self::berlinerphotoblog => 'berlinerphotoblog',
+            self::streetphotoberlin => 'streetphotoberlin',
+            self::freude_now => 'freude_now',
         };
     }
 

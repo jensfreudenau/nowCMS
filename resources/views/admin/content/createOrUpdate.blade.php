@@ -248,11 +248,7 @@
                         @if(isset($content) && $content->upload)
                         const files = {!! json_encode($content->upload) !!}
 
-                        for(
-                        const i
-                    in
-                        files
-                    )
+                        for(const i in files)
                         {
                             const file = files[i];
                             this.options.addedfile.call(this, file)

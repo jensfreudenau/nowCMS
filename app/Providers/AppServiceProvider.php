@@ -31,7 +31,6 @@ class AppServiceProvider extends ServiceProvider
 
     protected function loadEnvironmentFromDomain(): void
     {
-
         Config::set('app.blog_entries_per_page', env('BLOG_ENTRIES_PER_PAGE'));
         if (request()->getHost() == env('APP_BERLINER_PHOTO_BLOG_DOMAIN')) {
             Config::set('app.blog_entries_per_page', env('BERLINER_PHOTO_BLOG_ENTRIES_PER_PAGE'));
@@ -39,9 +38,27 @@ class AppServiceProvider extends ServiceProvider
         elseif(request()->getHost() == env('APP_STREET_PHOTO_BLOG_DOMAIN')) {
             Config::set('app.blog_entries_per_page', env('STREET_PHOTO_BLOG_ENTRIES_PER_PAGE'));
         }
-        $domain = Request::getHost();
+
+
+        $domain = $this->getDomain(request()->getHost());
+        if ($domain === false) {
+            $domain = env('APP_BASE_DOMAIN');
+        }
         Config::set('app.base_domain', $domain);
-        $domain = Str::replace('blog.', 'blog_', $domain);
         Config::set('app.base_domain_path', Str::before($domain, '.'));
+    }
+
+    /**
+     * @param $url
+     * @return false|string
+     */
+    protected function getDomain($url): false|string
+    {
+        $pieces = parse_url($url);
+        $domain = $pieces['host'] ?? $pieces['path'];
+        if (preg_match('/(?P<domain>[a-z0-9][a-z0-9\-]{0,63}\.[a-z\.]{1,5})$/i', $domain, $regs)) {
+            return $regs['domain'];
+        }
+        return false;
     }
 }
