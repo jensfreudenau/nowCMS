@@ -12,30 +12,8 @@
         <h2 class="text-xl tracking-tight py-3">Posts</h2>
         <ul class="space-y-4 pt-7">
             @foreach($contents as $content)
-
                 <li class="grid gap-2 sm:grid-cols-[auto_1fr] sm:[&amp;_q]:col-start-2">
                     <x-link href="/single/{{$content->slug}}" title="{{$content->header}}">
-                        <span class="font-thin text-sm">{{$content->date}}</span>
-                        <span class="underline tracking-wider font-thin text-base">{{$content->header}}</span>
-                    </x-link>
-                </li>
-                <li class="grid gap-2 sm:grid-cols-[auto_1fr] sm:[&amp;_q]:col-start-2">
-                    <x-link href="/single/{{$content->id}}" title="{{$content->header}}">
-                        <span class="font-thin text-sm">{{$content->date}}</span>
-                        <span class="underline tracking-wider font-thin text-base">{{$content->header}}</span>
-                    </x-link>
-                </li><li class="grid gap-2 sm:grid-cols-[auto_1fr] sm:[&amp;_q]:col-start-2">
-                    <x-link href="/single/{{$content->id}}" title="{{$content->header}}">
-                        <span class="font-thin text-sm">{{$content->date}}</span>
-                        <span class="underline tracking-wider font-thin text-base">{{$content->header}}</span>
-                    </x-link>
-                </li><li class="grid gap-2 sm:grid-cols-[auto_1fr] sm:[&amp;_q]:col-start-2">
-                    <x-link href="/single/{{$content->id}}" title="{{$content->header}}">
-                        <span class="font-thin text-sm">{{$content->date}}</span>
-                        <span class="underline tracking-wider font-thin text-base">{{$content->header}}</span>
-                    </x-link>
-                </li><li class="grid gap-2 sm:grid-cols-[auto_1fr] sm:[&amp;_q]:col-start-2">
-                    <x-link href="/single/{{$content->id}}" title="{{$content->header}}">
                         <span class="font-thin text-sm">{{$content->date}}</span>
                         <span class="underline tracking-wider font-thin text-base">{{$content->header}}</span>
                     </x-link>

@@ -38,14 +38,18 @@ class AppServiceProvider extends ServiceProvider
         elseif(request()->getHost() == env('APP_STREET_PHOTO_BLOG_DOMAIN')) {
             Config::set('app.blog_entries_per_page', env('STREET_PHOTO_BLOG_ENTRIES_PER_PAGE'));
         }
+        elseif(request()->getHost() == env('APP_FREUDE_NOW_BLOG_DOMAIN')) {
+            Config::set('app.blog_entries_per_page', env('FREUDE_NOW_BLOG_ENTRIES_PER_PAGE'));
+        }
 
-
-        $domain = $this->getDomain(request()->getHost());
-        if ($domain === false) {
-            $domain = env('APP_BASE_DOMAIN');
+        $domain = Request::getHost();
+        $domainPath = Str::before($domain, '.');
+        if(Config::get('app.freude_now_blog_domain') === $domain) {
+            $domainPathUnderline = Str::replace('blog.', 'blog_', $domain);
+            $domainPath = Str::before($domainPathUnderline, '.');
         }
         Config::set('app.base_domain', $domain);
-        Config::set('app.base_domain_path', Str::before($domain, '.'));
+        Config::set('app.base_domain_path', $domainPath);
     }
 
     /**

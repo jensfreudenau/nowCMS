@@ -189,8 +189,6 @@
                                     duplicates: false,
                                 }
                             })
-                            // var clist = response;
-
                         }
                     });
                 })
