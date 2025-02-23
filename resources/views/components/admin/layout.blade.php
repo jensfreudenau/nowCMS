@@ -1,5 +1,5 @@
 <x-admin.header />
-<body class="h-full">
+<body class="h-full bg-white">
 <div class="min-h-screen">
     <nav class="">
         <div class="mx-auto  px-4 sm:px-6 lg:px-8 bg-white">

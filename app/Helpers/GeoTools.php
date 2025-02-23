@@ -2,6 +2,8 @@
 
 namespace App\Helpers;
 
+use Imagick;
+
 final class GeoTools
 {
     public static function createSmallImages($file)

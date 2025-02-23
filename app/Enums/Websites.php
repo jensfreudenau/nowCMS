@@ -6,10 +6,10 @@ use Illuminate\Support\Collection;
 
 enum Websites: string
 {
-    case FREUDEFOTO = 'freudefoto.de';
-    case BERLINERPHOTOBLOG = 'berlinerphotoblog.de';
-    case STREETPHOTOBERLIN = 'streetphotoberlin.com';
-    case FREUDE_NOW = 'blog.freude-now.de';
+    case freudefoto = 'freudefoto.de';
+    case berlinerphotoblog = 'berlinerphotoblog.de';
+    case streetphotoberlin = 'streetphotoberlin.com';
+    case freude_now = 'blog.freude-now.de';
 
 
     public function label(): string

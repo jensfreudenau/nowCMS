@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="h-full" style="background-color: #3f092a">
+<html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html">

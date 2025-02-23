@@ -4,7 +4,7 @@
             <div class="bg-white overflow-hidden">
                 <div class="p-6 text-gray-900 pl-10">
                     <p class="pb-11">
-                        <x-button-new href="/contents/create">Neuer Content</x-button-new>
+                        <x-button-new href="/contents/create">{{__('Neuer Content')}}</x-button-new>
                     </p>
                     <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
                         <div id="dataTable_length"></div>
