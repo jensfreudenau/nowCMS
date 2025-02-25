@@ -1,7 +1,5 @@
 <x-admin.layout>
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden">
+
                 <div class="p-6 text-gray-900 pl-10">
                     <p class="pb-11">
                         <x-button-new href="/categories/create">Neue Kategorie</x-button-new>
@@ -16,9 +14,11 @@
                             </thead>
                             <tbody>
                             @foreach($categories as $category)
+
                                 <tr>
                                     <td class="border-b border-slate-100 dark:border-slate-700 py-4">
-                                        {{$category->name}} <br>
+
+                                        {{$category->translate('de')->name}} <br>
                                         {{$category->translate('en')->name}}
 
                                     </td>
@@ -31,7 +31,5 @@
                         </table>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
+
 </x-admin.layout>

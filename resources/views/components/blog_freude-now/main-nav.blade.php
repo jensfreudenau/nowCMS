@@ -1,7 +1,7 @@
 <div class="flex items-center">
     <div class="hidden md:block">
         <div class="flex items-baseline space-x-4 uppercase">
-            <x-link class="text-pink-500" href="/" title="Jens Freudenau's Blog Home">Home -</x-link>
+            <x-link class="text-pink-500" href="https://freude-now.de" title="Jens Freudenau Home">Home -</x-link>
             <x-link class="text-pink-500" href="/blog" title="Blog">Blog -</x-link>
             <x-link class="text-pink-500" href="/about" title="Archive">about</x-link>
         </div>

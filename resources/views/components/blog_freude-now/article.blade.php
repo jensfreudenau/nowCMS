@@ -34,7 +34,7 @@
                 <p class="mb-4 font-thin "> {!! Str::markdown($content->text ) !!} </p>
             @endif
         </div>
-        <div class="px-4">
+        <div class="px-4 py-6">
             @foreach($tags as $key => $tag)
                 <x-blog_freude-now.button-tag href="/tag/{{$tag}}">#{{$tag}}</x-blog_freude-now.button-tag>
             @endforeach

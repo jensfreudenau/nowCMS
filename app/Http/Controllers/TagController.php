@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Category;
 use App\Models\Content;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Models\Tag;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 
 class TagController extends BaseController
 {
-    public function index($tagId)
+    public function tag($tagId)
     {
         if (is_numeric($tagId)) {
             $tag = Tag::find($tagId);
@@ -33,6 +33,7 @@ class TagController extends BaseController
                 );
         }
         $tag = Tag::where('name', $tagId)->first();
+
         if ($tag === null) {
             $slug = request()->get('slug');
             if ($slug) {
@@ -75,6 +76,26 @@ class TagController extends BaseController
         );
     }
 
+    public function index()
+    {
+        $tags = json_encode(Tag::orderBy('name')->get());
+        return view('admin/tag.update', compact('tags'));
+    }
+
+    public function update(Request $request, $tagId): JsonResponse
+    {
+        $tag = Tag::find($tagId);
+        $request->validate(['name' => 'required|string|max:255']);
+        $tag->update(['name' => $request->name]);
+
+        return response()->json(['success' => true]);
+    }
+
+    public function display(): JsonResponse
+    {
+        return response()->json(Tag::orderBy('name')->get());
+    }
+
     public function tags(): JsonResponse
     {
         return response()->json([
@@ -83,16 +104,12 @@ class TagController extends BaseController
         ]);
     }
 
-    public function list(): View|Factory|Application
-    {
-        $tags = Tag::orderBy('name')->get();
 
-        return view('admin/tag.list', compact('tags'));
-    }
 
-    public function edit($id): View|Factory|Application
-    {
-        $tag = Tag::find($id);
-        return view('/admin/tag.update', compact('tag'));
-    }
+//    public function edit($id): View|Factory|Application
+//    {
+//        $tag = Tag::find($id);
+//        $tags = Tag::orderBy('name')->get();
+//        return view('/admin/tag.update', compact('tags'));
+//    }
 }

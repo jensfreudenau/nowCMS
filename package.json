@@ -6,7 +6,6 @@
         "build": "vite build"
     },
     "devDependencies": {
-        "@hammaadhrasheedh/editorjs-iframe": "^1.0.21",
         "@tailwindcss/forms": "^0.5.9",
         "@vitejs/plugin-basic-ssl": "^1.2.0",
         "alpinejs": "^3.4.2",
@@ -37,6 +36,7 @@
         "datatables.net-plugins": "^2.1.7",
         "dropzone": "^6.0.0-beta.2",
         "froala-editor": "^4.2.2",
+        "highlight.js": "^11.11.1",
         "jquery": "^3.7.1",
         "jquery-ui": "^1.14.0",
         "markdown-it": "^14.1.0",

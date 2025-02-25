@@ -1,7 +1,5 @@
 <x-admin.layout>
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden">
+
                 <div class="p-6 text-gray-900 pl-10">
                     <div id="display-content"></div>
                     <p class="pb-11">
@@ -90,9 +88,7 @@
                         </table>
 
                     </div>
-                </div>
-            </div>
-        </div>
+
 <script type="module">
     jQuery('#button_start_jobs').on("click", function (evt) {
         sendRequest();

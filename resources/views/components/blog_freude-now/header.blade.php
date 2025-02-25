@@ -10,9 +10,9 @@
         _paq.push(['disableCookies']);
         _paq.push(['enableLinkTracking']);
         (function() {
-            var u="https://www.freude-now.de/matomo/";
+            var u="//www.freude-now.de/matomo/";
             _paq.push(['setTrackerUrl', u+'matomo.php']);
-            _paq.push(['setSiteId', '6']);
+            _paq.push(['setSiteId', '2']);
             var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
             g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
         })();

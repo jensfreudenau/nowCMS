@@ -14,7 +14,8 @@
             @foreach($contents as $content)
                 <li class="grid gap-2 sm:grid-cols-[auto_1fr] sm:[&amp;_q]:col-start-2">
                     <x-link href="/single/{{$content->slug}}" title="{{$content->header}}">
-                        <span class="font-thin text-sm">{{$content->date}}</span>
+                        <span class="font-thin text-sm">{{ Carbon::parse($content->date)->format('d.m.Y')}}</span> </x-link>
+                        <x-link href="/single/{{$content->slug}}" title="{{$content->header}}">
                         <span class="underline tracking-wider font-thin text-base">{{$content->header}}</span>
                     </x-link>
                 </li>

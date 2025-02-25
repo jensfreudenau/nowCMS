@@ -1,7 +1,5 @@
 <x-admin.layout>
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden">
+
                 <div class="p-6 text-gray-900 pl-10">
                     <div class="grid grid-cols-3 gap-4">
                         <div>
@@ -71,9 +69,7 @@
                         </table>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
+
     <script type="module">
         $('.generate_geo').click(function () {
             let id = $(this).data("id");

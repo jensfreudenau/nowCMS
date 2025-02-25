@@ -18,17 +18,13 @@
             height: 100%;
         }
     </style>
-<div class="py-12">
-    <div class="mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white">
+
             @if(session('status'))
                 <div class="p-4 text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300" role="alert">
                     <span class="font-medium">{{ session('status') }}
                 </div>
             @endif
-            <div class="py-12">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div class="bg-white overflow-hidden">
+
                         <div class="p-6 text-gray-900 pl-10">
                             <div class="grid grid-cols-2 gap-4">
                                 <div class="pt-2">
@@ -162,12 +158,7 @@
                                 </form>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 @push('js_after')
 

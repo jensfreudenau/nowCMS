@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Enums\Websites;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\View as NamespaceView;
 use Illuminate\Support\ServiceProvider;
@@ -43,10 +45,22 @@ class AppServiceProvider extends ServiceProvider
         }
 
         $domain = Request::getHost();
+
         $domainPath = Str::before($domain, '.');
+        if(Str::contains($domainPath, 'www')) {
+            $domainPath = Str::after($domain, 'www.');
+            $domain = Str::after($domain, 'www.');
+        }
+
         if(Config::get('app.freude_now_blog_domain') === $domain) {
             $domainPathUnderline = Str::replace('blog.', 'blog_', $domain);
             $domainPath = Str::before($domainPathUnderline, '.');
+        }
+        $websites = Websites::cases();
+        foreach ($websites as $website) {
+            if(Str::contains($domainPath, $website->value)) {
+                $domainPath = $website->name;
+            }
         }
         Config::set('app.base_domain', $domain);
         Config::set('app.base_domain_path', $domainPath);

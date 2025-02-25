@@ -26,7 +26,6 @@
         "voku/portable-ascii": "^2.0.2"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.13",
         "bennett-treptow/laravel-migration-generator": "^4.4",
         "fakerphp/faker": "^1.23",
         "kitloong/laravel-migrations-generator": "^7.0",

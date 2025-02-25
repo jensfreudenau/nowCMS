@@ -42,13 +42,14 @@ Route::get('/feed/rss', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('tag/list', [TagController::class, 'list'])->name('tag/list');
-    Route::get('tag/edit/{id}', [TagController::class, 'edit'])->name('tag.edit');
+    Route::patch('/tags/{tag}', [TagController::class, 'update'])->name('tag.update');
+    Route::get('/tags/index', [TagController::class, 'index'])->name('tags.index');
+    Route::get('/tags/display', [TagController::class, 'display'])->name('tags.display');
+    Route::get('/tags/tags', [TagController::class, 'tags'])->name('tag.tags');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/tag/tags', [TagController::class, 'tags']);
 
 
     Route::delete('contents/{content}', [ContentController::class, 'destroy'])->name('contents.destroy');
@@ -110,7 +111,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('categories/store', [CategoryController::class, 'store'])->name('categories.store');
     Route::put('categories/{id}', [CategoryController::class, 'update'])->name('categories.update');
 });
-Route::get('/tag/{tagId}', [TagController::class, 'index']);
+Route::get('/tag/{tagId}', [TagController::class, 'tag']);
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 Route::get('/', [FrontendController::class, 'index'])->name('dashboard');
 

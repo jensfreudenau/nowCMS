@@ -37,7 +37,7 @@ class CategoryController extends BaseController
         }
         $categoryId = $categoryName;
         if (!is_numeric($categoryId)) {
-            $category = Category::where('name', $categoryId)->firstOrFail();
+            $category = Category::whereTranslation('name', $categoryId)->firstOrFail();
             $categoryId = $category->id;
         }
         $category = Category::find($categoryId);
@@ -75,6 +75,7 @@ class CategoryController extends BaseController
                 'name'       => $request->input('de_name'),
             ],
         ];
+//        dd($categoryData);
         Category::create($categoryData);
         return redirect('/categories/list')->with('success', 'Category created!');
     }

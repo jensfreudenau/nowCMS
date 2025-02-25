@@ -1,7 +1,5 @@
 <x-admin.layout>
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden">
+
                 <div class="p-6 text-gray-900 pl-10">
                     <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
                         @foreach($categories as $category){{$category->name}}
@@ -20,7 +18,5 @@
                         @endforeach
                     </div>
                 </div>
-            </div>
-         </div>
-    </div>
+
 </x-admin.layout>

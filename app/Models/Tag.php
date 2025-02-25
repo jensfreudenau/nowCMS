@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Content;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -12,9 +11,7 @@ use Illuminate\Support\Str;
 class Tag extends Model
 {
     use HasFactory;
-
     protected $table = 'tags';
-
     protected $fillable = ['name'];
 
     public function contents(): BelongsToMany

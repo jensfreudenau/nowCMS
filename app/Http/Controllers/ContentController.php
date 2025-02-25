@@ -7,6 +7,9 @@ use App\Models\Category;
 use App\Models\Content;
 use App\Models\Tag;
 use App\Services\ImageService;
+use App\Services\MediaService;
+use App\Services\StorageService;
+use App\Services\TagService;
 use Carbon\Carbon;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -54,8 +57,8 @@ class ContentController extends BaseController
         $request->merge(['single' => $request->has('single')]);
 
         $content = Content::create($request->all());
-        $tags = $this->createTags($request->input('tags'));
-        $this->saveToStorage($request, $content);
+        $tags = TagService::createTags($request->input('tags'));
+        StorageService::saveToStorage($request, $content);
         if ($tags) {
             $content->tags()->sync($tags);
         }
@@ -82,22 +85,25 @@ class ContentController extends BaseController
 
     public function update(Request $request, $id): Application|Redirector|RedirectResponse
     {
-        $tagsRequest = json_decode($request->input('tags'));
-        $tags = [];
-        foreach ($tagsRequest as $tag) {
-            $tags[] = $tag->value;
-        }
-        $content = Content::find($id);
         request()->validate([
             'header' => ['required'],
             'date' => ['required'],
         ]);
-        $tags = $this->createTags($tags);
         $request->merge(['active' => $request->has('active')]);
         $request->merge(['single' => $request->has('single')]);
+        $content = Content::find($id);
         $content->update($request->all());
-        $content->tags()->sync($tags);
-        $this->saveToStorage($request, $content);
+
+        $tagsRequest = json_decode($request->input('tags'));
+        $tags = [];
+        if($tagsRequest) {
+            foreach ($tagsRequest as $tag) {
+                $tags[] = $tag->value;
+            }
+            $tags = TagService::createTags($tags);
+            $content->tags()->sync($tags);
+        }
+        StorageService::saveToStorage($request, $content);
         $jobs = DB::table('jobs');
         if ($jobs->count()) {
             return redirect('/dispatcher/index');
@@ -109,7 +115,6 @@ class ContentController extends BaseController
     public function destroy(Content $content): Application|Redirector|RedirectResponse
     {
         $mediaItems = $content->getMedia('*');
-
         if ($mediaItems->isNotEmpty()) {
             foreach ($mediaItems as $mediaItem) {
                 Log::debug('$mediaItem->getPath(thumb)');
@@ -128,71 +133,6 @@ class ContentController extends BaseController
         $content->delete();
 
         return redirect()->route('contents.index')->with('success', 'Content deleted successfully');
-    }
-
-    protected function saveToStorage($request, $content): void
-    {
-        foreach ($request->input('upload', []) as $file) {
-            if (empty($file)) {
-                continue;
-            }
-            $path = storage_path(env('STORAGE_PATH')) . Auth::user()->id . '/' . $file;
-            if (File::mimeType($path) === 'image/jpeg') {
-                $mediaItem = $content->addMedia($path)->toMediaCollection('images');
-                $mediaItem->meta = $content->header;
-                $mediaItem->headline = $content->header;
-                $mediaItem->description = $content->text;
-                $mediaItem->keywords = implode(', ', $content->tags()->pluck('name')->toArray());
-                $mediaItem->website = $content->website;
-                $mediaItems = $content->getMedia('images');
-                $date = ImageService::parseData('T -createdate', $mediaItems[0]->getPath(), '');
-                if($date === '-' || empty($date)) $date = Carbon::now();
-                $mediaItem->date = $date;
-                if ($mediaItem->headline == '') {
-                    $mediaItem->headline = $content->header = ImageService::parseData(
-                        'Headline',
-                        $mediaItems[0]->getPath()
-                    );
-                    $mediaItem->meta = $content->metadescription = $content->header;
-                }
-                if ($content->text == '') {
-                    $mediaItem->description = $content->text = ImageService::parseData(
-                        'Description',
-                        $mediaItems[0]->getPath()
-                    );
-                }
-                if ($mediaItem->keywords === '') {
-                    $mediaItem->keywords = ImageService::parseData('Keywords', $mediaItems[0]->getPath());
-                    $tags = $this->createTags($mediaItem->keywords);
-                    $content->tags()->sync($tags);
-                }
-            } else {
-                $mediaItem = $content->addMedia($path)->toMediaCollection();
-            }
-            $content->save();
-            $mediaItem->save();
-        }
-    }
-
-    public function prepareTags($tags): array|\Illuminate\Support\Collection
-    {
-        if(is_array($tags)) return $tags;
-        $replaced = Str::replace(' ', '#', $tags);
-        $replaced = Str::replace(',', '#', $replaced);
-        $explode = Str::of($replaced)->explode('#');
-        return collect($explode)->filter();
-    }
-
-    /**
-     * @param $tags
-     * @return array
-     */
-    private function createTags($tags): array
-    {
-        $tagsArray = $this->prepareTags($tags);
-        return collect($tagsArray)->map(function (string $tag) {
-            return Tag::firstOrCreate(['name' => $tag])->id;
-        })->all();
     }
 
     /**
