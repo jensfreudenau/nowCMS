@@ -1,7 +1,7 @@
 <x-admin.header />
 <body class="h-full bg-white">
 <div class="min-h-screen">
-    <nav class="">
+    <nav class="mx-auto max-w-7xl">
         <div class="mx-auto  px-4 sm:px-6 lg:px-8 bg-white">
             <div class="flex h-16 items-center justify-between ">
 

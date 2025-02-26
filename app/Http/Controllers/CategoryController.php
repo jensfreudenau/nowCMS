@@ -75,7 +75,6 @@ class CategoryController extends BaseController
                 'name'       => $request->input('de_name'),
             ],
         ];
-//        dd($categoryData);
         Category::create($categoryData);
         return redirect('/categories/list')->with('success', 'Category created!');
     }

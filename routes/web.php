@@ -9,7 +9,9 @@ use App\Http\Controllers\MediaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QueuesController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\UserController;
 use App\Models\Content;
+use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -42,6 +44,12 @@ Route::get('/feed/rss', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+//    Route::get('users/index', function () {
+//        return view('admin/user.index', [
+//            'users' => User::all()
+//        ]);
+//    });
+
     Route::patch('/tags/{tag}', [TagController::class, 'update'])->name('tag.update');
     Route::get('/tags/index', [TagController::class, 'index'])->name('tags.index');
     Route::get('/tags/display', [TagController::class, 'display'])->name('tags.display');
@@ -110,6 +118,14 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('categories/{category}', [CategoryController::class, 'destroy'])->name('category.destroy');
     Route::post('categories/store', [CategoryController::class, 'store'])->name('categories.store');
     Route::put('categories/{id}', [CategoryController::class, 'update'])->name('categories.update');
+
+    Route::get('users/index', [UserController::class, 'index'])->name('users.index');
+    Route::get('users/create', [UserController::class, 'create'])->name('users.create');
+    Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+    Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
+    Route::post('/users/store', [UserController::class, 'store'])->name('users.store');
+
 });
 Route::get('/tag/{tagId}', [TagController::class, 'tag']);
 Route::get('/', [FrontendController::class, 'index'])->name('home');

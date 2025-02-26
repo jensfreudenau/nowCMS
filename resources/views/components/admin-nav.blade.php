@@ -6,6 +6,7 @@
         <x-nav-link href="/dispatcher/index" :active="request()->is('dispatcher/index')">Dispatcher</x-nav-link>
         <x-nav-link href="/journey" :active="request()->is('journey')">Journey</x-nav-link>
         <x-nav-link href="/tags/index" :active="request()->is('/tags/index')">Tags</x-nav-link>
+        <x-nav-link href="/users/index" :active="request()->is('/users/index')">Users</x-nav-link>
         <x-nav-link href="/log-viewer" :active="request()->is('log-viewer')">Logs</x-nav-link>
     <div>
 
