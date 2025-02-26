@@ -9,10 +9,13 @@
                 <x-link href="#">About</x-link>
             </li>
             <li>
+                <x-link href="https://blog.freude-now.de/">Jens Freudenau's Blog</x-link>
+            </li>
+            <li>
                 <x-link href="https://streetphotoberlin.com/">Street Photo Berlin</x-link>
             </li>
             <li>
-                <x-link href="https://freudefoto.de/">Freudefoto</x-link>
+                <x-link href="https://freudefoto.de/">Jens' Reisefotos</x-link>
             </li>
             <li>
                 <x-link href="https://freude-now.de/impressum.html">Impressum</x-link>

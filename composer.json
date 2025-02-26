@@ -8,6 +8,7 @@
         "php": "^8.3",
         "ext-simplexml": "*",
         "astrotomic/laravel-translatable": "^11.15",
+        "bugsnag/bugsnag-laravel": "^2.0",
         "composer/pcre": "^3.3",
         "cviebrock/eloquent-sluggable": "^11.0",
         "guzzlehttp/guzzle": "*",

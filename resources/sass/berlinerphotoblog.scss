@@ -20,16 +20,19 @@ article .content a {
 code{
     background-color: #f0f0f0;
     margin-bottom: 12px;
+    margin-top:12px;
 }
 article .content p {
     font-weight: 100;
 }
 
-article ul li {
-    font-weight: 100;
+ul li, ol li {
+    padding-left: .5rem;
+    padding-top: .75rem;
+    padding-bottom: .75rem;
 }
 
-article ul {
+ul, ol {
     padding-left: 0.75rem;
 }
 

@@ -12,7 +12,10 @@
                 <x-link href="https://berlinerphotoblog.de/">Berliner Photo Blog</x-link>
             </li>
             <li class="grid gap-2 sm:grid-cols-[auto_1fr] sm:[&amp;_q]:col-start-2">
-                <x-link href="https://freudefoto.de/">freude foto</x-link>
+                <x-link href="https://streetphotoberlin.com/">Stret photos from Berlin</x-link>
+            </li>
+            <li class="grid gap-2 sm:grid-cols-[auto_1fr] sm:[&amp;_q]:col-start-2">
+                <x-link href="https://freudefoto.de/">Jens' Reisefotos</x-link>
             </li>
             <li class="grid gap-2 sm:grid-cols-[auto_1fr] sm:[&amp;_q]:col-start-2">
                 <x-link href="https://freude-now.de/impressum.html">Impressum</x-link>

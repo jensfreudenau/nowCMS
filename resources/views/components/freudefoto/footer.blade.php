@@ -15,6 +15,9 @@
                 <x-link href="https://berlinerphotoblog.de/">Berliner Photo Blog</x-link>
             </li>
             <li>
+                <x-link href="https://blog.freude-now.de/">Jens Freudenau's Blog</x-link>
+            </li>
+            <li>
                 <x-link href="https://freude-now.de/impressum.html">Impressum</x-link>
             </li>
         </ul>
