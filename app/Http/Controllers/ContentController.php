@@ -22,13 +22,11 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
-use RuntimeException;
+
 class ContentController extends BaseController
 {
     public function index(): View|Factory|Application
     {
-        Bugsnag::notifyException(new RuntimeException("Test error"));
         $contents = Content::with('category')->get();
         return view('admin/content.index', [
             'contents' => $contents
