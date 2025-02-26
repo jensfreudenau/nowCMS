@@ -51,7 +51,9 @@ return [
     */
 
     'channels' => [
-
+        'sentry' => [
+            'driver' => 'sentry',
+        ],
         'stack' => [
             'driver' => 'stack',
             'channels' => explode(',', env('LOG_STACK', 'single')),
@@ -125,10 +127,7 @@ return [
 
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
-        ],
-        'bugsnag' => [
-            'driver' => 'bugsnag',
-        ],
+        ]
     ],
 
 ];
