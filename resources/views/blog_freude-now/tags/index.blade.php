@@ -1,32 +1,15 @@
 @php use Carbon\Carbon; @endphp
-
     @push('meta_after')
         <meta name="description" content="{{config('app.freude_now_blog_title')}} - tag {{$tag->name}}">
         <link rel="canonical" href="{{Config::get('app.base_domain')}}/tags/{{$tag->name}}">
         <title>{{config('app.freude_now_blog_title')}} - tag {{$tag->name}}</title>
     @endpush
-
 <x-blog_freude-now.layout>
-    <div class="space-y-4 text-gray-700 mt-4 p-6">
-
-        <div class="m-4">
-
-
-                <h2 class="text-xl tracking-tight py-3 lowercase">Tag: #{{$tag->name}}</h2>
-
-            <ul>
-                @foreach($contents as $content)
-                    <li class="grid gap-2 sm:grid-cols-[auto_1fr] sm:[&amp;_q]:col-start-2">
-                        <x-link href="/single/{{$content->slug}}" title="{{$content->header}}">
-                            <span class="font-thin text-sm">{{ Carbon::parse($content->date)->format('d.m.Y')}}</span> </x-link>
-                        <x-link href="/single/{{$content->slug}}" title="{{$content->header}}">
-                            <span class="underline tracking-wider font-thin text-base">{{$content->header}}</span>
-                        </x-link>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
-
+    <div class="space-y-4 text-gray-700 mt-4 p-6 m-4">
+        <h2 class="text-xl tracking-tight py-3 lowercase">Tag: #{{$tag->name}}</h2>
+        @foreach($contents as $content)
+            <x-blog_freude-now.content-iterator :content="$content"></x-blog_freude-now.content-iterator>
+        @endforeach
     </div>
 </x-blog_freude-now.layout>
 

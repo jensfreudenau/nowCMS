@@ -24,7 +24,9 @@
     <div class="justify-between items-stretch text-sm ">
         <div class="container mx-auto px-5 py-2">
             @if($single === 'true')
-                <div class="flex justify-start"><h2 class="text-xl tracking-tight pb-6">{{$content->header}}</h2>
+                <div class="flex justify-start">
+                    <h2 class="text-xl tracking-tight py-3">{{$content->header}}</h2>
+
                 </div>
             @else
                 <h2 class="underline text-xl tracking-tight ml-3 pb-6 "><a href="/single/{{$content->slug}}" >{{$content->header}}</a></h2>

@@ -18,7 +18,7 @@
         })();
     </script>
     <!-- End Matomo Code -->
-    @vite(['resources/css/app.css', 'resources/sass/berlinerphotoblog.scss', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/sass/blogfreudenow.scss', 'resources/js/app.js'])
     <x-meta />
 
 

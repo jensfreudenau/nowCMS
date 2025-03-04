@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Content;
 use App\Models\Tag;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -63,6 +64,7 @@ class TagController extends BaseController
         $contents = $tag
             ->contents()
             ->with('category')
+            ->whereDate('date', '<=', Carbon::now('Europe/Berlin'))
             ->orderBy('date', 'desc')
             ->where('active', true)
             ->simplePaginate(5);
