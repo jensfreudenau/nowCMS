@@ -3,7 +3,6 @@
     <div class="flex float-right justify-between items-center mb-5 text-gray-900">
         <span class="text-sm">{{ Carbon::parse($content->date)->format('d.m.Y')}}</span>
     </div>
-
     <div class="m-4">
         @php
             $media = $content->getFirstMedia('images');

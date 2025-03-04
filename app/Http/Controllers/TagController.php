@@ -1,14 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Content;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use App\Models\Tag;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
-use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -103,13 +100,4 @@ class TagController extends BaseController
             'data' => Tag::select(DB::raw('name as value'))->get()
         ]);
     }
-
-
-
-//    public function edit($id): View|Factory|Application
-//    {
-//        $tag = Tag::find($id);
-//        $tags = Tag::orderBy('name')->get();
-//        return view('/admin/tag.update', compact('tags'));
-//    }
 }

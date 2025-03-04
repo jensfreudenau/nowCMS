@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Category;
-use App\Models\Content;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -54,7 +52,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Category $category
+     * @param User $user
      * @return RedirectResponse
      */
     public function destroy(User $user): RedirectResponse

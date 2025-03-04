@@ -1,4 +1,4 @@
-@php use Carbon\Carbon; use Illuminate\Support\Str; @endphp
+@php use Carbon\Carbon; @endphp
 @push('meta_after')
     <meta name="description" content="{{config('app.freude_now_blog_title')}}">
     <link rel="canonical" href="{{Config::get('app.base_domain')}}">
