@@ -1,6 +1,6 @@
 @php use Illuminate\Support\Str; @endphp
 
-
+<article>
     <div class="justify-between items-stretch">
         <div class="container mx-auto">
             @if($single === 'true')
@@ -27,4 +27,4 @@
 
         </div>
     </div>
-
+</article>

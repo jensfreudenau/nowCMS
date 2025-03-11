@@ -14,10 +14,16 @@
             <li><x-link class="text-pink-500" href="/blog" title="Blog">{{__('Blog')}} -</x-link></li>
             <li><x-link class="text-pink-500" href="/about" title="about">{{__('about')}}</x-link></li>
         </ul>
+        <form action="{{ route('search') }}" method="GET">
+            <input type="text" name="search" class="border-0 border-b-2 border-gray-300 bg-gray-50" placeholder="Suche">
+            <button type="submit">
+                <i class="fa-solid fa-magnifying-glass fa-lg text-gray-500"></i>
+            </button>
+        </form>
     </div>
 
     <!-- Mobile Menü -->
-    <ul id="mobile-menu" class="hidden bg-blue-700 text-white flex flex-col items-center space-y-4 p-4 md:hidden">
+    <ul id="mobile-menu" class="hidden flex flex-col items-center space-y-4 p-4 md:hidden">
         <li><x-link class="text-pink-500" href="https://freude-now.de" title="Jens Freudenau Home">Home -</x-link></li>
         <li><x-link class="text-pink-500" href="/blog" title="Blog">{{__('Blog')}} -</x-link></li>
         <li><x-link class="text-pink-500" href="/about" title="about">{{__('about')}}</x-link></li>

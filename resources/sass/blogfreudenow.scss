@@ -31,6 +31,18 @@ article .content a {
     text-decoration-line: underline;
 }
 
+
+article strong {
+    font-weight: bold;
+}
+article ul, ol {
+    padding-left: 0.75rem;
+}
+article ol li {
+    padding-left: .5rem;
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+}
 article ul li {
     font-weight: 100;
 }

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" class="h-full bg-gray-50">
 <head>
-    <script src="https://cdn.tailwindcss.com"></script>
+
     @include('feed::links')
     <!-- Matomo -->
     <script>
