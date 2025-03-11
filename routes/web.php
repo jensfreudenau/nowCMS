@@ -27,6 +27,9 @@ Route::domain(config('app.freude_foto_domain'))->group(function () {
 Route::domain(config('app.street_photo_blog_domain'))->group(function () {
     Route::get('/archive', [MediaController::class, 'streetphotoindex']);
 });
+Route::domain(config('app.freude_now_blog_domain'))->group(function () {
+    Route::get('/about', [FrontendController::class, 'about']);
+});
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
 Route::get('category', [CategoryController::class, 'index'])->name('category');

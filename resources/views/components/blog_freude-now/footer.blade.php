@@ -5,20 +5,21 @@
             <a href="https://freude-now.de/" class="hover:underline">freude-now™</a>
             </span>
         <ul class="pr-9 flex flex-wrap items-center mt-3 text-sm font-medium sm:mt-0">
-            <li class="grid gap-2 sm:grid-cols-[auto_1fr] sm:[&amp;_q]:col-start-2">
-                <x-link href="/about">About</x-link>
+            <li class="grid gap-2 sm:grid-cols-[auto_1fr] sm:[&amp;_q]:col-start-1">
+                <x-link  class="pl-3" target="_blank" href="https://github.com/jensfreudenau"><i class="fa-brands fa-github"></i></x-link>
             </li>
-            <li class="grid gap-2 sm:grid-cols-[auto_1fr] sm:[&amp;_q]:col-start-2">
-                <x-link href="https://berlinerphotoblog.de/">Berliner Photo Blog</x-link>
+            <li class="grid gap-2 sm:grid-cols-[auto_1fr] sm:[&amp;_q]:col-start-1">
+                <x-link  class="pl-3" href="https://berlinerphotoblog.de/">Berliner Photo Blog</x-link>
             </li>
-            <li class="grid gap-2 sm:grid-cols-[auto_1fr] sm:[&amp;_q]:col-start-2">
-                <x-link href="https://streetphotoberlin.com/">Stret photos from Berlin</x-link>
+
+            <li class="grid gap-2 sm:grid-cols-[auto_1fr] sm:[&amp;_q]:col-start-1">
+                <x-link  class="pl-3" href="https://streetphotoberlin.com/">Stret photos from Berlin</x-link>
             </li>
-            <li class="grid gap-2 sm:grid-cols-[auto_1fr] sm:[&amp;_q]:col-start-2">
-                <x-link href="https://freudefoto.de/">Jens' Reisefotos</x-link>
+            <li class="grid gap-2 sm:grid-cols-[auto_1fr] sm:[&amp;_q]:col-start-1">
+                <x-link  class="pl-3" href="https://freudefoto.de/">Jens' Reisefotos</x-link>
             </li>
-            <li class="grid gap-2 sm:grid-cols-[auto_1fr] sm:[&amp;_q]:col-start-2">
-                <x-link href="https://freude-now.de/impressum.html">Impressum</x-link>
+            <li class="grid gap-2 sm:grid-cols-[auto_1fr] sm:[&amp;_q]:col-start-1">
+                <x-link class="pl-3" href="https://freude-now.de/impressum.html">Impressum</x-link>
             </li>
         </ul>
     </div>

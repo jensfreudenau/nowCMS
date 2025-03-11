@@ -17,7 +17,8 @@ export default defineConfig({
                 'resources/js/editorjs.js',
                 'resources/sass/app.scss',
                 'resources/sass/berlinerphotoblog.scss',
-                'resources/sass/streetphotoberlin.scss'
+                'resources/sass/streetphotoberlin.scss',
+                'resources/sass/blogfreudenow.scss'
             ],
             refresh: true,
         }),

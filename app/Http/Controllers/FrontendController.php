@@ -66,6 +66,12 @@ class FrontendController extends BaseController
         );
     }
 
+    public function about()
+    {
+        return view(
+            config('app.base_domain_path', env('APP_BASE_DOMAIN_NAME')) . '/about'
+        );
+    }
 
     public function search(Request $request): \Illuminate\Contracts\View\View|Factory|Application
     {

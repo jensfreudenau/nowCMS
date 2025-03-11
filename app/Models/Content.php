@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -75,6 +77,10 @@ class Content extends Model implements HasMedia, Feedable
         ];
     }
 
+    public function germanDate()
+    {
+        return Carbon::parse($this->date)->translatedFormat('d. F Y');
+    }
 
     public function registerMediaConversions(Media $media = null): void
     {

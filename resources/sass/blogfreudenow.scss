@@ -25,6 +25,7 @@ article p a {
 code{
     background-color: #f0f0f0;
     margin-bottom: 12px;
+    margin-top: 12px;
 }
 article .content a {
     text-decoration-line: underline;
@@ -70,5 +71,5 @@ article ul {
     max-height: 150px;
 }
 hr {
-    margin-bottom: 30px;
+    padding: 10px 0 10px 0;
 }
