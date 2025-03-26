@@ -11,7 +11,7 @@
     </header>
     <x-berlinerphotoblog.main-nav />
     <main class="bg-gray-50">
-        <div class="mx-auto max-w-5xl py-6 sm:px-6 lg:px-8 text-lg">
+        <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8 text-lg">
             <div class="space-y-4">
                 <div class="flex flex-row">
                     <div class="basis-3/3">
