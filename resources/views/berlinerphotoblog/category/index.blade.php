@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
     </div>
     <div class="">
         <div class="p-5 sm:p-8">
-            <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-2 xl:gap-x-8">
+            <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
                 @foreach($contents as $content)
                     @if(Str::before($content->website, '.') === Str::before(config('app.base_domain', env('APP_BASE_DOMAIN')), '.'))
                         @php $imageItems = $content->getMedia('images'); @endphp

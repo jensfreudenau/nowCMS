@@ -77,6 +77,7 @@ class FrontendController extends BaseController
     {
         $search = $request->input('search');
         $contents = Content::where('active', true)
+            ->whereDate('date', '<=', Carbon::now('Europe/Berlin'))
             ->whereAny(
                 [
                     'header',

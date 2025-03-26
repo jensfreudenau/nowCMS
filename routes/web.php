@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BerlinerPhotoblogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\DispatcherController;
@@ -11,13 +12,16 @@ use App\Http\Controllers\QueuesController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 use App\Models\Content;
-use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
+Route::get('/blog', [FrontendController::class, 'index'])->name('blog');
 
 Route::domain(config('app.berliner_photo_blog_domain'))->group(function () {
+    Route::get('/', [BerlinerPhotoblogController::class, 'index'])->name('home');
+    Route::get('/', [BerlinerPhotoblogController::class, 'index'])->name('dashboard');
+    Route::get('/', [BerlinerPhotoblogController::class, 'index'])->name('index');
     Route::get('/archive', [MediaController::class, 'index']);
 });
 Route::domain(config('app.freude_foto_domain'))->group(function () {
@@ -28,7 +32,7 @@ Route::domain(config('app.street_photo_blog_domain'))->group(function () {
     Route::get('/archive', [MediaController::class, 'streetphotoindex']);
 });
 Route::domain(config('app.freude_now_blog_domain'))->group(function () {
-    Route::get('/about', [FrontendController::class, 'about']);
+    Route::get('/about', [FrontendController::class, 'about'])->name('about');
 });
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
@@ -52,7 +56,8 @@ Route::middleware(['auth'])->group(function () {
 //            'users' => User::all()
 //        ]);
 //    });
-
+    Route::get('/medias/{id}', [MediaController::class, 'getContent']);
+    Route::post('/set_on_frontsite', [MediaController::class, 'setOnFrontsite']);
     Route::patch('/tags/{tag}', [TagController::class, 'update'])->name('tag.update');
     Route::get('/tags/index', [TagController::class, 'index'])->name('tags.index');
     Route::get('/tags/display', [TagController::class, 'display'])->name('tags.display');
@@ -128,9 +133,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
     Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
     Route::post('/users/store', [UserController::class, 'store'])->name('users.store');
-
 });
 Route::get('/tag/{tagId}', [TagController::class, 'tag']);
+Route::get('/blog', [FrontendController::class, 'index'])->name('blog');
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 Route::get('/', [FrontendController::class, 'index'])->name('dashboard');
 

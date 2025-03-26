@@ -7,7 +7,7 @@
             </div>
             <div class="hidden md:block">
                 <div class="ml-10 flex items-baseline space-x-4">
-                    <x-berlinerphotoblog.nav-link href="/" :active="request()->is('/')" title="Blog">Blog</x-berlinerphotoblog.nav-link>
+                    <x-berlinerphotoblog.nav-link href="/blog" :active="request()->is('/blog')" title="Blog">Blog</x-berlinerphotoblog.nav-link>
                     <x-berlinerphotoblog.dropdown/>
                 </div>
             </div>

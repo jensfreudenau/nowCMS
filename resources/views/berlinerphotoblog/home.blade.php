@@ -5,7 +5,8 @@
     <title>{{config('app.berliner_photo_blog_title')}} - Home</title>
 @endpush
 <x-berlinerphotoblog.layout>
-    <div class="space-y-4 text-gray-700">
+
+    <div class="space-y-4 text-gray-700 max-w-5xl">
         @foreach($contents as $content)
             @php
                 $words = Str::of($content['text'])->wordCount();
