@@ -9,7 +9,6 @@
     <form action="{{ route('contents.store') }}" method="POST" enctype="multipart/form-data">
 @endif
 @csrf
-
     <div class="p-12">
         <label for="header" class="block">{{ __('Überschrift')}}*</label>
         <input type="text"
@@ -80,6 +79,7 @@
     <div class="px-12">
         <label for="text" class="block">{{ __('Content')}}</label>
         <x-forms.textarea :text="old('text', $content->text ?? '')" name="text" id="contentText"/>
+        [![An old rock in the desert](/assets/images/shiprock.jpg "Shiprock, New Mexico by Beau Rogers")](https://www.flickr.com/photos/beaurogers/31833779864/in/photolist)
     </div>
     <fieldset>
         <div class="px-12 pt-10">

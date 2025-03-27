@@ -13,35 +13,43 @@ use Illuminate\Support\Str;
     </div>
     <div class="">
         <div class="p-5 sm:p-8">
-            <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+
                 @foreach($contents as $content)
                     @if(Str::before($content->website, '.') === Str::before(config('app.base_domain', env('APP_BASE_DOMAIN')), '.'))
                         @php $imageItems = $content->getMedia('images'); @endphp
-                        @foreach($imageItems as $imageItem)
-                            <a
-                                class="my-image-links"
-                                title="{{$content->header}}"
-                                data-overlay="#ffffff"
-                                data-maxwidth="1000px"
-                                data-gall="{{$categoryName}}"
-                                href="{{asset('storage/')}}/{{$imageItem->getPathRelativeToRoot()}}">
-                                <div class="group relative">
-                                    <img
-                                        class=""
-                                        src="{{asset('storage/')}}/{{$imageItem->getPathRelativeToRoot('big_thumb_square')}}"
-                                        alt="{{$imageItem->headline}}"
-                                    />
-                                    <div class="mt-1 flex justify-between">
-                                        <div>
-                                            <h3 class="text-sm text-gray-700">{{$imageItem->headline}}</h3>
+                        @if(count($imageItems))
+                            <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+                            @foreach($imageItems as $imageItem)
+                                <a
+                                    class="my-image-links"
+                                    title="{{$imageItem->headline}}"
+                                    data-overlay="#ffffff"
+                                    data-maxwidth="1000px"
+                                    data-gall="{{$categoryName}}"
+                                    href="{{asset('storage/')}}/{{$imageItem->getPathRelativeToRoot()}}">
+                                    <div class="group relative">
+                                        <img
+                                            class=""
+                                            src="{{asset('storage/')}}/{{$imageItem->getPathRelativeToRoot('big_thumb_square')}}"
+                                            alt="{{$imageItem->headline}}"
+                                        />
+                                        <div class="mt-1 flex justify-between">
+                                            <div>
+                                                <h3 class="text-sm text-gray-700">{{$content->header}}</h3>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </a>
-                        @endforeach
+                                </a>
+                            @endforeach
+                        @else
+                         <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 xl:gap-x-8">
+                             <h2 class="text-xl tracking-tight ml-3 pb-6 "><a href="/single/{{$content->slug}}" >{{$content->header}}</a></h2>
+
+                        @endif
                     @endif
+                </div>
                 @endforeach
-            </div>
+
         </div>
     </div>
 

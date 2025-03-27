@@ -40,6 +40,7 @@ class CategoryController extends BaseController
             $category = Category::whereTranslation('name', $categoryId)->firstOrFail();
             $categoryId = $category->id;
         }
+
         $category = Category::find($categoryId);
         if($category === null) {
             return redirect('/');

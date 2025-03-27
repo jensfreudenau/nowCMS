@@ -32,14 +32,17 @@
             </div>
             @if($single === 'true')
                 <div class="flex justify-start">
-                    <h2 class="text-xl tracking-tight ml-3 pb-6">{{$content->header}}</h2>&nbsp; in &nbsp;
-                    <h2>  <a href="/getCategory/{{$content->category?->name}}" class="underline">{{$content->category?->name}}</a></h2></div>
+                    <h2 class="text-5xl font-extrabold ml-3 pb-6">{{$content->header}}</h2>&nbsp;  &nbsp;
+                   </div>
             @else
-                <h2 class="underline text-xl tracking-tight ml-3 pb-6 "><a href="/single/{{$content->slug}}" >{{$content->header}}</a></h2>
+                <h2 class="underline text-2xl   ml-3 pb-6 font-extrabold "><a href="/single/{{$content->slug}}" >{{$content->header}}</a></h2>
             @endif
             @if(!empty($content->text))
-                <p class="mb-4 font-thin text-base "> {!! Str::markdown($content->text ) !!} </p>
+                <p class="mb-4 font-thin text-base"> {!! Str::markdown($content->text ) !!} </p>
             @endif
+            <h3 class="underline text-xl tracking-tight mt-3 pb-6 ">
+                <a href="/getCategory/{{$content->category?->name}}" class="underline">{{$content->category?->name}}</a>
+            </h3>
         </div>
         <div class="px-4">
             @foreach($tags as $key => $tag)
