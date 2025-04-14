@@ -1,11 +1,11 @@
 <x-berlinerphotoblog.header />
-<x-slot:meta>{{config('app.berliner_photo_blog_title')}}</x-slot:meta>
+<x-slot:meta>{{config('domains.titles.berliner_photo_blog_title')}}</x-slot:meta>
 <body class="h-full">
 <div class="min-h-screen ">
     <header class="bg-white">
         <div class="mx-auto max-w-5xl px-4 py-6 sm:px-6 lg:px-1">
             <h1 class="font-thin text-7xl text-center text-gray-900">
-                <a href="/">{{config('app.berliner_photo_blog_title')}}</a>
+                <a href="/">{{config('domains.titles.berliner_photo_blog_title')}}</a>
             </h1>
         </div>
     </header>

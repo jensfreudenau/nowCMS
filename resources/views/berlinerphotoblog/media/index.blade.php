@@ -1,7 +1,7 @@
 @push('meta_after')
-    <meta name="description" content="{{config('app.berliner_photo_blog_title')}} - Media">
-    <link rel="canonical" href="{{Config::get('app.base_domain')}}/archive">
-    <title>{{config('app.berliner_photo_blog_title')}} - media</title>
+    <meta name="description" content="{{config('domains.titles.berliner_photo_blog_title')}} - Media">
+    <link rel="canonical" href="https://{{Config::get('domains.name.berliner_photo_blog_domain')}}/archive">
+    <title>{{config('domains.titles.berliner_photo_blog_title')}} - media</title>
 @endpush
 <x-berlinerphotoblog.layout>
     <x-slot name="header">

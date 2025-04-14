@@ -1,8 +1,8 @@
 @php use Carbon\Carbon; use Illuminate\Support\Str; @endphp
 @push('meta_after')
     <meta name="description" content="Street Photos from Berlin">
-    <link rel="canonical" href="{{Config::get('app.base_domain')}}/">
-    <title>{{config('app.streetphoto_title')}} - home</title>
+    <link rel="canonical" href="https://{{Config::get('domains.name.street_photo_blog_domain')}}/">
+    <title>{{Config::get('domains.titles.streetphoto_title')}} - home</title>
 @endpush
 <x-streetphotoberlin.layout>
 

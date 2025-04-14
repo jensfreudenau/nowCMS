@@ -1,7 +1,7 @@
 @push('meta_after')
-    <meta name="description" content="{{config('app.freude_now_blog_title')}} - tag {{$tag->name}}">
-    <link rel="canonical" href="{{Config::get('app.base_domain')}}/tags/{{$tag->name}}">
-    <title>{{config('app.freude_now_blog_title')}} - {{__('Tag')}} :: {{$tag->name}}</title>
+    <meta name="description" content="{{config('domains.titles.freude_now_blog_title')}} - tag {{$tag->name}}">
+    <link rel="canonical" href="https://{{Config::get('domains.name.freude_now_blog_domain')}}/tags/{{$tag->name}}">
+    <title>{{config('domains.titles.freude_now_blog_title')}} - {{__('Tag')}} :: {{$tag->name}}</title>
 @endpush
 <x-blog_freude-now.layout>
     <div class="space-y-4 text-gray-700 m-4">
