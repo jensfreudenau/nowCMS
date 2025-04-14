@@ -1,7 +1,7 @@
 @push('meta_after')
-    <meta name="description" content="{{config('app.streetphoto_title')}} - category {{$categoryName}}">
-    <link rel="canonical" href="{{Config::get('app.base_domain')}}/getCategory/{{$categoryName}}">
-    <title>{{config('app.streetphoto_title')}} - category {{$categoryName}}</title>
+    <meta name="description" content="{{Config::get('domains.titles.streetphoto_title')}} - category {{$categoryName}}">
+    <link rel="canonical" href="https://{{Config::get('domains.name.street_photo_blog_domain')}}/getCategory/{{$categoryName}}">
+    <title>{{Config::get('domains.titles.streetphoto_title')}} - category {{$categoryName}}</title>
 @endpush
 <x-streetphotoberlin.layout>
 

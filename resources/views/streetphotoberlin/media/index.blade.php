@@ -1,7 +1,7 @@
 @push('meta_after')
-    <meta name="description" content="s{{config('app.streetphoto_title')}} - media overview">
-    <link rel="canonical" href="{{Config::get('app.base_domain')}}/archive">
-    <title>{{config('app.streetphoto_title')}} - media</title>
+    <meta name="description" content="s{{Config::get('domains.titles.streetphoto_title')}} - media overview">
+    <link rel="canonical" href="https://{{Config::get('domains.name.street_photo_blog_domain')}}/archive">
+    <title>{{Config::get('domains.titles.streetphoto_title')}} - media</title>
 @endpush
 <x-streetphotoberlin.layout>
     <div class="mt-4 p-6 border-gray-50 shadow-sm bg-white border">

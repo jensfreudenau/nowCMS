@@ -1,7 +1,8 @@
 @push('meta_after')
-    <meta name="description" content="{{config('app.freude_now_blog_title')}} - category {{$categoryName}}">
-    <link rel="canonical" href="{{Config::get('app.base_domain')}}/getCategory/{{$categoryName}}">
-    <title>{{config('app.freude_now_blog_title')}} - {{__('Kategorie')}} :: {{$categoryName}}</title>
+    <meta name="description" content="{{config('domains.titles.freude_now_blog_title')}} - {{__('Kategory')}}:{{$categoryName}}">
+    <link rel="canonical" href="https://{{Config::get('domains.name.freude_now_blog_domain')}}/getCategory/{{$categoryName}}">
+
+    <title>{{config('domains.titles.freude_now_blog_title')}} - {{__('Kategorie')}} :: {{$categoryName}}</title>
 @endpush
 <x-blog_freude-now.layout>
     <div class="space-y-4 text-gray-700 m-4">
