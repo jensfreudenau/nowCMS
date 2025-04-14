@@ -48,9 +48,9 @@ use Illuminate\Support\Str;
                     @endif
                 </div>
                 @endforeach
-                <div>
-                    {{ $contents->links() }}
-                </div>
+{{--                <div>--}}
+{{--                    {{ $contents->links() }}--}}
+{{--                </div>--}}
         </div>
     </div>
 

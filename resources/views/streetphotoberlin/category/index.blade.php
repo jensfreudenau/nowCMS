@@ -12,9 +12,9 @@
     @foreach($contents as $content)
         <x-streetphotoberlin.article :content="$content" single="false"></x-streetphotoberlin.article>
     @endforeach
-    <div>
-        {{ $contents->links() }}
-    </div>
+{{--    <div>--}}
+{{--        {{ $contents->links() }}--}}
+{{--    </div>--}}
         @push('js_after')
             <script type="module">
                 new VenoBox({
