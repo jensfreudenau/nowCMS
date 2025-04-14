@@ -7,4 +7,7 @@
     @foreach($contents as $content)
         <x-berlinerphotoblog.article :content="$content" single="false"></x-berlinerphotoblog.article>
     @endforeach
+    <div>
+        {{ $contents->links() }}
+    </div>
 </x-berlinerphotoblog.layout>

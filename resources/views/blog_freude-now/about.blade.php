@@ -9,7 +9,6 @@
         <ul>
             <li>👋 Hi, I’m Jens Freudenau</li>
             <li>👀 I’m interested in PHP</li>
-            <li>🌱 I’m currently learning C++</li>
             <li>💞️ I’m looking to collaborate on freelance projects</li>
             <li>📫 How to reach me over <a href="https://www.freude-now.de">https://www.freude-now.de</a></li>
         </ul>

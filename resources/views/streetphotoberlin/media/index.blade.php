@@ -21,6 +21,9 @@
                             @endforeach
                         @endif
                     @endforeach
+                    <div>
+                        {{ $contents->links() }}
+                    </div>
                 </div>
             </div>
     </article>

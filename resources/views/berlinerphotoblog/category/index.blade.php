@@ -44,12 +44,13 @@ use Illuminate\Support\Str;
                         @else
                          <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 xl:gap-x-8">
                              <h2 class="text-xl tracking-tight ml-3 pb-6 "><a href="/single/{{$content->slug}}" >{{$content->header}}</a></h2>
-
                         @endif
                     @endif
                 </div>
                 @endforeach
-
+                <div>
+                    {{ $contents->links() }}
+                </div>
         </div>
     </div>
 

@@ -2,14 +2,12 @@
 
 namespace App\Enums;
 
-use Illuminate\Support\Collection;
-
 enum Websites: string
 {
-    case freudefoto = 'freudefoto.de';
-    case berlinerphotoblog = 'berlinerphotoblog.de';
-    case streetphotoberlin = 'streetphotoberlin.com';
-    case freude_now = 'blog.freude-now.de';
+    case freudefoto = 'freudefoto.local';
+    case berlinerphotoblog = 'berlinerphotoblog.local';
+    case streetphotoberlin = 'streetphotoberlin.local';
+    case freude_now = 'blog.freude-now.local';
 
 
     public function label(): string
@@ -18,9 +16,7 @@ enum Websites: string
             self::freudefoto => 'freudefoto',
             self::berlinerphotoblog => 'berlinerphotoblog',
             self::streetphotoberlin => 'streetphotoberlin',
-            self::freude_now => 'freude_now',
+            self::freude_now => 'blog.freude-now',
         };
     }
-
-
 }

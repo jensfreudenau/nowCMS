@@ -121,21 +121,11 @@ return [
     */
 
     'maintenance' => [
-        'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
+        'driver' => env('APP_MAINTENANCE_DRIVER', 'file1'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
     'exif_tool_path' => env('EXIF_TOOL_PATH'),
     'exif_tool_params' => env('EXIF_TOOL_PARAMS'),
-    'freude_now_blog_domain' => env('APP_FREUDE_NOW_BLOG_DOMAIN'),
-    'freude_now_blog_title' => "Jens Freudenau's Blog",
-    'base_domain' => env('APP_BASE_DOMAIN'),
-    'berliner_photo_blog_domain' => env('APP_BERLINER_PHOTO_BLOG_DOMAIN'),
-    'berliner_photo_blog_title' => "Jens' Photo Art",
-    'freudefoto_title' => "Jens' Reisefotos",
-    'streetphoto_title' => "Jens' street photos",
-    'street_photo_blog_domain' => env('APP_STREET_PHOTO_BLOG_DOMAIN'),
-    'freude_foto_domain' => env('APP_FREUDE_FOTO_DOMAIN'),
-    'blog_entries_per_page' => env('BLOG_ENTRIES_PER_PAGE'),
     'import_path' => env('IMPORT_PATH'),
     'google_url' => env('GOOGLE_URL'),
     'google_key' => env('GOOGLE_KEY'),

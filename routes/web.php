@@ -19,21 +19,37 @@ use Illuminate\Support\Str;
 Route::get('/blog', [FrontendController::class, 'index'])->name('blog');
 
 Route::domain(config('app.berliner_photo_blog_domain'))->group(function () {
-    Route::get('/', [BerlinerPhotoblogController::class, 'index'])->name('home');
-    Route::get('/', [BerlinerPhotoblogController::class, 'index'])->name('dashboard');
-    Route::get('/', [BerlinerPhotoblogController::class, 'index'])->name('index');
+    Route::get('/', [BerlinerPhotoblogController::class, 'index']);
+    Route::get('/', [BerlinerPhotoblogController::class, 'index']);
     Route::get('/archive', [MediaController::class, 'index']);
 });
+
+Route::domain('www.' . config('app.berliner_photo_blog_domain'))->group(function () {
+    Route::get('/', [BerlinerPhotoblogController::class, 'index']);
+    Route::get('/', [BerlinerPhotoblogController::class, 'index']);
+    Route::get('/archive', [MediaController::class, 'index']);
+});
+
 Route::domain(config('app.freude_foto_domain'))->group(function () {
+    Route::get('/archive', [MediaController::class, 'index']);
+});
+Route::domain('www.' . config('app.freude_foto_domain'))->group(function () {
     Route::get('/archive', [MediaController::class, 'index']);
 });
 
 Route::domain(config('app.street_photo_blog_domain'))->group(function () {
     Route::get('/archive', [MediaController::class, 'streetphotoindex']);
 });
-Route::domain(config('app.freude_now_blog_domain'))->group(function () {
-    Route::get('/about', [FrontendController::class, 'about'])->name('about');
+Route::domain('www.' . config('app.street_photo_blog_domain'))->group(function () {
+    Route::get('/archive', [MediaController::class, 'streetphotoindex']);
 });
+Route::domain(config('app.freude_now_blog_domain'))->group(function () {
+    Route::get('/about', [FrontendController::class, 'about']);
+});
+Route::domain('www.' . config('app.freude_now_blog_domain'))->group(function () {
+    Route::get('/about', [FrontendController::class, 'about']);
+});
+
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
 Route::get('category', [CategoryController::class, 'index'])->name('category');

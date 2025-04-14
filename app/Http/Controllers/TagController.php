@@ -62,7 +62,7 @@ class TagController extends BaseController
         }
 
         $contents = $tag
-            ->contents()
+            ->contentsAll()
             ->with('category')
             ->whereDate('date', '<=', Carbon::now('Europe/Berlin'))
             ->orderBy('date', 'desc')

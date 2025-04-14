@@ -2,14 +2,10 @@
 
 namespace App\Providers;
 
-use App\Enums\Websites;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\View as NamespaceView;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Str;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,7 +14,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
     }
 
     /**
@@ -27,56 +22,51 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::defaultSimpleView('pagination::simple-tailwind');
+        $domain = Request::getHost();
+        if($domain === Config::get('domains.name.freude_now_blog_domain')) {
+            Paginator::defaultSimpleView('pagination::simple-blog_freude-now');
+
+        }
+
         $this->loadEnvironmentFromDomain();
 //        Model::preventLazyLoading();
     }
 
     protected function loadEnvironmentFromDomain(): void
     {
-        Config::set('app.blog_entries_per_page', env('BLOG_ENTRIES_PER_PAGE'));
-        if (request()->getHost() == env('APP_BERLINER_PHOTO_BLOG_DOMAIN')) {
-            Config::set('app.blog_entries_per_page', env('BERLINER_PHOTO_BLOG_ENTRIES_PER_PAGE'));
-        }
-        elseif(request()->getHost() == env('APP_STREET_PHOTO_BLOG_DOMAIN')) {
-            Config::set('app.blog_entries_per_page', env('STREET_PHOTO_BLOG_ENTRIES_PER_PAGE'));
-        }
-        elseif(request()->getHost() == env('APP_FREUDE_NOW_BLOG_DOMAIN')) {
-            Config::set('app.blog_entries_per_page', env('FREUDE_NOW_BLOG_ENTRIES_PER_PAGE'));
-        }
-
         $domain = Request::getHost();
-
-        $domainPath = Str::before($domain, '.');
-        if(Str::contains($domainPath, 'www')) {
-            $domainPath = Str::after($domain, 'www.');
-            $domain = Str::after($domain, 'www.');
+        if (in_array($domain, Config::get('domains.name'))) {
+            Config::set('app.base_domain', $domain);
         }
-
-        if(Config::get('app.freude_now_blog_domain') === $domain) {
-            $domainPathUnderline = Str::replace('blog.', 'blog_', $domain);
-            $domainPath = Str::before($domainPathUnderline, '.');
-        }
-        $websites = Websites::cases();
-        foreach ($websites as $website) {
-            if(Str::contains($domainPath, $website->value)) {
-                $domainPath = $website->name;
-            }
-        }
-        Config::set('app.base_domain', $domain);
-        Config::set('app.base_domain_path', $domainPath);
+        $this->setEntriesPerPage($domain);
+        $this->setDomainPath($domain);
     }
 
-    /**
-     * @param $url
-     * @return false|string
-     */
-    protected function getDomain($url): false|string
+
+    private function setEntriesPerPage($domain): void
     {
-        $pieces = parse_url($url);
-        $domain = $pieces['host'] ?? $pieces['path'];
-        if (preg_match('/(?P<domain>[a-z0-9][a-z0-9\-]{0,63}\.[a-z\.]{1,5})$/i', $domain, $regs)) {
-            return $regs['domain'];
+        if($domain === Config::get('domains.name.freude_now_blog_domain')) {
+            Config::set('app.blog_entries_per_page', Config::get('domains.entries.freude_now_blog_entries_per_page'));
+        } elseif($domain === Config::get('domains.name.berliner_photo_blog_domain')) {
+            Config::set('app.blog_entries_per_page', Config::get('domains.entries.berliner_photo_blog_entries_per_page'));
+        } elseif($domain === Config::get('domains.name.freude_foto_domain')) {
+            Config::set('app.blog_entries_per_page', Config::get('domains.entries.freude_foto_domain_entries_per_page'));
+        } elseif($domain === Config::get('domains.name.street_photo_blog_domain')) {
+            Config::set('app.blog_entries_per_page', Config::get('domains.entries.street_photo_blog_entries_per_page'));
+        } else {
+            Config::set('app.blog_entries_per_page', env('BLOG_ENTRIES_PER_PAGE'));
         }
-        return false;
+    }
+
+    private function setDomainPath(false|string $host): void
+    {
+        $parts = explode('.', $host);
+        $numParts = count($parts);
+        if ($numParts >= 2) {
+            $domainPart = $parts[$numParts - 2];
+            Config::set('app.base_domain_path', Config::get('domains.path.' . $domainPart));
+        } else {
+            Config::set('app.base_domain_path', Config::get('domains.path.freudefoto'));
+        }
     }
 }

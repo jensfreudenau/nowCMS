@@ -9,6 +9,9 @@
         @foreach($contents as $content)
             <x-blog_freude-now.content-iterator :content="$content"></x-blog_freude-now.content-iterator>
         @endforeach
+{{--        <div>--}}
+{{--            {{ $contents->links() }}--}}
+{{--        </div>--}}
     </div>
 </x-blog_freude-now.layout>
 

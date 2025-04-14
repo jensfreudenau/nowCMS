@@ -1,7 +1,7 @@
 @push('meta_after')
-    <meta name="description" content="{{config('app.freude_now_blog_title')}}">
-    <link rel="canonical" href="{{Config::get('app.base_domain')}}">
-    <title>{{config('app.freude_now_blog_title')}} - Blog :: {{__('Posts')}}</title>
+    <meta name="description" content="{{config('domains.titles.freude_now_blog_title')}} :: {{__('Posts')}}">
+    <link rel="canonical" href="https://{{Config::get('domains.name.freude_now_blog_domain')}}">
+    <title>{{config('domains.titles.freude_now_blog_title')}} :: {{__('Posts')}}</title>
 @endpush
 <x-blog_freude-now.layout>
     <div class="space-y-4 text-gray-700 m-4">
@@ -9,5 +9,8 @@
         @foreach($contents as $content)
              <x-blog_freude-now.content-iterator :content="$content"></x-blog_freude-now.content-iterator>
         @endforeach
+        <div>
+            {{ $contents->links() }}
+        </div>
     </div>
 </x-blog_freude-now.layout>
