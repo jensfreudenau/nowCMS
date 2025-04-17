@@ -1,52 +1,14 @@
-{{--
-@php use Carbon\Carbon; @endphp
-@section('title', 'Reisefotos - Reiserouten')
+
 
 <x-freudefoto.layout>
-    @push('meta_after')
-        <meta name="description" content="{{Str::words($journey->description, 10)}}">
-    @endpush
-    <x-slot:heading></x-slot:heading>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v3.7.0/mapbox-gl.css" rel="stylesheet">
-    <script src="https://api.mapbox.com/mapbox-gl-js/v3.7.0/mapbox-gl.js"></script>
-    <style>
-        div.relative {
-            position: relative;
-            width: 100%;
-            height: 800px;
-        }
+    {!! $journey->description !!}
+{{--    <x-slot:heading></x-slot:heading>--}}
 
-        div#map {
-            position: absolute;
-            top: 0;
-            width: 100%;
-            left: 0;
-            height: 100%;
-        }
-    </style>
-    <div class="space-y-4 text-white">
-        <article
-            class="m-4 p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-            <div class="flex justify-between items-center mb-5 text-gray-500">
-                  <span
-                      class="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
 
-                  </span>
-                <span class="text-sm">{{ Carbon::parse($journey->date)->format('d.m.Y')}}</span>
-            </div>
-            <h2 class="font-thin text-5xl tracking-tight ml-3 pb-6">{{$journey->name_of_route}}</h2>
-            <div class="m-4">
-                <p class="mb-5 font-thin">{!! $journey->description !!}</p>
-                <div class="relative">
-                    <div id="map"></div>
-                </div>
-            </div>
-        </article>
-    </div>
-    @push('js_after')
+{{--    @push('js_after')--}}
 
-        <script>
-            --}}
+{{--        <script>--}}
+
 {{--<script type="module">--}}{{--
 
             readFile('{{$url}}/line.js', setLine);
@@ -251,6 +213,6 @@
 
         </script>
     @endpush
-
-</x-freudefoto.layout>
 --}}
+</x-freudefoto.layout>
+

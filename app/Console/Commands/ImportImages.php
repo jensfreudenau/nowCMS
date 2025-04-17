@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use App\Exceptions\ImportException;
-use App\Mail\ErrorSend;
 use App\Models\Category;
 use App\Models\Content;
 use App\Models\Tag;
@@ -14,7 +13,6 @@ use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -109,7 +107,6 @@ class ImportImages extends Command
      * @param $key
      * @param Category $category
      * @param $lastDate
-     * @throws ImportException
      */
     public function setData(string $path, string $baseFileName, $key, Category $category, $lastDate): array
     {

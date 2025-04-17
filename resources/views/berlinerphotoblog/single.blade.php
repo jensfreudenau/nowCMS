@@ -1,6 +1,6 @@
 @push('meta_after')
     <meta name="description" content="{{config('domains.titles.berliner_photo_blog_title')}} - {{Str::words($content->header, 10)}}">
-    <link rel="canonical" href="https://{{Config::get('domains.name.berliner_photo_blog_domain')}}/single/{{$content->slug}}">
+    <link rel="canonical" href="https://{{Config::get('domains.domain.berliner_photo_blog_domain')}}/single/{{$content->slug}}">
     <title>{{config('domains.titles.berliner_photo_blog_title')}} - {{Str::words($content->header, 10)}}</title>
 @endpush
 <x-berlinerphotoblog.layout>

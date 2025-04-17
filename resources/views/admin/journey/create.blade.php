@@ -1,6 +1,6 @@
 <x-admin.layout>
-    <script src="https://cdn.tiny.cloud/1/enj6vwjkaod8my9vbjwxfphgvru2cmiw98p4fks6xqp9jgpn/tinymce/5/tinymce.min.js"
-            referrerpolicy="origin"></script>
+{{--    <script src="https://cdn.tiny.cloud/1/enj6vwjkaod8my9vbjwxfphgvru2cmiw98p4fks6xqp9jgpn/tinymce/5/tinymce.min.js"--}}
+{{--            referrerpolicy="origin"></script>--}}
 
                 @if(session('status'))
                     <div class="alert alert-success mb-1 mt-1">
@@ -118,7 +118,7 @@
     @push('js_after')
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js" integrity="sha512-VQQXLthlZQO00P+uEu4mJ4G4OAgqTtKG1hri56kQY1DtdLeIqhKUp9W/lllDDu3uN3SnUNawpW7lBda8+dSi7w==" crossorigin="anonymous"></script>
         <x-forms.dropzone/>
-        <x-forms.tinymce-editor/>
+{{--        <x-forms.tinymce-editor/>--}}
     @endpush
 </x-admin.layout>
 

@@ -12,6 +12,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
@@ -51,7 +53,8 @@ class MediaController extends BaseController
 
     public function adminmedia(): View|Factory|Application
     {
-        $websites = Websites::cases();
+        $websites = Config::get('domains.name');
+
         $contents = Content::with('category')
             ->where('single', false)
             ->where('active', true);
@@ -59,7 +62,7 @@ class MediaController extends BaseController
         return view('admin/media.index', compact('categories', 'websites'));
     }
 
-    public function setOnFrontsite(Request $request)
+    public function setOnFrontsite(Request $request): JsonResponse
     {
         $media = Media::find($request->id);
         $media->on_frontsite = $media->on_frontsite === 1 ? 0 : 1;
@@ -70,15 +73,19 @@ class MediaController extends BaseController
     public function getContent($id)
     {
         $img = [];
-        $contents = Content::where('website', $id)->get();
+
+        $contents = Content::where('website', 'like', $id . '%')->orderBy('date', 'desc')->get();
         if (!$contents) {
             return response()->json(['message' => 'Content not found'], 404);
         }
         foreach ($contents as $content) {
             $imageItems = $content->getMedia('images');
             foreach ($imageItems as $imageItem) {
+                $img[$content->id][$imageItem->id]['date'] = $imageItem->date;
+                $img[$content->id][$imageItem->id]['slug'] = $content->slug;
                 $img[$content->id][$imageItem->id]['id'] = $imageItem->id;
                 $img[$content->id][$imageItem->id]['on_frontsite'] = $imageItem->on_frontsite;
+                $img[$content->id][$imageItem->id]['preview'] = $imageItem->getUrl('preview');
                 $img[$content->id][$imageItem->id]['url'] = $imageItem->getUrl('thumb_square');
             }
         }

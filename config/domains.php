@@ -8,7 +8,12 @@ return [
         'berlinerphotoblog' => env('APP_BERLINER_PHOTO_BLOG_PATH'),
     ],
     'name' => [
-        'base_domain' => env('APP_BASE_DOMAIN'),
+        'freude_now_blog_domain' => env('APP_FREUDE_NOW_BLOG_DOMAIN_NAME'),
+        'street_photo_blog_domain' => env('APP_STREET_PHOTO_BLOG_DOMAIN_NAME'),
+        'freude_foto_domain' => env('APP_FREUDE_FOTO_DOMAIN_NAME'),
+        'berliner_photo_blog_domain' => env('APP_BERLINER_PHOTO_BLOG_DOMAIN_NAME'),
+    ],
+    'domain' => [
         'freude_now_blog_domain' => env('APP_FREUDE_NOW_BLOG_DOMAIN'),
         'street_photo_blog_domain' => env('APP_STREET_PHOTO_BLOG_DOMAIN'),
         'freude_foto_domain' => env('APP_FREUDE_FOTO_DOMAIN'),

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Events\GeoInformation;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Orchestra\Parser\Xml\Facade as XmlParser;
@@ -273,8 +274,8 @@ class GeoService
         foreach ($imageFileMedia as $imageFile) {
             $this->writeIntoMarkerFile(
                 $imageFile->custom_properties,
-                $imageFile->getPath('thumb'),
-                $imageFile->getPath('preview')
+                $imageFile->getPath(Config::get('conversions.journey.300x300')),
+                $imageFile->getPath(Config::get('conversions.journey.w600xh600'))
             );
         }
         $this->endWriteFile(self::MARKER_FILE);

@@ -63,7 +63,7 @@
                                     </div>
                                     <div class="px-12">
                                         <label for="description" class="block">{{ __('Beschreibung')}}</label>
-                                        <x-forms.textarea :text="Str::markdown(old('text', $journey->description ?? ''))" name="description" id="description"/>
+                                        <x-forms.textarea :text="$journey->description" name="description" id="description"/>
                                         <div id="descriptionHelp" class="text-sm">
                                             {{__('Du kannst hier deine Reise beschreiben. Das Feld ist optional')}}
                                         </div>
@@ -144,16 +144,19 @@
                                         </ul>
                                     </div>
                                     <div class="p-12">
+                                        <div class="grid grid-cols-4 gap-4 p-4 pt-8" id="">
                                             @foreach ($mediaImages as $mediaImage)
                                             <div class="" id="image_list_{{$mediaImage->id}}">
-                                               <img alt="" class="figure-img img-fluid rounded float-md-left" src="{{ $mediaImage->getUrl('square') }}">
+                                               <img alt="" class="figure-img img-fluid rounded float-md-left" src="{{ $mediaImage->getUrl('thumb_square') }}">
                                                 <div class="overlay">
+                                                    {{$mediaImage->getCustomProperty('DateTimeOriginal')}}
                                                     <a class="button_delete_media" title="delete image" data-id="{{ $mediaImage->id }}" data-token="{{ csrf_token() }}" data-journey="{{$journey->slug}}" data-type="images">
-                                                        <i class="fa fa-minus-square fa-3x"></i>
+                                                        <i class="fa fa-minus-square"></i>
                                                     </a>
                                                 </div>
                                             </div>
                                             @endforeach
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -170,7 +173,7 @@
 
         function setMarker(line_data) {
             let geoJson = createMarkerGeoJson(line_data);
-            console.log(geoJson);
+
             for (const marker of geoJson.features) {
                 let iconurl = '{{$url}}' + '/' + marker.properties.icon.iconUrl;
                 let el = document.createElement('div');
@@ -358,6 +361,35 @@
             });
         }
     });
+        $('.button_delete_media').click(function(){
+            let id = $(this).data("id");
+            let token = $(this).data("token");
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            jQuery.ajax({
+                url: '/journey/deleteMedia/' + id,
+                type: "DELETE",
+                dataType: "JSON",
+                data: {
+                    "id": id,
+                    "slug": $(this).data('journey'),
+                    "type": $(this).data('type'),
+                    "_method": 'DELETE',
+                    "_token": token,
+                },
+                success: function ()
+                {
+                    $( '#list_' + id).hide();
+                    $( '#image_list_' + id).hide();
+                },
+                error: function(xhr) {
+                    console.log(xhr.responseText); // this line will save you tons of hours while debugging
+                }
+            });
+        });
     </script>
         <x-forms.dropzone/>
         <x-forms.tinymce-editor/>

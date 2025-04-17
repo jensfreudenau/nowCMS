@@ -4,7 +4,7 @@ use Illuminate\Support\Str;
 
 @push('meta_after')
     <meta name="description" content="berlinerphotoblog category {{$categoryName}}">
-    <link rel="canonical" href="https://{{Config::get('domains.name.berliner_photo_blog_domain')}}/getCategory/{{$categoryName}}">
+    <link rel="canonical" href="https://{{Config::get('domains.domain.berliner_photo_blog_domain')}}/getCategory/{{$categoryName}}">
     <title>{{config('domains.titles.berliner_photo_blog_title')}} - {{ __('Kategorie') }} - {{$categoryName}}</title>
 @endpush
 <x-berlinerphotoblog.layout>

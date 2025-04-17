@@ -1,6 +1,6 @@
 @push('meta_after')
     <meta name="description" content="{{config('domains.titles.berliner_photo_blog_title')}} - Media">
-    <link rel="canonical" href="https://{{Config::get('domains.name.berliner_photo_blog_domain')}}/archive">
+    <link rel="canonical" href="https://{{Config::get('domains.domain.berliner_photo_blog_domain')}}/archive">
     <title>{{config('domains.titles.berliner_photo_blog_title')}} - media</title>
 @endpush
 <x-berlinerphotoblog.layout>
@@ -16,7 +16,7 @@
                     <div class="p-5 sm:p-8">
                         <div class="columns-1 gap-5 sm:columns-2 sm:gap-8 md:columns-3 lg:columns-3 [&>img:not(:first-child)]:mt-8">
                             @foreach($category->contents as $content)
-                                @if(Str::before($content->website, '.') === Str::before(Config::get('domains.name.berliner_photo_blog_domain'), '.'))
+                                @if(Str::before($content->website, '.') === Str::before(Config::get('domains.domain.berliner_photo_blog_domain'), '.'))
                                     @php $imageItems = $content->getMedia('images'); @endphp
                                     @foreach($imageItems as $imageItem)
                                         <a

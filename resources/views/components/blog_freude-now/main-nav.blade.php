@@ -11,8 +11,8 @@
         <!-- Menü -->
         <ul id="menu" class="hidden md:flex space-x-4 text-white">
             <li><x-link class="text-pink-500" href="https://freude-now.de" title="Jens Freudenau Home">Home -</x-link></li>
-            <li><x-link class="text-pink-500" href="https://{{config::get('domains.name.freude_now_blog_domain')}}" title="Blog">{{__('Blog')}} -</x-link></li>
-            <li><x-link class="text-pink-500" href="https://{{config::get('domains.name.freude_now_blog_domain')}}/about" title="about">{{__('about')}}</x-link></li>
+            <li><x-link class="text-pink-500" href="https://{{config::get('domains.domain.freude_now_blog_domain')}}" title="Blog">{{__('Blog')}} -</x-link></li>
+            <li><x-link class="text-pink-500" href="https://{{config::get('domains.domain.freude_now_blog_domain')}}/about" title="about">{{__('about')}}</x-link></li>
         </ul>
         <form action="{{ route('search') }}" method="GET">
             <input type="text" name="search" class="border-0 border-b-2 border-gray-300 bg-gray-50" placeholder="Suche">
@@ -25,7 +25,7 @@
     <!-- Mobile Menü -->
     <ul id="mobile-menu" class="hidden flex-col items-center space-y-4 p-4 md:hidden">
         <li><x-link class="text-pink-500" href="https://freude-now.de" title="Jens Freudenau Home">Home -</x-link></li>
-        <li><x-link class="text-pink-500" href="{{config::get('domains.name.freude_now_blog_domain')}}" title="Blog">{{__('Blog')}} -</x-link></li>
-        <li><x-link class="text-pink-500" href="{{config::get('domains.name.freude_now_blog_domain')}}/about" title="about">{{__('about')}}</x-link></li>
+        <li><x-link class="text-pink-500" href="{{config::get('domains.domain.freude_now_blog_domain')}}" title="Blog">{{__('Blog')}} -</x-link></li>
+        <li><x-link class="text-pink-500" href="{{config::get('domains.domain.freude_now_blog_domain')}}/about" title="about">{{__('about')}}</x-link></li>
     </ul>
 </nav>

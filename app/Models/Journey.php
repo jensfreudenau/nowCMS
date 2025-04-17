@@ -6,6 +6,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Config;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -52,15 +53,39 @@ class Journey extends Model implements HasMedia
     public function registerMediaConversions(Media $media = null): void
     {
         //https://www.youtube.com/watch?v=Ho9OVdxpFRM
-        $this->addMediaConversion('thumb')
-            ->width(500)
-            ->height(500);
+        $this->addMediaConversion(Config::get('conversions.journey.400x400'))
+            ->fit(Fit::Crop, 400, 400, true)
+            ->withResponsiveImages()
+            ->optimize()
+            ->keepOriginalImageFormat();
 
-        $this->addMediaConversion('preview')
-            ->width(2000)
-            ->height(2000)
-        ;
-        $this->addMediaConversion('square')
-            ->fit(Fit::Contain, 100, 100);
+        $this->addMediaConversion(Config::get('conversions.journey.300x300'))
+            ->fit(Fit::Crop, 300, 300, true)
+            ->withResponsiveImages()
+            ->optimize();
+
+        $this->addMediaConversion(Config::get('conversions.journey.w300xh300'))
+            ->fit(Fit::Contain, 400, 400, true)
+            ->withResponsiveImages()
+            ->keepOriginalImageFormat()
+            ->optimize();
+
+        $this->addMediaConversion(Config::get('conversions.journey.w600xh600'))
+            ->keepOriginalImageFormat()
+            ->fit(Fit::Contain, 600, 600, true)
+            ->withResponsiveImages()
+            ->optimize();
+
+        $this->addMediaConversion(Config::get('conversions.journey.w800xh800'))
+            ->keepOriginalImageFormat()
+            ->fit(Fit::Contain, 800, 800, true)
+            ->withResponsiveImages()
+            ->optimize()
+            ->quality(80);
+
+        $this->addMediaConversion(Config::get('conversions.journey.800x800'))
+            ->fit(Fit::Crop, 800, 800, true)
+            ->withResponsiveImages()
+            ->optimize();
     }
 }

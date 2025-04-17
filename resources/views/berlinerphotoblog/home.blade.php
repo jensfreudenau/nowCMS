@@ -1,7 +1,7 @@
 @php use Carbon\Carbon; use Illuminate\Support\Str; @endphp
 @push('meta_after')
     <meta name="description" content="{{config('domains.titles.berliner_photo_blog_title')}} - Home">
-    <link rel="canonical" href="https://{{Config::get('domains.name.berliner_photo_blog_domain')}}">
+    <link rel="canonical" href="https://{{Config::get('domains.domain.berliner_photo_blog_domain')}}">
     <title>{{config('domains.titles.berliner_photo_blog_title')}} - Home</title>
 @endpush
 <x-berlinerphotoblog.layout>

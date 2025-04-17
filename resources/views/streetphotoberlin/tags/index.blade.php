@@ -1,7 +1,7 @@
 <x-streetphotoberlin.layout>
     @push('meta_after')
         <meta name="description" content="{{Config::get('domains.titles.streetphoto_title')}} - tag {{$tag->name}}">
-        <link rel="canonical" href="https://{{Config::get('domains.name.street_photo_blog_domain')}}/tags/{{$tag->name}}">
+        <link rel="canonical" href="https://{{Config::get('domains.domain.street_photo_blog_domain')}}/tags/{{$tag->name}}">
         <title>{{Config::get('domains.titles.streetphoto_title')}} - tag {{$tag->name}}</title>
     @endpush
         <div class="mt-4 p-6 header_category  border border-gray-50 shadow-sm">

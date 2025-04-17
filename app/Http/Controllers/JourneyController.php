@@ -15,12 +15,14 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\MediaCannotBeDeleted;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
@@ -128,16 +130,21 @@ class JourneyController extends BaseController
      * @param Journey $journey
      * @return RedirectResponse
      */
-    public function update(Request $request, Journey $journey): RedirectResponse
+    public function update(Request $request, string $id): RedirectResponse
     {
-        $request->validate([
-            'name_of_route' => 'required|string|max:255',
-        ]);
-        $journeyModel = $journey->find($request['id']);
         $request->merge(['active' => $request->has('active')]);
-        $journeyModel->update($request->all());
+        $validated = $request->validate([
+            'name_of_route' => 'required|string|max:255',
+            'id' => 'required|integer',
+            'start_date' => 'required|date',
+            'active' => 'nullable|boolean',
+            'description' => 'nullable|string',
+        ]);
+        $journey = Journey::findBySlug($id);
+        $journey->update($validated);
+
         try {
-            $this->saveToStorage($request, $journeyModel);
+            $this->saveToStorage($request, $journey);
         } catch (FileDoesNotExist|FileIsTooBig $e) {
             Log::error($e->getMessage());
         }
@@ -196,6 +203,7 @@ class JourneyController extends BaseController
 //            return redirect('/', 303);
 //        }
         $journey = Journey::where('slug', $slug)->where('active', true)->first();
+
         $path = $url = '';
         $media = [];
 //        if ($journey->hasMedia('gpx') || $journey->hasMedia('images')) {
@@ -224,6 +232,7 @@ class JourneyController extends BaseController
      */
     public function edit(Journey $journey): Factory|View|Application
     {
+
         $mediaGpx = $mediaImages = [];
         $path = $url = '';
         if ($journey->hasMedia('gpx') || $journey->hasMedia('images')) {
@@ -275,7 +284,7 @@ class JourneyController extends BaseController
         $mediaItems = $journey->getMedia($request['type']);
         foreach ($mediaItems as $mediaItem) {
             if ($mediaItem->id === (int)$id) {
-                Storage::deleteDirectory($mediaItem->getPath('thumb'));
+                Storage::deleteDirectory($mediaItem->getPath());
 
                 Storage::delete($mediaItem->file_name);
             }

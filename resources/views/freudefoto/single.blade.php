@@ -8,7 +8,7 @@
 <x-freudefoto.layout>
     @push('meta_after')
         <meta name="description" content="{{Config::get('domains.titles.freudefoto_title')}} - {{$content['metadescription']}}">
-        <link rel="canonical" href="https://{{Config::get('domains.name.freudefoto_domain')}}/single/{{$content->slug}}">
+        <link rel="canonical" href="https://{{Config::get('domains.domain.freudefoto_domain')}}/single/{{$content->slug}}">
         <title>{{Config::get('domains.titles.freudefoto_title')}} - {!! Str::words($content->header, 10) !!}</title>
     @endpush
     <x-slot:heading></x-slot:heading>

@@ -15,6 +15,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
@@ -113,11 +114,12 @@ class ContentController extends BaseController
         $mediaItems = $content->getMedia('*');
         if ($mediaItems->isNotEmpty()) {
             foreach ($mediaItems as $mediaItem) {
-                Log::debug('$mediaItem->getPath(thumb)');
-                Log::debug($mediaItem->getPath('thumb'));
-                File::delete($mediaItem->getPath('thumb'));
-                File::delete($mediaItem->getPath('preview'));
-                File::delete($mediaItem->getPath('square'));
+                File::delete($mediaItem->getPath(Config::get('conversions.journey.400x400')));
+                File::delete($mediaItem->getPath(Config::get('conversions.journey.300x300')));
+                File::delete($mediaItem->getPath(Config::get('conversions.journey.w300xh300')));
+                File::delete($mediaItem->getPath(Config::get('conversions.journey.w600xh600')));
+                File::delete($mediaItem->getPath(Config::get('conversions.journey.w800xh800')));
+                File::delete($mediaItem->getPath(Config::get('conversions.journey.800x800')));
                 File::delete($mediaItem->getPath());
             }
         }
@@ -184,7 +186,7 @@ class ContentController extends BaseController
 //                    File::delete($mediaItem->getPath('thumb'));
 //                    File::delete($mediaItem->getPath('preview'));
 //                    File::delete($mediaItem->getPath('square'));
-//                    File::delete($mediaItem->getPath());
+                    File::delete($mediaItem->getPath());
                 }
             }
             Media::where('id', $id)->delete();

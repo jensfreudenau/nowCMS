@@ -13,6 +13,7 @@
         "cviebrock/eloquent-sluggable": "^11.0",
         "guzzlehttp/guzzle": "*",
         "intervention/image-laravel": "^1.3",
+        "josantonius/url": "^2.0",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "league/commonmark": "^2.5",

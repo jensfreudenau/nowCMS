@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::defaultSimpleView('pagination::simple-tailwind');
         $domain = Request::getHost();
-        if($domain === Config::get('domains.name.freude_now_blog_domain')) {
+        if($domain === Config::get('domains.domain.freude_now_blog_domain')) {
             Paginator::defaultSimpleView('pagination::simple-blog_freude-now');
 
         }
@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
     protected function loadEnvironmentFromDomain(): void
     {
         $domain = Request::getHost();
-        if (in_array($domain, Config::get('domains.name'))) {
+        if (in_array($domain, Config::get('domains.domain'))) {
             Config::set('app.base_domain', $domain);
         }
         $this->setEntriesPerPage($domain);
@@ -45,13 +45,13 @@ class AppServiceProvider extends ServiceProvider
 
     private function setEntriesPerPage($domain): void
     {
-        if($domain === Config::get('domains.name.freude_now_blog_domain')) {
+        if($domain === Config::get('domains.domain.freude_now_blog_domain')) {
             Config::set('app.blog_entries_per_page', Config::get('domains.entries.freude_now_blog_entries_per_page'));
-        } elseif($domain === Config::get('domains.name.berliner_photo_blog_domain')) {
+        } elseif($domain === Config::get('domains.domain.berliner_photo_blog_domain')) {
             Config::set('app.blog_entries_per_page', Config::get('domains.entries.berliner_photo_blog_entries_per_page'));
-        } elseif($domain === Config::get('domains.name.freude_foto_domain')) {
+        } elseif($domain === Config::get('domains.domain.freude_foto_domain')) {
             Config::set('app.blog_entries_per_page', Config::get('domains.entries.freude_foto_domain_entries_per_page'));
-        } elseif($domain === Config::get('domains.name.street_photo_blog_domain')) {
+        } elseif($domain === Config::get('domains.domain.street_photo_blog_domain')) {
             Config::set('app.blog_entries_per_page', Config::get('domains.entries.street_photo_blog_entries_per_page'));
         } else {
             Config::set('app.blog_entries_per_page', env('BLOG_ENTRIES_PER_PAGE'));

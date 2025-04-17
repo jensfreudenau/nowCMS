@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\Config;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
 use Spatie\Image\Enums\Fit;
@@ -84,37 +85,37 @@ class Content extends Model implements HasMedia, Feedable
     public function registerMediaConversions(Media $media = null): void
     {
         //https://www.youtube.com/watch?v=Ho9OVdxpFRM
-        $this->addMediaConversion('big_thumb_square')
+        $this->addMediaConversion(Config::get('conversions.journey.400x400'))
             ->fit(Fit::Crop, 400, 400, true)
             ->withResponsiveImages()
             ->optimize()
             ->keepOriginalImageFormat();
 
-        $this->addMediaConversion('thumb_square')
+        $this->addMediaConversion(Config::get('conversions.journey.300x300'))
             ->fit(Fit::Crop, 300, 300, true)
             ->withResponsiveImages()
             ->optimize();
 
-        $this->addMediaConversion('big_thumb')
+        $this->addMediaConversion(Config::get('conversions.journey.w300xh300'))
             ->fit(Fit::Contain, 400, 400, true)
             ->withResponsiveImages()
             ->keepOriginalImageFormat()
             ->optimize();
 
-        $this->addMediaConversion('preview')
+        $this->addMediaConversion(Config::get('conversions.journey.w600xh600'))
             ->keepOriginalImageFormat()
             ->fit(Fit::Contain, 600, 600, true)
             ->withResponsiveImages()
             ->optimize();
 
-        $this->addMediaConversion('big_preview')
+        $this->addMediaConversion(Config::get('conversions.journey.w800xh800'))
             ->keepOriginalImageFormat()
             ->fit(Fit::Contain, 800, 800, true)
             ->withResponsiveImages()
             ->optimize()
             ->quality(80);
 
-        $this->addMediaConversion('big_square')
+        $this->addMediaConversion(Config::get('conversions.journey.800x800'))
             ->fit(Fit::Crop, 800, 800, true)
             ->withResponsiveImages()
             ->optimize();

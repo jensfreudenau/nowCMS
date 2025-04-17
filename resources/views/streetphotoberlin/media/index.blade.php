@@ -1,6 +1,6 @@
 @push('meta_after')
     <meta name="description" content="s{{Config::get('domains.titles.streetphoto_title')}} - media overview">
-    <link rel="canonical" href="https://{{Config::get('domains.name.street_photo_blog_domain')}}/archive">
+    <link rel="canonical" href="https://{{Config::get('domains.domain.street_photo_blog_domain')}}/archive">
     <title>{{Config::get('domains.titles.streetphoto_title')}} - media</title>
 @endpush
 <x-streetphotoberlin.layout>
@@ -14,7 +14,7 @@
             <div class="p-5 sm:p-8">
                 <div class="columns-1 gap-5 sm:columns-2 sm:gap-8 md:columns-3 lg:columns-3 [&>img:not(:first-child)]:mt-8">
                     @foreach($contents as $content)
-                        @if(Str::before($content->website, '.') === Str::before(Config::get('domains.name.street_photo_blog_domain'), '.'))
+                        @if(Str::before($content->website, '.') === Str::before(Config::get('domains.domain.street_photo_blog_domain'), '.'))
                             @php $imageItems = $content->getMedia('images'); @endphp
                             @foreach($imageItems as $imageItem)
                                 <x-streetphotoberlin.imageLink :media="$imageItem" :content="$content"></x-streetphotoberlin.imageLink>
