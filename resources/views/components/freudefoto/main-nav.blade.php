@@ -1,7 +1,7 @@
-<nav class="bg-nord-4 text-gray-400">
+<nav class="bg-nord-nav text-gray-400">
     <div class="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        <div class="flex h-16 items-center justify-between">
-            <div class="flex items-center bg-nord-4">
+        <div class="flex h-16 items-center justify-between ">
+            <div class="flex items-center  ">
                 <div class="flex-shrink-0">
                     <a href="/" title="Home"><img class="h-8 w-8" src="{{ URL::asset('images/logo.jpg') }}" alt="{{config('domains.titles.freudefoto_title')}} - Home" ></a>
                 </div>
@@ -12,10 +12,11 @@
                         <x-freudefoto.dropdown/>
                     </div>
                 </div>
+{{--                @if (auth()->user())--}}
+{{--                    <x-admin-nav />--}}
+{{--                @endif--}}
             </div>
-            @if (auth()->user())
-                <x-admin-nav />
-            @endif
+
 
             <form action="{{ route('search') }}" method="GET">
                 <input type="text" name="search" placeholder="{{__('Suche')}}">

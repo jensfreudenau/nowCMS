@@ -1,4 +1,4 @@
-<div class="hidden sm:flex sm:items-center sm:ms-6 bg-white">
+<div class="hidden sm:flex sm:items-center sm:ms-6 ">
     <div class="flex h-16 items-center justify-between">
         <x-nav-link href="/adminmedia" :active="request()->is('adminmedia')">Media</x-nav-link>
         <x-nav-link href="/contents" :active="request()->is('contents')">Content</x-nav-link>

@@ -16,6 +16,13 @@
 @tailwind utilities;
 @import 'nord/src/sass/nord.scss';
 
+.bg-nord {
+    background-color: #222222;
+}
+.bg-nord-nav {
+    background-color: #292929;
+}
+
 article p a {
     text-decoration-line: underline;
 }
@@ -23,7 +30,12 @@ body {
     background-color: $nord0;
     color: $nord8;
 }
-
+#journey table  {
+    margin-bottom:30px;
+}
+#journey table td {
+    padding:10px;
+}
 article .content a {
     text-decoration-line: underline;
 }

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="h-full bg-nord-4">
+<html lang="en" class="h-full">
 <head>
     @stack('meta_after')
     <x-feed-links/>

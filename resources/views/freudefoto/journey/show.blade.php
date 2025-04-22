@@ -1,7 +1,9 @@
 
 
 <x-freudefoto.layout>
+    <div id="journey">
     {!! $journey->description !!}
+    </div>
 {{--    <x-slot:heading></x-slot:heading>--}}
 
 
