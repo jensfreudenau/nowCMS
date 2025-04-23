@@ -1,20 +1,32 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-import basicSsl from '@vitejs/plugin-basic-ssl'
+import mkcert from 'vite-plugin-mkcert'
+// import basicSsl from '@vitejs/plugin-basic-ssl'
 
-export default defineConfig({
+export default defineConfig(
+    {
+    resolve: {
+        alias: {
+            '$': 'jQuery',
+        }
+    },
     server: {
-        https: {
-            key: '/Users/jensfreudenau/berlinerphpotoblog.local/key.pem',  // Pfad zum privaten Schlüssel
-            cert: '/Users/jensfreudenau/berlinerphpotoblog.local/cert.pem' // Pfad zum Zertifikat
+        hmr: {
+            host: 'localhost',
         },
     },
+    // server: {
+    //     https: {
+    //         key: '/Users/jensfreudenau/berlinerphpotoblog.local/key.pem',  // Pfad zum privaten Schlüssel
+    //         cert: '/Users/jensfreudenau/berlinerphpotoblog.local/cert.pem' // Pfad zum Zertifikat
+    //     },
+    // },
     plugins: [
+        mkcert(),
         laravel({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
-                'resources/js/editorjs.js',
                 'resources/sass/app.scss',
                 'resources/sass/berlinerphotoblog.scss',
                 'resources/sass/streetphotoberlin.scss',
@@ -31,6 +43,15 @@ export default defineConfig({
         }
     },
     build: {
+        rollupOptions: {
+            output:{
+                manualChunks(id) {
+                    if (id.includes('node_modules')) {
+                        return id.toString().split('node_modules/')[1].split('/')[0].toString();
+                    }
+                }
+            }
+        },
         sourcemap: true // Aktiviert die Generierung von Source-Maps für den Build
     }
 });

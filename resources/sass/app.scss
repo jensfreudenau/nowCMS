@@ -9,12 +9,13 @@
 
 //$tag-pad: .2em .3em;
 //$tagMargin: 2px;
-@import '../../node_modules/@yaireo/tagify/src/tagify';
+@import '@yaireo/tagify/src/tagify.scss';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 @import 'nord/src/sass/nord.scss';
+
 
 .bg-nord {
     background-color: #222222;
