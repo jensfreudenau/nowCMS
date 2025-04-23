@@ -1,4 +1,3 @@
-@php use Illuminate\Support\Str; @endphp
 @php
     $tags = $content?->tags->pluck('name', 'id');
     $mediaItemsAll = $content->getMedia('images');
@@ -8,8 +7,8 @@
 @endphp
 <x-freudefoto.layout>
     @push('meta_after')
+        <link rel="canonical" href="{{ canonical() }}"/>
         <meta name="description" content="{{Config::get('domains.titles.freudefoto_title')}} - {{$content['metadescription']}}">
-        <link rel="canonical" href="https://{{Config::get('domains.domain.freude_foto_domain')}}/single/{{$content->slug}}">
         <title>{{Config::get('domains.titles.freudefoto_title')}} - {!! Str::words($content->header, 10) !!}</title>
     @endpush
     <x-slot:heading></x-slot:heading>

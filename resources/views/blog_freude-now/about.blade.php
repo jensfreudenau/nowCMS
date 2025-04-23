@@ -1,6 +1,6 @@
 @push('meta_after')
     <meta name="description" content="{{config('domains.titles.freude_now_blog_title')}} - {{__('about me')}}">
-    <link rel="canonical" href="https://{{Config::get('domains.domain.freude_now_blog_domain')}}/about">
+    <link rel="canonical" href="{{ canonical() }}"/>
     <title>{{config('domains.titles.freude_now_blog_title')}} - {{__('about me')}}</title>
 @endpush
 <x-blog_freude-now.layout>

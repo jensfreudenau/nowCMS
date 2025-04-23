@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>nowCMS</title>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     @vite(['resources/css/app.css','resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <x-slot:heading></x-slot:heading>

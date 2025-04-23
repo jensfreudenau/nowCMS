@@ -1,6 +1,6 @@
 @push('meta_after')
     <meta name="description" content="{{Config::get('domains.titles.freudefoto_title')}} - {{__('Medien')}}">
-    <link rel="canonical" href="https://{{Config::get('domains.domain.freude_foto_domain')}}/media">
+    <link rel="canonical" href="{{ canonical() }}"/>
     <title>{{Config::get('domains.titles.freudefoto_title')}} - {{__('Medien')}}</title>
 @endpush
 <x-freudefoto.layout>

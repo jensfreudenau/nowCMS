@@ -2,14 +2,27 @@ import {defineConfig} from 'vite';
 import laravel from 'laravel-vite-plugin';
 import mkcert from 'vite-plugin-mkcert'
 // import basicSsl from '@vitejs/plugin-basic-ssl'
+import dns from 'node:dns'
 
+dns.setDefaultResultOrder('verbatim')
 export default defineConfig(
     {
+        preview: {
+            allowedHost: true
+        },
         server: {
+            cors: {
+                origin: [
+                    'https://blog.freude-now.local',
+                    'https://freudefoto.local',
+                ],
+            },
             hmr: {
                 host: 'localhost',
             },
+            allowedHosts: true
         },
+
         plugins: [
             mkcert(),
             laravel({

@@ -1,6 +1,6 @@
 @push('meta_after')
     <meta name="description" content="{{config('domains.titles.berliner_photo_blog_title')}} tag {{$tag->name}}">
-    <link rel="canonical" href="https://{{Config::get('domains.domain.berliner_photo_blog_domain')}}/tags/{{$tag->name}}">
+    <link rel="canonical" href="{{ canonical() }}"/>
     <title>{{config('domains.titles.berliner_photo_blog_title')}} - tag {{$tag->name}}</title>
 @endpush
 <x-berlinerphotoblog.layout>

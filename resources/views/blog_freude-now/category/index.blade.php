@@ -1,7 +1,6 @@
 @push('meta_after')
     <meta name="description" content="{{config('domains.titles.freude_now_blog_title')}} - {{__('Kategory')}}:{{$categoryName}}">
-    <link rel="canonical" href="https://{{Config::get('domains.domain.freude_now_blog_domain')}}/getCategory/{{$categoryName}}">
-
+    <link rel="canonical" href="{{ canonical() }}"/>
     <title>{{config('domains.titles.freude_now_blog_title')}} - {{__('Kategorie')}} :: {{$categoryName}}</title>
 @endpush
 <x-blog_freude-now.layout>

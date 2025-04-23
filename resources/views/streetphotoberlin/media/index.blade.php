@@ -1,6 +1,6 @@
 @push('meta_after')
     <meta name="description" content="s{{Config::get('domains.titles.streetphoto_title')}} - media overview">
-    <link rel="canonical" href="https://{{Config::get('domains.domain.street_photo_blog_domain')}}/archive">
+    <link rel="canonical" href="{{ canonical() }}"/>
     <title>{{Config::get('domains.titles.streetphoto_title')}} - media</title>
 @endpush
 <x-streetphotoberlin.layout>

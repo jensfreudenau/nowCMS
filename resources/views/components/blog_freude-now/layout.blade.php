@@ -1,4 +1,5 @@
 <x-blog_freude-now.header />
+
 <x-slot:meta>Jens Freudenau's Blog</x-slot:meta>
 
 <body class="justify-center mx-auto px-4 pt-8 flex flex-col md:flex-row font-mono text-sm font-normal antialiased sm:px-8">
@@ -13,6 +14,9 @@
         </div>
     </header>
     <main class="p-7">
+        <button id="toggle-theme" class="px-4 py-2 bg-gray-200 dark:bg-gray-800 rounded hover:bg-gray-300 dark:hover:bg-gray-700">
+            Theme wechseln
+        </button>
         <div class="pb-5 mx-auto max-w-7xl sm:px-6 lg:px-8 shadow-md">
             <div class="space-y-4">
                 <div class="flex-col md:flex-row ">{{ $slot }}</div>
@@ -22,6 +26,26 @@
     <x-blog_freude-now.footer/>
 </div>
 <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        const toggleButton = document.getElementById('toggle-theme');
+        const root = document.documentElement;
+
+        // Theme aus localStorage laden
+        const savedTheme = localStorage.getItem('theme');
+        console.log(savedTheme);
+        if (savedTheme === 'dark') {
+            root.classList.add('dark');
+        } else {
+            root.classList.remove('dark');
+        }
+
+        toggleButton.addEventListener('click', () => {
+            console.log('click');
+            const isDark = root.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+    });
     // JavaScript für das Hamburger Menü
     document.getElementById("menu-btn").addEventListener("click", function() {
         document.getElementById("mobile-menu").classList.toggle("hidden");

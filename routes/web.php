@@ -65,6 +65,10 @@ Route::get('/feed/atom', function () {
 Route::get('/feed/rss', function () {
     return redirect('/feed', 303);
 });
+Route::get('/tag/{tagId}', [TagController::class, 'tag']);
+Route::get('/blog', [FrontendController::class, 'index'])->name('blog');
+Route::get('/', [FrontendController::class, 'index'])->name('home');
+Route::get('/', [FrontendController::class, 'index'])->name('dashboard');
 
 Route::middleware(['auth'])->group(function () {
 //    Route::get('users/index', function () {
@@ -150,10 +154,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
     Route::post('/users/store', [UserController::class, 'store'])->name('users.store');
 });
-Route::get('/tag/{tagId}', [TagController::class, 'tag']);
-Route::get('/blog', [FrontendController::class, 'index'])->name('blog');
-Route::get('/', [FrontendController::class, 'index'])->name('home');
-Route::get('/', [FrontendController::class, 'index'])->name('dashboard');
+
 
 Route::fallback(function () {
     $path = request()->path();

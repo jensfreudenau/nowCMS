@@ -1,6 +1,6 @@
 @push('meta_after')
     <meta name="description" content="Jens' Reiseberichte mit dem Rennrad durch Westeuropa">
-    <link rel="canonical" href="https://{{Config::get('domains.domain.freude_foto_domain')}}">
+    <link rel="canonical" href="{{ canonical() }}"/>
     <title>{{Config::get('domains.titles.freudefoto_title')}} - Home</title>
 @endpush
 <x-freudefoto.layout>

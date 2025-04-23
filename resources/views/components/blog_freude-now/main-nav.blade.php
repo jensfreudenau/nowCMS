@@ -14,6 +14,7 @@
             <li><x-link class="text-pink-500" href="https://{{config::get('domains.domain.freude_now_blog_domain')}}" title="Blog">{{__('Blog')}} -</x-link></li>
             <li><x-link class="text-pink-500" href="https://{{config::get('domains.domain.freude_now_blog_domain')}}/about" title="about">{{__('about')}}</x-link></li>
         </ul>
+
         <form action="{{ route('search') }}" method="GET">
             <input type="text" name="search" class="border-0 border-b-2 border-gray-300 bg-gray-50" placeholder="Suche">
             <button type="submit">

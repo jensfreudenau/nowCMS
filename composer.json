@@ -23,6 +23,7 @@
         "orangehill/iseed": "^3.0",
         "resend/resend-php": "^0.15.1",
         "romanzipp/laravel-queue-monitor": "^5.3",
+        "salamwaddah/laravel-canonical": "^1.1",
         "sentry/sentry-laravel": "^4.13",
         "spatie/laravel-feed": "^4.4",
         "spatie/laravel-medialibrary": "^11.9",

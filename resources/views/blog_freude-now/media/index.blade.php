@@ -1,6 +1,6 @@
 @push('meta_after')
     <meta name="description" content="{{config('domains.titles.freude_now_blog_title')}} - media overview">
-    <link rel="canonical" href="https://{{Config::get('domains.domain.freude_now_blog_domain')}}/archive">
+    <link rel="canonical" href="{{ canonical() }}"/>
     <title>{{config('domains.titles.freude_now_blog_title')}} - media</title>
 @endpush
 <x-blog_freude-now.layout>
