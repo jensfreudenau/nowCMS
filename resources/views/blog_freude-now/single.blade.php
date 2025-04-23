@@ -7,7 +7,7 @@
 @endpush
 
 <x-blog_freude-now.layout>
-    <div class="space-y-4 text-gray-700 m-4">
+    <div class="space-y-4 m-4">
         <x-blog_freude-now.article :content="$content" single="true"></x-blog_freude-now.article>
     </div>
     <script>

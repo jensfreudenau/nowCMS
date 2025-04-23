@@ -1,11 +1,11 @@
 <x-blog_freude-now.header />
 <x-slot:meta>Jens Freudenau's Blog</x-slot:meta>
 
-<body class="justify-center  mx-auto px-4 pt-8 flex flex-col md:flex-row font-mono text-sm font-normal antialiased sm:px-8">
-<div class="p-4  h-screen ">
+<body class="justify-center mx-auto px-4 pt-8 flex flex-col md:flex-row font-mono text-sm font-normal antialiased sm:px-8">
+<div class="p-4 h-screen">
     <header class="mt-6">
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            <img class="mr-4 h-16  float-left" src="{{ URL::asset('images/jens_blog2.webp') }} " alt="Jens Freudenau's Blog">
+            <img class="mr-4 h-16 float-left" src="{{ URL::asset('images/jens_blog2.webp') }} " alt="Jens Freudenau's Blog">
             <div class="mt-2">
                 <h1 class="text-lg font-bold"><a href="/" class="">{{config('domains.titles.freude_now_blog_title')}}</a></h1>
                     <x-blog_freude-now.main-nav />

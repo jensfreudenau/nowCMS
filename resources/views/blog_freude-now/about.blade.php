@@ -4,7 +4,7 @@
     <title>{{config('domains.titles.freude_now_blog_title')}} - {{__('about me')}}</title>
 @endpush
 <x-blog_freude-now.layout>
-    <div class="space-y-4 text-gray-700 m-4">
+    <div class="space-y-4 m-4">
         <h2 class="text-xl tracking-tight py-3 lowercase underline font-bold">{{__('about me')}}</h2>
         <ul>
             <li>👋 Hi, I’m Jens Freudenau</li>
