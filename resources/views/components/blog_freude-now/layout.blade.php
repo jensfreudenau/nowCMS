@@ -30,7 +30,6 @@
 
         // Theme aus localStorage laden
         const savedTheme = localStorage.getItem('theme');
-        console.log(savedTheme);
         if (savedTheme === 'dark') {
             root.classList.add('dark');
         } else {
@@ -38,7 +37,6 @@
         }
 
         toggleButton.addEventListener('click', () => {
-            console.log('click');
             const isDark = root.classList.toggle('dark');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
         });

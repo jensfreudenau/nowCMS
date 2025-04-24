@@ -15,18 +15,36 @@
 @tailwind components;
 @tailwind utilities;
 
-//#eceff4
 article p {
     padding-bottom: 10px;
 }
 article p a {
     text-decoration-line: underline;
 }
-
-code{
-    background-color: #f0f0f0;
+.hljs-tag .hljs-name, .hljs-tag .hljs-attr {
+    color: #fff;
+}
+.hljs-title, .hljs-section {
+    color:$nord12;
+    font-weight: bold;
+}
+.dark code{
+    background-color: $nord7;
     margin-bottom: 12px;
     margin-top: 12px;
+    color:$nord2;
+}
+code{
+    //background-color: $nord1;
+    margin-bottom: 12px;
+    margin-top: 12px;
+    color:$nord12;
+}
+.dark pre code {
+    background-color: $nord2;
+    margin-bottom: 12px;
+    margin-top: 12px;
+    color: $nord13;
 }
 article .content a {
     text-decoration-line: underline;
