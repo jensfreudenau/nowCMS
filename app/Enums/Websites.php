@@ -4,10 +4,10 @@ namespace App\Enums;
 
 enum Websites: string
 {
-    case freudefoto = 'freudefoto.local';
-    case berlinerphotoblog = 'berlinerphotoblog.local';
-    case streetphotoberlin = 'streetphotoberlin.local';
-    case freude_now = 'blog.freude-now.local';
+    case freudefoto = 'freudefoto.de';
+    case berlinerphotoblog = 'berlinerphotoblog.de';
+    case streetphotoberlin = 'streetphotoberlin.com';
+    case freude_now = 'blog.freude-now.de';
 
 
     public function label(): string
