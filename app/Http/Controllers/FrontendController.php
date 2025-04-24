@@ -31,7 +31,7 @@ class FrontendController extends BaseController
             Log::error($request->fullUrl());
         }
         return view(
-            config('app.base_domain_path', env('APP_BASE_DOMAIN_NAME')) . '/home',
+            config('app.base_domain_path', 'freudefoto') . '/home',
             compact('contents', 'heading', 'meta')
         );
     }
