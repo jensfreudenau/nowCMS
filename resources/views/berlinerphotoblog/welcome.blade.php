@@ -1,4 +1,3 @@
-@php use Carbon\Carbon; use Illuminate\Support\Str; @endphp
 @push('meta_after')
     <meta name="description" content="{{config('domains.titles.berliner_photo_blog_title')}} - Home">
     <link rel="canonical" href="{{ canonical() }}"/>

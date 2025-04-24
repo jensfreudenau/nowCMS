@@ -2,7 +2,7 @@
 
 <x-slot:meta>Jens Freudenau's Blog</x-slot:meta>
 
-<body class="justify-center mx-auto px-4 pt-8 flex flex-col md:flex-row font-mono text-sm font-normal antialiased sm:px-8">
+<body class="justify-center mx-auto px-4 pt-8 flex flex-col md:flex-row font-mono text-sm font-normal antialiased sm:px-8 white text-nord-1 dark:bg-nord-1  dark:text-nord-7">
 <div class="p-4 h-screen">
     <header class="mt-6">
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
@@ -13,11 +13,8 @@
             </div>
         </div>
     </header>
-    <main class="p-7">
-        <button id="toggle-theme" class="px-4 py-2 bg-gray-200 dark:bg-gray-800 rounded hover:bg-gray-300 dark:hover:bg-gray-700">
-            Theme wechseln
-        </button>
-        <div class="pb-5 mx-auto max-w-7xl sm:px-6 lg:px-8 shadow-md">
+    <main class="p-7 dark:bg-nord-0  shadow-md">
+        <div class="pb-5 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="space-y-4">
                 <div class="flex-col md:flex-row ">{{ $slot }}</div>
             </div>
@@ -28,7 +25,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
 
-        const toggleButton = document.getElementById('toggle-theme');
+        const toggleButton = document.getElementById('theme-toggle');
         const root = document.documentElement;
 
         // Theme aus localStorage laden

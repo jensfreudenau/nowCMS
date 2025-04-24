@@ -9,12 +9,13 @@
 
 //$tag-pad: .2em .3em;
 //$tagMargin: 2px;
-@import '../../node_modules/@yaireo/tagify/src/tagify';
-
+@import '@yaireo/tagify/src/tagify.scss';
+@import 'nord/src/sass/nord.scss';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+//#eceff4
 article p {
     padding-bottom: 10px;
 }
@@ -81,7 +82,4 @@ article ul {
 
 .admin img {
     max-height: 150px;
-}
-hr {
-    padding: 10px 0 10px 0;
 }

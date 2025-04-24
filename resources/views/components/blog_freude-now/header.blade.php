@@ -21,7 +21,7 @@
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <!-- End Matomo Code -->
-    @vite(['resources/css/app.css', 'resources/sass/blogfreudenow.scss', 'resources/js/app.js'])
+    @vite(['resources/sass/blogfreudenow.scss', 'resources/js/app.js'])
     <x-meta />
 </head>
 

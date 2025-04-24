@@ -38,4 +38,4 @@ window.Moment = Moment;
 window.languageDE = languageDE;
 window.Sortable = Sortable;
 window.VenoBox = VenoBox;
-import '../sass/app.scss';
+// import '../sass/app.scss';
