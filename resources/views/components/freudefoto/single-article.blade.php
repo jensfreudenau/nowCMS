@@ -66,8 +66,8 @@
         </div>
     @endif
     <div class="py-11 px-52">
-        <div class="justify-between items-stretch container   flex flex-wrap ">
-            <div class="flex   flex-wrap  md:p-2">
+        <div class="justify-between items-stretch container flex flex-wrap ">
+            <div class="flex flex-wrap  md:p-2">
                     @foreach($tags as $tag)
                         <x-freudefoto.button-tag href="/tag/{{$tag}}" class="dark:bg-white border mb-2 mr-2 hover:bg-orange-500 border-orange-500 bg-white text-black font-normal">#{{$tag}}</x-freudefoto.button-tag>
                     @endforeach

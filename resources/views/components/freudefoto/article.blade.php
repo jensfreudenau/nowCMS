@@ -1,4 +1,4 @@
-@php use Carbon\Carbon; use Illuminate\Support\Str; @endphp
+@php use Illuminate\Support\Str; @endphp
 <div class="flex flex-col">
 @foreach($contents as $content)
     @php

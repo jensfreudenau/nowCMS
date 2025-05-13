@@ -13,9 +13,9 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -130,8 +130,10 @@ class JourneyController extends BaseController
      * @param Journey $journey
      * @return RedirectResponse
      */
-    public function update(Request $request, string $id): RedirectResponse
+    public function update(\Illuminate\Http\Request $request, $id): RedirectResponse
     {
+
+        Log::debug(json_encode($request->all()));
         $request->merge(['active' => $request->has('active')]);
         $validated = $request->validate([
             'name_of_route' => 'required|string|max:255',
@@ -152,7 +154,7 @@ class JourneyController extends BaseController
         if ($jobs->count()) {
             return redirect('/dispatcher/index');
         }
-        return redirect()->route('journey.index')
+        return redirect()->route('journey.admin.list')
             ->with('success', 'Journey updated successfully');
     }
 
@@ -206,20 +208,20 @@ class JourneyController extends BaseController
 
         $path = $url = '';
         $media = [];
-//        if ($journey->hasMedia('gpx') || $journey->hasMedia('images')) {
-//            if($journey->hasMedia('images')) {
-//                $media = $journey->getMedia('images');
-//            }
-//            elseif($journey->hasMedia('gpx')) {
-//                $media = $journey->getMedia('gpx');
-//
-//            }
-//            if(count($media) > 0) {
-//                $urlMedia = $media[0]->getUrl();
-//                $url = Str::beforeLast($urlMedia, '/');
-//                $path = pathinfo($media[0]->getPath(), PATHINFO_DIRNAME);
-//            }
-//        }
+        if ($journey->hasMedia('gpx') || $journey->hasMedia('images')) {
+            if($journey->hasMedia('images')) {
+                $media = $journey->getMedia('images');
+            }
+            elseif($journey->hasMedia('gpx')) {
+                $media = $journey->getMedia('gpx');
+
+            }
+            if(count($media) > 0) {
+                $urlMedia = $media[0]->getUrl();
+                $url = Str::beforeLast($urlMedia, '/');
+                $path = pathinfo($media[0]->getPath(), PATHINFO_DIRNAME);
+            }
+        }
 
         return view('freudefoto.journey.show', compact('journey', 'url', 'path'));
     }
@@ -227,12 +229,12 @@ class JourneyController extends BaseController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Journey $journey
+     * @param $id
      * @return Application|Factory|View
      */
-    public function edit(Journey $journey): Factory|View|Application
+    public function edit($id): Factory|View|Application
     {
-
+        $journey = Journey::find($id);
         $mediaGpx = $mediaImages = [];
         $path = $url = '';
         if ($journey->hasMedia('gpx') || $journey->hasMedia('images')) {

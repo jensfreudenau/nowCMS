@@ -19,148 +19,149 @@
         }
     </style>
 
-            @if(session('status'))
-                <div class="p-4 text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300" role="alert">
-                    <span class="font-medium">{{ session('status') }}
+    @if(session('status'))
+        <div class="p-4 text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300" role="alert">
+            <span class="font-medium">{{ session('status') }}
+        </div>
+    @endif
+
+<div class="p-6 text-gray-900 pl-10">
+    <div class="grid grid-cols-2 gap-4">
+        <div class="pt-2">
+            <a href="{{ route('dispatcher.index') }}">{{ __('Job Übersicht') }}</a>
+        </div>
+        <div class="flex  justify-end">
+            <form method="POST" action="{{ route('journey.destroy', $journey->slug) }}" onsubmit="return confirm('are yo sure');">
+                @method('DELETE')
+                @csrf
+                <button type="submit" class="right-0 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    {{ __('löschen') }}
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="grid grid-cols-1 gap-4">
+        <form method="POST" class="needs-validation" novalidate action="{{ route('journey.update', $journey) }}"  enctype="multipart/form-data">
+            @method('PUT')
+                @csrf
+            <div class="p-12">
+                <label for="name_of_route" class="block">{{ __('Name der Route') }}*</label>
+                <input
+                    type="text"
+                    name="name_of_route"
+                    class="mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
+                    id="name_of_route"
+                    aria-describedby="nameHelp"
+                    value="{{$journey['name_of_route']}}"
+                    required
+                />
+                <div id="nameHelp" class="text-sm">
+                    {{ __('Gib der Route einen Titel. Dieser darf noch nicht von dir verwendet worden sein') }}
                 </div>
-            @endif
+                @error('name_of_route')
+                <div class="invalid-feedback"> {{ __('ein gültiger Name ist erforderlich') }} </div>
+                @enderror
+            </div>
+            <div class="px-12">
+                <label for="description" class="block">{{ __('Beschreibung')}}</label>
+                <x-forms.textarea :text="$journey->description" name="description" id="description"/>
+                <div id="descriptionHelp" class="text-sm">
+                    {{__('Du kannst hier deine Reise beschreiben. Das Feld ist optional')}}
+                </div>
+                @error('description')
+                    <div class="invalid-feedback">
+                        {{ __('eine gültige Beschreibung der Route ist erforderlich') }}
+                    </div>
+                @enderror
+            </div>
+            <div class="p-12">
+                <label class="block" for="startDate">{{ __('Start Datum') }}</label>
+                <input
+                    id="startDate"
+                    name="start_date"
+                    class="mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
+                    type="date"
+                    value="{{$journey['start_date']}}"/>
+            </div>
+            <div class="p-12">
+                <input type="checkbox"
+                       name="active"
+                       id="active"
+                       class="rounded"
+                    @checked(old('active', $journey->active ?? '')) />
+                <label for="active"
+                       class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">{{ __('Aktiv')}}
+                </label>
+            </div>
+            <div class="px-12">
+                <label class="block" for="gpx">GPX</label>
+                <div class="needsclick dropzone" id="gpxDropzone">
+                    <div class="dropzone-previews"></div>
+                </div>
+            </div>
+            <div class="p-12">
+                <label class="block" for="images">Images</label>
+                <div class="needsclick dropzone" id="imagesDropzone">
+                    <div class="dropzone-previews"></div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <button
+                    type="submit"
+                    class="float-right relative inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                    {{ __('Speichern') }}
+                </button>
+                <input type="hidden" name="id" value="{{$journey->id}}">
 
-                        <div class="p-6 text-gray-900 pl-10">
-                            <div class="grid grid-cols-2 gap-4">
-                                <div class="pt-2">
-                                    <a href="{{ route('dispatcher.index') }}">{{ __('Job Übersicht') }}</a>
-                                </div>
-                                <div class="flex  justify-end">
-                                    <form method="POST" action="{{ route('journey.destroy', $journey->slug) }}" onsubmit="return confirm('are yo sure');">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button type="submit" class="right-0 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                                            {{ __('löschen') }}
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-1 gap-4">
-                                <form method="POST" class="needs-validation" novalidate {{ route('journey.update', $journey->slug) }}>
-                                        @csrf
-                                    <div class="p-12">
-                                        <label for="name_of_route" class="block">{{ __('Name der Route') }}*</label>
-                                        <input
-                                            type="text"
-                                            name="name_of_route"
-                                            class="mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
-                                            id="name_of_route"
-                                            aria-describedby="nameHelp"
-                                            value="{{$journey['name_of_route']}}"
-                                            required
-                                        />
-                                        <div id="nameHelp" class="text-sm">
-                                            {{ __('Gib der Route einen Titel. Dieser darf noch nicht von dir verwendet worden sein') }}
-                                        </div>
-                                        @error('name_of_route')
-                                        <div class="invalid-feedback"> {{ __('ein gültiger Name ist erforderlich') }} </div>
-                                        @enderror
-                                    </div>
-                                    <div class="px-12">
-                                        <label for="description" class="block">{{ __('Beschreibung')}}</label>
-                                        <x-forms.textarea :text="$journey->description" name="description" id="description"/>
-                                        <div id="descriptionHelp" class="text-sm">
-                                            {{__('Du kannst hier deine Reise beschreiben. Das Feld ist optional')}}
-                                        </div>
-                                        @error('description')
-                                            <div class="invalid-feedback">
-                                                {{ __('eine gültige Beschreibung der Route ist erforderlich') }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                    <div class="p-12">
-                                        <label class="block" for="startDate">{{ __('Start Datum') }}</label>
-                                        <input
-                                            id="startDate"
-                                            name="start_date"
-                                            class="mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
-                                            type="date"
-                                            value="{{$journey['start_date']}}"/>
-                                    </div>
-                                    <div class="p-12">
-                                        <input type="checkbox"
-                                               name="active"
-                                               id="active"
-                                               class="rounded"
-                                            @checked(old('active', $journey->active ?? '')) />
-                                        <label for="active"
-                                               class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">{{ __('Aktiv')}}
-                                        </label>
-                                    </div>
-                                    <div class="px-12">
-                                        <label class="block" for="gpx">GPX</label>
-                                        <div class="needsclick dropzone" id="gpxDropzone">
-                                            <div class="dropzone-previews"></div>
-                                        </div>
-                                    </div>
-                                    <div class="p-12">
-                                        <label class="block" for="images">Images</label>
-                                        <div class="needsclick dropzone" id="imagesDropzone">
-                                            <div class="dropzone-previews"></div>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <button
-                                            type="submit"
-                                            class="float-right relative inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                                            {{ __('Speichern') }}
-                                        </button>
-                                        <input type="hidden" name="id" value="{{$journey->id}}">
+            </div>
 
-                                    </div>
-
-                                    <div class="p-12">
-                                        <div class="relative">
-                                            <div id="map"></div>
-                                        </div>
-                                    </div>
-                                    <div class="p-12">
-                                        <h4>GPX Dateien sortieren</h4>
-                                        <ul class="text-gray-500 list-none list-inside dark:text-black" id="gpxFiles">
-                                        @foreach ($mediaGpx as $key => $gpx)
-                                            <li class="flex border-2 py-4 mb-2 pb-3" data-media-id="{{$gpx->id}}" id="list_{{$gpx->id}}" data-id="{{$gpx->id}}">
-                                                <i class="px-2 fa-solid fa-hand"></i>
-                                                <div class="px-5">{{ Carbon\Carbon::parse($gpx->getCustomProperty('start_time'))->setTimezone('Europe/Berlin')->format('d.m.Y H:i:s') }} </div>
-                                                <div class="px-3">
-                                                      {{Str::after($gpx->file_name, '_')}}
-                                                </div>
-                                                <button
-                                                    type="button"
-                                                    data-id="{{ $gpx->id }}"
-                                                    id="{{$gpx->id}}"
-                                                    data-token="{{ csrf_token() }}"
-                                                    data-journey="{{$journey->slug}}"
-                                                    data-type="gpx"
-                                                    class="button_delete_media px-3 py-2 text-xs font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                                                    {{ __('löschen') }}
-                                                </button>
-                                            </li>
-                                        @endforeach
-                                        </ul>
-                                    </div>
-                                    <div class="p-12">
-                                        <div class="grid grid-cols-4 gap-4 p-4 pt-8" id="">
-                                            @foreach ($mediaImages as $mediaImage)
-                                            <div class="" id="image_list_{{$mediaImage->id}}">
-                                               <img alt="" class="figure-img img-fluid rounded float-md-left" src="{{ $mediaImage->getUrl('thumb_square') }}">
-                                                <div class="overlay">
-                                                    {{$mediaImage->getCustomProperty('DateTimeOriginal')}}
-                                                    <a class="button_delete_media" title="delete image" data-id="{{ $mediaImage->id }}" data-token="{{ csrf_token() }}" data-journey="{{$journey->slug}}" data-type="images">
-                                                        <i class="fa fa-minus-square"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+            <div class="p-12">
+                <div class="relative">
+                    <div id="map"></div>
+                </div>
+            </div>
+            <div class="p-12">
+                <h4>GPX Dateien sortieren</h4>
+                <ul class="text-gray-500 list-none list-inside dark:text-black" id="gpxFiles">
+                @foreach ($mediaGpx as $key => $gpx)
+                    <li class="flex border-2 py-4 mb-2 pb-3" data-media-id="{{$gpx->id}}" id="list_{{$gpx->id}}" data-id="{{$gpx->id}}">
+                        <i class="px-2 fa-solid fa-hand"></i>
+                        <div class="px-5">{{ Carbon\Carbon::parse($gpx->getCustomProperty('start_time'))->setTimezone('Europe/Berlin')->format('d.m.Y H:i:s') }} </div>
+                        <div class="px-3">
+                              {{Str::after($gpx->file_name, '_')}}
                         </div>
+                        <button
+                            type="button"
+                            data-id="{{ $gpx->id }}"
+                            id="{{$gpx->id}}"
+                            data-token="{{ csrf_token() }}"
+                            data-journey="{{$journey->slug}}"
+                            data-type="gpx"
+                            class="button_delete_media px-3 py-2 text-xs font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                            {{ __('löschen') }}
+                        </button>
+                    </li>
+                @endforeach
+                </ul>
+            </div>
+            <div class="p-12">
+                <div class="grid grid-cols-4 gap-4 p-4 pt-8" id="">
+                    @foreach ($mediaImages as $mediaImage)
+                    <div class="" id="image_list_{{$mediaImage->id}}">
+                       <img alt="" class="figure-img img-fluid rounded float-md-left" src="{{ $mediaImage->getUrl('thumb_square') }}">
+                        <div class="overlay">
+                            {{$mediaImage->getCustomProperty('DateTimeOriginal')}}
+                            <a class="button_delete_media" title="delete image" data-id="{{ $mediaImage->id }}" data-token="{{ csrf_token() }}" data-journey="{{$journey->slug}}" data-type="images">
+                                <i class="fa fa-minus-square"></i>
+                            </a>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
 
 @push('js_after')

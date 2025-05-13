@@ -30,4 +30,21 @@ class ImageService
 
         return Str::replace($between, $replaceBetween, $replace);
     }
+
+    public static function parseObjectName(string $path, string $quotes = '"'): string
+    {
+
+        $result = Process::run('exiftool ' .  $quotes . '-Object Name'  . $quotes .' -G1 -a '. $path);
+        $str = Str::after($result->output(), ': ');
+
+        return Str::chopEnd($str, "\n");
+    }
+
+    public static function parseSourceName(string $path, string $quotes = '"'): string
+    {
+        $result = Process::run('exiftool ' .  $quotes . '-Source'  . $quotes .' -G1 -a '. $path);
+        $str = Str::after($result->output(), ': ');
+        $str = Str::before($str, "\n");
+        return Str::chopEnd($str, "\n");
+    }
 }

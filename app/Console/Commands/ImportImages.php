@@ -112,7 +112,20 @@ class ImportImages extends Command
     {
         $data['header'] = ImageService::parseData('Headline', $path);
         if (empty($data['header'])){
-            throw new ImportException('no header in image ' . $path);
+            $data['header'] = ImageService::parseObjectName($path);
+            if (empty($data['header'])) {
+                throw new ImportException('no header in image ' . $path);
+            }
+        }
+
+        $data['website'] = ImageService::parseData('*URL*', $path);
+
+        if (empty($data['website'])) {
+            $data['website'] = ImageService::parseSourceName($path);
+            if (empty($data['website'])) {
+                $data['website'] = 'freudefoto.de';
+            }
+            $data['website'] = Str::of($data['website'])->chopStart(['https://', 'http://']);
         }
 
         $data['file_name'] = $baseFileName;
@@ -120,7 +133,7 @@ class ImportImages extends Command
         $data['height'] = ImageService::parseData('ImageHeight', $path);
         $data['width'] = ImageService::parseData('ImageWidth', $path);
         $data['category_id'] = 1;
-        $cat = $category::whereTranslation('name', ImageService::parseData('Category', $path))->first();
+        $cat = $category::whereTranslation('short', ImageService::parseData('Category', $path))->first();
         if(is_object($cat) !== false) {
             $data['category_id'] = $cat?->id;
         }
@@ -132,12 +145,7 @@ class ImportImages extends Command
         $text = ImageService::parseData('Description', $path);
         $data['text'] = ImageService::parseText($text);
         $data['keywords'] = Str::remove(',', ImageService::parseData('Keywords', $path));
-        $data['website'] = !empty(ImageService::parseData('*URL*', $path)) ? Str::of(
-            ImageService::parseData(
-                '*URL*',
-                $path
-            )
-        )->chopStart(['https://', 'http://']) : 'freudefoto.de';
+
         return $data;
     }
 }

@@ -12,41 +12,42 @@ use App\Http\Controllers\QueuesController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 use App\Models\Content;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 Route::get('/blog', [FrontendController::class, 'index'])->name('blog');
 
-Route::domain(config('app.berliner_photo_blog_domain'))->group(function () {
+Route::domain(config('domains.domain.berliner_photo_blog_domain'))->group(function () {
     Route::get('/', [BerlinerPhotoblogController::class, 'index']);
     Route::get('/', [BerlinerPhotoblogController::class, 'index']);
     Route::get('/archive', [MediaController::class, 'index']);
 });
 
-Route::domain('www.' . config('app.berliner_photo_blog_domain'))->group(function () {
+Route::domain('www.' . Config::get('domains.domain.berliner_photo_blog_domain'))->group(function () {
     Route::get('/', [BerlinerPhotoblogController::class, 'index']);
     Route::get('/', [BerlinerPhotoblogController::class, 'index']);
     Route::get('/archive', [MediaController::class, 'index']);
 });
 
-Route::domain(config('app.freude_foto_domain'))->group(function () {
+Route::domain(config('domains.domain.freude_foto_domain'))->group(function () {
     Route::get('/archive', [MediaController::class, 'index']);
 });
-Route::domain('www.' . config('app.freude_foto_domain'))->group(function () {
+Route::domain('www.' . config('domains.domain.freude_foto_domain'))->group(function () {
     Route::get('/archive', [MediaController::class, 'index']);
 });
 
-Route::domain(config('app.street_photo_blog_domain'))->group(function () {
+Route::domain(config('domains.domain.street_photo_blog_domain'))->group(function () {
     Route::get('/archive', [MediaController::class, 'streetphotoindex']);
 });
-Route::domain('www.' . config('app.street_photo_blog_domain'))->group(function () {
+Route::domain('www.' . config('domains.domain.street_photo_blog_domain'))->group(function () {
     Route::get('/archive', [MediaController::class, 'streetphotoindex']);
 });
-Route::domain(config('app.freude_now_blog_domain'))->group(function () {
+Route::domain(config('domains.domain.freude_now_blog_domain'))->group(function () {
     Route::get('/about', [FrontendController::class, 'about']);
 });
-Route::domain('www.' . config('app.freude_now_blog_domain'))->group(function () {
+Route::domain('www.' . config('domains.domain.freude_now_blog_domain'))->group(function () {
     Route::get('/about', [FrontendController::class, 'about']);
 });
 
@@ -57,7 +58,7 @@ Route::get('/category/{categoryId}', [CategoryController::class, 'get']);
 Route::get('/getCategory/{categoryId}', [CategoryController::class, 'get']);
 Route::get('/single/{slug}', [FrontendController::class, 'single']);
 Route::get('/search', [FrontendController::class, 'search'])->name('search');
-Route::get('/journeys', [JourneyController::class, 'journeys'])->name('journeys');
+
 Route::feeds();
 Route::get('/feed/atom', function () {
     return redirect('/feed', 303);
@@ -69,7 +70,7 @@ Route::get('/tag/{tagId}', [TagController::class, 'tag']);
 Route::get('/blog', [FrontendController::class, 'index'])->name('blog');
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 Route::get('/', [FrontendController::class, 'index'])->name('dashboard');
-
+Route::get('/journey/{slug}', [JourneyController::class, 'show'])->name('journey.show');
 Route::middleware(['auth'])->group(function () {
 //    Route::get('users/index', function () {
 //        return view('admin/user.index', [
@@ -111,13 +112,19 @@ Route::middleware(['auth'])->group(function () {
 
     //Route::get('/previews', [JourneyController::class, 'preview'])->name('preview');
     Route::post('/upload', [JourneyController::class, 'upload'])->name('upload');
-    Route::post('journey/{slug}/edit', [JourneyController::class, 'update']);
-    Route::resource('journey', JourneyController::class);
-    Route::post('journey/storeMedia', [JourneyController::class, 'storeMedia'])->name('journey.storeMedia');
-    Route::post('journey/updateMedia', [JourneyController::class, 'updateMedia'])->name('journey.updateMedia');
-    Route::delete('journey/deleteMedia/{media_id}', [JourneyController::class, 'deleteMedia'])->name(
-        'journey.deleteMedia'
-    );
+
+    Route::get('/journey/admin/list', [JourneyController::class, 'index'])->name('journey.admin.list');
+    Route::get('/journey/create', [JourneyController::class, 'create'])->name('journey.create');
+    // Formular zum Bearbeiten (z. B. /journey/123/edit)
+    Route::get('/journey/{id}/edit', [JourneyController::class, 'edit'])->where('id', '[0-9]+')->name('journey.edit');
+    // Update-Request (z. B. per PUT/PATCH an /journey/123)
+    Route::put('/journey/{id}', [JourneyController::class, 'update'])->where('id', '[0-9]+')->name('journey.update');
+    Route::get('/journey/destroy', [JourneyController::class, 'destroy'])->name('journey.destroy');
+    Route::get('/journey/{id}/edit', [JourneyController::class, 'edit'])->name('journey.edit');
+    Route::put('/journey/{id}', [JourneyController::class, 'update'])->name('journey.update');
+    Route::post('/journey/storeMedia', [JourneyController::class, 'storeMedia'])->name('journey.storeMedia');
+    Route::post('/journey/updateMedia', [JourneyController::class, 'updateMedia'])->name('journey.updateMedia');
+    Route::delete('/journey/deleteMedia/{media_id}', [JourneyController::class, 'deleteMedia'])->name('journey.deleteMedia');
 
     Route::get('dispatcher/startQueue', [DispatcherController::class, 'startQueue'])->name('dispatcher.start');
     Route::get('dispatcher/retryFailedJobs', [DispatcherController::class, 'retryFailedJobs'])->name(

@@ -84,9 +84,9 @@ class GeoService
         if (empty($lat) || empty($lon)) {
             return false;
         }
-        $url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' . trim($lat) . ',' . trim(
-                $lon
-            ) . '&key='.env('GOOGLE');
+        $url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' . trim($lat) . ',' . trim($lon) .
+            '&key='.config('app.google_key');;
+
         $data = json_decode(file_get_contents($url));
         if ($data->status === 'OK') {
             $this->address = str_replace("'", '', $data->results[0]->formatted_address);
@@ -104,15 +104,16 @@ class GeoService
      */
     protected function writeIntoMarkerFile($customProperties, string $thumb, string $preview): void
     {
-        fwrite(
-            $this->fileHandle,
-            '{ "Address": "' . array_key_exists('address', $customProperties) ? $customProperties['address'] : '' . '",
-         "DateTimeOriginal": "' . $customProperties['DateTimeOriginal'] . '",
-          "thumb": "' . basename($thumb) . '",
-          "preview": "' . basename($preview) . '",
-          "lon": "' . $customProperties['lon'] . '",
-          "lat": "' . $customProperties['lat'] . '"},'
-        );
+        $address = array_key_exists('address', $customProperties) ? $customProperties['address'] : '';
+        $dataString = '{
+            "Address": "' . $address . '",
+            "DateTimeOriginal": "' . $customProperties['DateTimeOriginal'] . '",
+            "thumb": "' . basename($thumb) . '",
+            "preview": "' . basename($preview) . '",
+            "lon": "' . $customProperties['lon'] . '",
+            "lat": "' . $customProperties['lat'] . '"
+          },';
+        fwrite($this->fileHandle, $dataString);
     }
 
     /**
@@ -150,7 +151,6 @@ class GeoService
                     Log::error('read exif goes wrong');
                 }
             }
-            Log::debug('GPSLatitude' . $this->image['GPSLatitude']);
             $imageFile->setCustomProperty('lat', $this->image['GPSLatitude']);
             $imageFile->setCustomProperty('lon', $this->image['GPSLongitude']);
             $this->address = '';
@@ -216,6 +216,7 @@ class GeoService
     }
 
     /**
+     * @param $targetFile
      * @return void
      */
     protected function endWriteFile($targetFile): void
@@ -242,10 +243,6 @@ class GeoService
 //                    'exiftool -geotag ' . $gpxFile->getPath() . ' -GeoSync=+2 ' . $imageFile->getPath()
 //                );
 
-                Log::info(
-                    config('app.exif_tool_path') . ' -geotag ' . $gpxFile->getPath(
-                    ) . ' -GeoSync=+2 ' . $imageFile->getPath()
-                );
                 exec(
                     config('app.exif_tool_path') . ' -geotag ' . $gpxFile->getPath(
                     ) . ' -GeoSync=+2 ' . $imageFile->getPath(),
@@ -253,7 +250,6 @@ class GeoService
                 );
 
                 if (str::contains(json_encode($output), '1 image files updated')) {
-                    Log::debug(json_encode($output));
                     return json_encode($output);
                 }
 

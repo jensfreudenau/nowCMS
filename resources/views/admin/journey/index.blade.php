@@ -46,22 +46,19 @@
                                         <td class="border-b border-slate-100 dark:border-slate-700 py-4">
                                             @if($jobsInProcess === 0)
                                                 @if($countGeo[$journey->id] !== 0)
-                                                    <a href="#" class="icon generate_geo" data-id="{{ $journey->id }}" data-token="{{ csrf_token() }}" data-journey="{{$journey->slug}}">
+                                                    <a href="/journey/admin/list" class="icon generate_geo" data-id="{{ $journey->id }}" data-token="{{ csrf_token() }}" data-journey="{{$journey->slug}}">
                                                         <span id="journey_globe_{{ $journey->id }}" class="">{{$countGeo[$journey->id]}}
                                                             <i class="fa fa-globe" aria-hidden="true"></i> Generate Geo Informations
                                                         </span>
                                                     </a>
-
                                                 @endif
                                             @endif
                                         </td>
                                         <td class="border-b border-slate-100 dark:border-slate-700 py-4">{{ $journey->active }}</td>
                                         <td class="border-b border-slate-100 dark:border-slate-700 py-4">
-                                            <a href="{{ route('journey.edit',$journey->slug) }}">
-                                            <span class="mb-3 pb-3">
+                                            <x-button-new href="{{ route('journey.edit', $journey->id) }}">
                                                 <i class="fa-regular fa-pen-to-square"></i>
-                                            </span>
-                                            </a>
+                                            </x-button-new>
                                         </td>
                                     </tr>
                                 @endforeach

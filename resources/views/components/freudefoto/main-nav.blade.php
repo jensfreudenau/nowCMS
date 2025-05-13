@@ -10,6 +10,7 @@
                         <x-freudefoto.nav-link href="/" :active="request()->is('/')" title="{{__('Blog')}}">{{__('Blog')}}</x-freudefoto.nav-link>
                         <x-freudefoto.nav-link href="/archive" :active="request()->is('/')" title="{{__('Medien')}}">{{__('Medien')}}</x-freudefoto.nav-link>
                         <x-freudefoto.dropdown/>
+                        <x-freudefoto.dropdown-bikepacking/>
                     </div>
                 </div>
 {{--                @if (auth()->user())--}}

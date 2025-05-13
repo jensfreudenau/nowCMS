@@ -10,7 +10,7 @@
     tinymce.init({
         selector: '#description',
         plugins: 'anchor autolink charmap codesample image link lists media searchreplace table visualblocks wordcount linkchecker pagebreak code imagetools',
-        toolbar: 'undo redo | link table | pagebreak code | bold italic underline | bullist numlist outdent indent | removeformat visualblocks h2 h3 h4| image| pagebreak code',
+        toolbar: 'styleselect undo redo | link table | pagebreak code | bold italic underline | bullist numlist outdent indent | removeformat visualblocks h1 h2 h3 h4| image',
         tinycomments_author: 'Jens',
         pagebreak_split_block: true,
         tiny_mce_before_init: my_switch_tinymce_p_br,
@@ -25,7 +25,12 @@
         extended_valid_elements: [
             'em[class|name|id]',
             'i[class|name|id]',
-            'table[class=table]'
+            'table[class=table]',
+            'h2[class]'
+        ],
+        style_formats: [
+            { title: 'H2 Groß', selector: 'h2', classes: 'font-bold text-5xl pb-11' },
+            { title: 'H2 Normal', selector: 'h2', classes: 'font-bold text-3xl pb-11' }
         ],
         valid_children: "+body[style], +style[type]",
         apply_source_formatting: false,
