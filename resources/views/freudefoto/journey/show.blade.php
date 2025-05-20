@@ -25,7 +25,7 @@
     <x-slot:heading></x-slot:heading>
 
     <div class="flex flex-col">
-        <article class="shadow-md bg-white dark:bg-gray-800 tracking-wide pb-24">
+        <article class="shadow-md bg-white dark:bg-gray-800 dark:text-white tracking-wide pb-24">
             <img
                 src="{{$journey->getFirstMediaUrl('images')}}"
                 alt="{{$journey->name_of_route}}"

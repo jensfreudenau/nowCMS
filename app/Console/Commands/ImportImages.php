@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use League\CommonMark\Exception\CommonMarkException;
+use Resend\Laravel\Facades\Resend;
 
 class ImportImages extends Command
 {
@@ -56,7 +57,7 @@ class ImportImages extends Command
             $baseFileName = basename($file);
             try {
                 $data = $this->setData($path, $baseFileName, $key, $category, $lastDate);
-            }catch (ImportException $exception) {
+            } catch (ImportException $exception) {
                 $adminUser = User::where('is_admin', true)->first();
                 Notification::send($adminUser, new ErrorNotification($exception));
                 $this->error('no header in image ' . $path);
@@ -87,43 +88,37 @@ class ImportImages extends Command
     }
 
     /**
-     * @param string $tags
-     * @return array
-     */
-    private function createTags(string $tags): array
-    {
-        $replaced = Str::replace(' ', '#', $tags);
-        $replaced = Str::replace(',', '#', $replaced);
-        $explode = Str::of($replaced)->explode('#');
-        $tagsArray = collect($explode)->filter();
-        return collect($tagsArray)->map(function (string $tag) {
-            return Tag::firstOrCreate(['name' => $tag])->id;
-        })->all();
-    }
-
-    /**
      * @param string $path
      * @param string $baseFileName
      * @param $key
      * @param Category $category
      * @param $lastDate
+     * @return array
+     * @throws ImportException
      */
     public function setData(string $path, string $baseFileName, $key, Category $category, $lastDate): array
     {
-        $data['header'] = ImageService::parseData('Headline', $path);
-        if (empty($data['header'])){
+//        $data['header'] = ImageService::parseData('Headline', $path);
+//        if (empty($data['header'])) {
             $data['header'] = ImageService::parseObjectName($path);
             if (empty($data['header'])) {
+                Resend::emails()->send([
+                    'from' => 'info@freudefoto.de',
+                    'to' => ['jens@freude-now.de'],
+                    'subject' => 'Import Image Problem',
+                    'html' => 'no header in image ' . $path,
+                ]);
+
                 throw new ImportException('no header in image ' . $path);
             }
-        }
+//        }
 
         $data['website'] = ImageService::parseData('*URL*', $path);
 
         if (empty($data['website'])) {
             $data['website'] = ImageService::parseSourceName($path);
             if (empty($data['website'])) {
-                $data['website'] = 'freudefoto.de';
+                $data['website'] = 'berlinerphotoblog.de';
             }
             $data['website'] = Str::of($data['website'])->chopStart(['https://', 'http://']);
         }
@@ -134,7 +129,7 @@ class ImportImages extends Command
         $data['width'] = ImageService::parseData('ImageWidth', $path);
         $data['category_id'] = 1;
         $cat = $category::whereTranslation('short', ImageService::parseData('Category', $path))->first();
-        if(is_object($cat) !== false) {
+        if (is_object($cat) !== false) {
             $data['category_id'] = $cat?->id;
         }
         $data['metadescription'] = $data['header'];
@@ -147,5 +142,20 @@ class ImportImages extends Command
         $data['keywords'] = Str::remove(',', ImageService::parseData('Keywords', $path));
 
         return $data;
+    }
+
+    /**
+     * @param string $tags
+     * @return array
+     */
+    private function createTags(string $tags): array
+    {
+        $replaced = Str::replace(' ', '#', $tags);
+        $replaced = Str::replace(',', '#', $replaced);
+        $explode = Str::of($replaced)->explode('#');
+        $tagsArray = collect($explode)->filter();
+        return collect($tagsArray)->map(function (string $tag) {
+            return Tag::firstOrCreate(['name' => $tag])->id;
+        })->all();
     }
 }

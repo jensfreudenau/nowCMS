@@ -172,11 +172,6 @@ Route::fallback(function () {
         return redirect()->to('/single/' . $similarPage->slug)
             ->with('message', 'The page you looked for was not found, but you might be interested in this.');
     }
-    // Log the miss
-    Log::info(
-        'Missing page: ' . $path . ' Request Url: ' . request()->getRequestUri() . ' Referer: ' . request(
-        )->headers->get('referer')
-    );
     // Return custom 404 view with search functionality
     return redirect('/', 301);
 });

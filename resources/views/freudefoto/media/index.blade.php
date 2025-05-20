@@ -4,7 +4,6 @@
     <title>{{Config::get('domains.titles.freudefoto_title')}} - {{__('Medien')}}</title>
 @endpush
 <x-freudefoto.layout>
-
     <article class="shadow-md bg-white dark:bg-gray-800 tracking-wide pb-24">
         @foreach($categories as $category)
             @foreach($category->contents as $content)
@@ -12,7 +11,7 @@
                 src="{{ $content->getFirstMediaUrl('images')}}"
                 alt="{{$content['header']}}_1"
             >
-            <div class="text-gray-600 italic">
+            <div class="text-gray-600  dark:text-gray-300 italic">
                 <h2 class="px-52 text-normal py-11">
                     <a href="/single/{{$content->slug}}">{{$content->header}}</a>
                 </h2>

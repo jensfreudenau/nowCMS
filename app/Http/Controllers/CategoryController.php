@@ -17,10 +17,15 @@ class CategoryController extends BaseController
 {
     public function index(): View|Factory|Application
     {
+        if (empty($categoryName)) {
+            $domain = config('app.base_domain_path', 'freudefoto');
+            $contents = Content::where('website', 'like', $domain . '%')->orderBy('date', 'desc')->get();
+            $categoryName = $contents[0]->category_id;
+        }
         $categories = Category::whereHas('contents', function ($query) {
             return $query->where('active', true)->whereLike('website', config('app.base_domain_path') . '%');
         })->get();
-        return view(config('app.base_domain_path', 'freudefoto') . '/category.index', compact('categories'));
+        return view(config('app.base_domain_path', 'freudefoto') . '/category.index', compact('categories','categoryName', 'contents'));
     }
 
     /**

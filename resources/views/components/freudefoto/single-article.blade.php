@@ -1,10 +1,10 @@
 @php use Illuminate\Support\Str; @endphp
-<article class="shadow-md bg-white dark:bg-gray-800 tracking-wide pb-24">
+<article class="shadow-md bg-white dark:bg-gray-800 dark:text-white tracking-wide pb-24">
     <img
         src="{{ $content->getFirstMediaUrl('images')}}"
         alt="{{$content['header']}}_1"
     >
-    <div class="text-gray-900 ">
+    <div class="text-gray-900 dark:text-gray-300">
         <span class="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center py-11 px-52">
           <span class="font-thin text-2xl underline">
               <a href="/getCategory/{{$content->category?->name}}">{{$content->category?->name}}</a>
