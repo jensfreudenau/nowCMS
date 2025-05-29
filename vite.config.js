@@ -1,4 +1,5 @@
 import {defineConfig} from 'vite';
+import tailwindcss from '@tailwindcss/vite'
 import laravel from 'laravel-vite-plugin';
 import mkcert from 'vite-plugin-mkcert'
 // import basicSsl from '@vitejs/plugin-basic-ssl'
@@ -24,6 +25,7 @@ export default defineConfig(
         },
 
         plugins: [
+            tailwindcss(),
             mkcert(),
             laravel({
                 input: [

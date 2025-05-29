@@ -1,7 +1,9 @@
 <!doctype html>
 <html lang="en" class="h-full">
 <head>
+
     @stack('meta_after')
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <x-feed-links/>
     <!-- Matomo -->
     <script>

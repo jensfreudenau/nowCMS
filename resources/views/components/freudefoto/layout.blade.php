@@ -28,22 +28,43 @@
         const root = document.documentElement;
 
         // Theme aus localStorage laden
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            root.classList.add('dark');
-        } else {
-            root.classList.remove('dark');
-        }
+        // const savedTheme = localStorage.getItem('theme');
+        // if (savedTheme === 'dark') {
+        //     root.classList.add('dark');
+        // } else {
+        //     root.classList.remove('dark');
+        // }
+        //
+        // toggleButton.addEventListener('click', () => {
+        //     const isDark = root.classList.toggle('dark');
+        //     localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        // });
+        // const toggleButton = document.getElementById('theme-toggle');
+        // const root = document.documentElement;
+        //
+        // // Theme aus localStorage laden
+        // const savedTheme = localStorage.getItem('theme');
+        // if (savedTheme === 'dark') {
+        //     root.classList.add('dark');
+        // } else {
+        //     root.classList.remove('dark');
+        // }
+        //
+        // toggleButton.addEventListener('click', () => {
+        //     const isDark = root.classList.toggle('dark');
+        //     localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        // });
+    });
+    const mobileMenuButton = document.querySelector('button');
+    const mobileMenu = document.querySelector('.md\\:hidden ul');
 
-        toggleButton.addEventListener('click', () => {
-            const isDark = root.classList.toggle('dark');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        });
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
     });
     // JavaScript für das Hamburger Menü
-    document.getElementById("menu-btn").addEventListener("click", function() {
-        document.getElementById("mobile-menu").classList.toggle("hidden");
-    });
+    // document.getElementById("menu-btn").addEventListener("click", function() {
+    //     document.getElementById("mobile-menu").classList.toggle("hidden");
+    // });
 </script>
 @stack('js_after')
 </body>

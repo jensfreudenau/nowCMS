@@ -34,16 +34,15 @@
                 <h2 class="text-2xl ml-3 pb-1"><a href="/single/{{$content->slug}}" >{{$content->header}}</a></h2>
             @endif
         </div>
-        <div class=" ">
-            <div class="  ml-10 float-left   mb-5 ">
-                <h3><span class="text-sm text-gray-300">{{ Carbon::parse($content->date)->format('d.m.Y')}}</span>
-                <a href="/getCategory/{{$content->category?->name}}" class="font-thin text-gray-500 ml-2">{{$content->category?->name}}</a></h3>
-                @if(!empty($content->text))
-                    <p class="mb-4 font-thin text-base text-gray-900"> {!! Str::markdown($content->text ) !!} </p>
-                @endif
-            </div>
 
+        <div class=" ml-10 float-left mb-5 ">
+            <h3><span class="text-sm text-gray-300">{{ Carbon::parse($content->date)->format('d.m.Y')}}</span>
+            <a href="/getCategory/{{$content->category?->name}}" class="font-thin text-gray-500 ml-2">{{$content->category?->name}}</a></h3>
+            @if(!empty($content->text))
+                <p class="mb-4 font-thin text-base text-gray-900"> {!! Str::markdown($content->text ) !!} </p>
+            @endif
         </div>
+
 
     </div>
     <div class="p-3 pl-7 pt-16 text-gray-300">

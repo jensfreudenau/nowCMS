@@ -4,17 +4,17 @@
         src="{{ $content->getFirstMediaUrl('images')}}"
         alt="{{$content['header']}}_1"
     >
-    <div class="text-gray-900 dark:text-gray-300">
-        <span class="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center py-11 px-52">
-          <span class="font-thin text-2xl underline">
-              <a href="/getCategory/{{$content->category?->name}}">{{$content->category?->name}}</a>
-          </span>
-        </span>
-    </div>
-    <h2 class="px-52 font-bold text-5xl pb-11">
-        <a href="/single/{{$content->slug}}">{{$content->header}}</a>
-    </h2>
-    <div class="px-52 font-thin">
+    <div class="px-8 sm:px-52">
+        <div class="text-gray-900 dark:text-gray-300 bg-primary-100 font-medium inline-flex items-center py-11">
+              <span class="font-thin text-xl underline">
+                  <a href="/getCategory/{{$content->category?->name}}">{{$content->category?->name}}</a>
+              </span>
+
+        </div>
+        <h2 class="font-bold sm:text-5xl text-3xl pb-11">
+            <a href="/single/{{$content->slug}}">{{$content->header}}</a>
+        </h2>
+    <div class="font-thin">
         @if($content->text)
             @php
                 $markDownText = Str::markdown($content->text);
@@ -31,7 +31,7 @@
     </div>
 
     @if($words <= 100)
-        <div class="justify-between items-stretch container mx-auto px-52 py-2 flex flex-wrap ">
+        <div class="justify-between items-stretch container mx-auto py-2 flex flex-wrap ">
             @php
                 $uploadsAll  = $content->getMedia('default');
                 $imageItemsAll = $content->getMedia('images');
@@ -65,7 +65,7 @@
             @endforeach
         </div>
     @endif
-    <div class="py-11 px-52">
+    <div class="py-11">
         <div class="justify-between items-stretch container flex flex-wrap ">
             <div class="flex flex-wrap  md:p-2">
                     @foreach($tags as $tag)
@@ -74,5 +74,6 @@
 
             </div>
         </div>
+    </div>
     </div>
 </article>

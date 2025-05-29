@@ -1,18 +1,13 @@
 @import url('https://fonts.bunny.net/css?family=Nunito');
 @import 'dropzone/src/dropzone';
 @import '@fortawesome/fontawesome-free/css/all.min.css';
-@import '@fortawesome/fontawesome-free/css/fontawesome.css';
-@import '@fortawesome/fontawesome-free/css/regular.css';
-@import '@fortawesome/fontawesome-free/css/solid.css';
-@import '@fortawesome/fontawesome-free/css/brands.css';
+
 @import 'venobox/dist/venobox.min.css';
 
 //$tag-pad: .2em .3em;
 //$tagMargin: 2px;
 @import '@yaireo/tagify/src/tagify.scss';
 
-@tailwind base;
-@tailwind components;
 @tailwind utilities;
 @import 'nord/src/sass/nord.scss';
 
@@ -26,10 +21,7 @@
 article p a {
     text-decoration-line: underline;
 }
-body {
-    //background-color: $nord0;
-    //color: $nord8;
-}
+
 #journey table  {
     margin-bottom:30px;
 }
