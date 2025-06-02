@@ -28,7 +28,7 @@
                     @endif
                 </div>
                 @php
-                    $tags = $content?->tags->pluck('name', 'id');
+//                    $tags = $content?->tags->pluck('name', 'id');
                     $mediaItemsAll = $content->getMedia('images');
                     $mediaItemsAll->shift();
                     $mediaItemsAll->all()
@@ -50,11 +50,11 @@
 {{--                      </span>--}}
 {{--                    </span>--}}
 {{--                    </div>--}}
-                    <div class="px-3"><span class="font-light text-sm font-xs">Tags:</span>
-                        @foreach($tags as $key => $tag)
-                            <x-streetphotoberlin.button-tag href="/tag/{{$tag}}">#{{$tag}}</x-streetphotoberlin.button-tag>
-                        @endforeach
-                    </div>
+{{--                    <div class="px-3"><span class="font-light text-sm font-xs">Tags:</span>--}}
+{{--                        @foreach($tags as $key => $tag)--}}
+{{--                            <x-streetphotoberlin.button-tag href="/tag/{{$tag}}">#{{$tag}}</x-streetphotoberlin.button-tag>--}}
+{{--                        @endforeach--}}
+{{--                    </div>--}}
                 </div>
 
             </article>
