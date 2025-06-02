@@ -1,4 +1,4 @@
-<footer class="bg-gray-50 shadow sticky top-[100vh]">
+<footer class="bg-gray-50 shadow sticky top-[100vh] text-black">
     <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-left md:justify-between">
         <span class="pl-9 text-sm sm:text-left ">
             © {{\Carbon\Carbon::now()->format('Y')}}

@@ -10,9 +10,9 @@
         @foreach($contents as $content)
             @php
                 $words = Str::of($content['text'])->wordCount();
-                $tags = $content?->tags->pluck('name', 'id');
+//                $tags = $content?->tags->pluck('name', 'id');
             @endphp
-            <x-berlinerphotoblog.article :content="$content" single="false"></x-berlinerphotoblog.article>
+            <x-berlinerphotoblog.article :content="$content" :single="false"></x-berlinerphotoblog.article>
         @endforeach
         <div>
             {{ $contents->links() }}

@@ -16,9 +16,7 @@
                         data-gall="categoryName"
                         href="{{$image['url']}}">
                         <img src="{{$image['big_square']}}" alt="{{$image['headline']}}" class="w-full h-full shadow-xl"></a>
-                    <div class="flex justify-between">
-                        <h3 class="text-sm pt-2 text-gray-700 ">{{$image['headline']}}</h3>
-                    </div>
+
                 </div>
             @endforeach
         </div>

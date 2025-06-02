@@ -1,5 +1,5 @@
 @php use Carbon\Carbon; use Illuminate\Support\Str; @endphp
-<article class=" mt-4 p-6 bg-gray-800 border border-gray-50 shadow-sm">
+<article class=" mt-4 p-6">
     <div class="m-4">
         @php
             $media = $content->getFirstMedia('images');
@@ -45,9 +45,11 @@
 
 
     </div>
-    <div class="p-3 pl-7 pt-16 text-gray-300">
-        @foreach($tags as $key => $tag)
-            <x-button-tag class="dark:bg-sky-100 p-0 m-0 bg-gray-800 text-white" href="/tag/{{$tag}}">#{{$tag}}</x-button-tag>
-        @endforeach
-    </div>
+    @if($single === 'false')
+        <div class="p-3 pl-7 pt-16 text-gray-300">
+            @foreach($tags as $key => $tag)
+                <x-button-tag class="dark:bg-sky-100 p-0 m-0 bg-gray-800 text-white" href="/tag/{{$tag}}">#{{$tag}}</x-button-tag>
+            @endforeach
+        </div>
+    @endif
 </article>
