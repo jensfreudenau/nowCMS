@@ -7,13 +7,13 @@
 @import '@fortawesome/fontawesome-free/css/brands.css';
 @import 'venobox/dist/venobox.min.css';
 
-@tailwind base;
-@tailwind components;
 @tailwind utilities;
-//@import 'nord/src/sass/nord.scss';
+@import 'nord/src/sass/nord.scss';
 /* Color Theme Swatches in Hex */
 
-
+.bg-nord {
+    background-color: #222222;
+}
 article .content a {
     text-decoration-line: underline;
 }
@@ -51,6 +51,7 @@ ul, ol {
     background-color: #CCCCCC;
     font-size: 15px;
 }
+
 
 //.vbox-child {
 //    max-width: 2500px;

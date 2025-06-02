@@ -1,80 +1,100 @@
-{{--<nav class="bg-nord-nav text-gray-400">--}}
-{{--    <div class="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">--}}
+<nav class="bg-white shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16 items-center">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <span class="text-xl font-bold text-blue-600"><a href="/" title="Home"><img class="h-8 w-8" src="{{ URL::asset('images/logo.jpg') }}" alt="{{config('domains.titles.freudefoto_title')}} - Home" ></a></span>
+            </div>
 
-{{--        <div class="flex h-16 items-center justify-between ">--}}
-{{--            <!-- Hamburger Button -->--}}
-{{--            <button data-collapse-toggle="navbar-default" id="menu-btn" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">--}}
-{{--                <span class="sr-only">Open main menu</span>--}}
-{{--                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">--}}
-{{--                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>--}}
-{{--                </svg>--}}
-{{--            </button>--}}
-{{--            <div class="flex items-center">--}}
-{{--                <div class="hidden md:block">--}}
-{{--                    <div id="menu" class="ml-10 flex items-baseline space-x-4">--}}
-{{--                        <x-freudefoto.nav-link href="/" :active="request()->is('/')" title="{{__('Blog')}}">{{__('Blog')}}</x-freudefoto.nav-link>--}}
-{{--                        <x-freudefoto.nav-link href="/archive" :active="request()->is('/')" title="{{__('Medien')}}">{{__('Medien')}}</x-freudefoto.nav-link>--}}
-{{--                        <x-freudefoto.dropdown/>--}}
-{{--                        <x-freudefoto.dropdown-bikepacking/>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="/" title="{{__('Blog')}}" class="text-gray-700 hover:text-blue-600">{{__('Blog')}}</a>
+                @if(!empty($categories) && is_object($categories))
+                    <!-- Dropdown -->
+                    <div class="relative group">
+                        <button id="dropdown-button" class="text-gray-700 hover:text-blue-600 flex items-center">
+                            {{__('Regionen')}}
+                            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div id="dropdown-menu" class="absolute top-6 left-0 bg-white shadow-lg rounded-md hidden group-hover:block z-50 min-w-[150px]">
+                            @foreach($categories as $category)
+                                <a href="/category/{{$category->name}}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">{{$category->name}}</a>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+                <a href="/archive" class="text-gray-700 hover:text-blue-600" title="{{__('Medien')}}">{{__('Medien')}}</a>
+                <div class="relative group">
+                    <button id="dropdown-button-journey" class="text-gray-700 hover:text-blue-600 flex items-center">
+                        {{__('Meine Radreisen')}}
+                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div id="dropdown-menu-journey" class="absolute top-6 left-0 bg-white shadow-lg rounded-md hidden group-hover:block z-50 min-w-[250px]">
+                        <a href="/journey/basel-nizza" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">{{__('Von Basel nach Nizza')}}</a>
+                    </div>
+                </div>
+                <!-- Suchfeld (Desktop) -->
+                <div>
+                    <form action="{{ route('search') }}" method="GET">
+                    <input type="text" name="search" placeholder="Suche..." class="px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500">
+                        <button type="submit"><i class="fa-solid fa-magnifying-glass fa-lg"></i></button>
+                    </form>
+                </div>
+            </div>
 
-{{--            <form action="{{ route('search') }}" method="GET">--}}
-{{--                --}}
-{{--                <input type="text" name="search" placeholder="{{__('Suche')}}">--}}
-{{--                <button type="submit"><i class="fa-solid fa-magnifying-glass fa-lg"></i></button>--}}
-{{--            </form>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--    <!-- Mobile Menü -->--}}
-{{--    <div id="mobile-menu" class="hidden flex-col items-center space-y-4 p-4 md:hidden">--}}
-{{--        <x-freudefoto.nav-link href="/" :active="request()->is('/')" title="{{__('Blog')}}">{{__('Blog')}}</x-freudefoto.nav-link>--}}
-{{--        <x-freudefoto.nav-link href="/archive" :active="request()->is('/')" title="{{__('Medien')}}">{{__('Medien')}}</x-freudefoto.nav-link>--}}
-{{--        <x-freudefoto.dropdown/>--}}
-{{--        <x-freudefoto.dropdown-bikepacking/>--}}
-{{--    </div>--}}
-{{--</nav>--}}
+            <!-- Hamburger Icon -->
+            <div class="md:hidden">
+                <button id="menu-toggle" class="text-gray-700 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
 
-
-<nav class="bg-blue-600 p-4">
-    <div class="container mx-auto flex justify-between items-center">
-        <a href="#" class="text-white text-2xl font-bold">Logo</a>
-        <ul class="hidden md:flex space-x-4">
-            <li><a href="#" class="text-white hover:text-blue-200">Home</a></li>
-            <li><a href="#" class="text-white hover:text-blue-200">About</a></li>
-            <li class="relative">
-                <a href="#" class="text-white hover:text-blue-200">Services</a>
-                <ul class="absolute hidden bg-blue-600 mt-2 space-y-2">
-                    <li><a href="#" class="block px-4 py-2 text-white hover:bg-blue-700">Web Design</a></li>
-                    <li><a href="#" class="block px-4 py-2 text-white hover:bg-blue-700">SEO</a></li>
-                    <li><a href="#" class="block px-4 py-2 text-white hover:bg-blue-700">Marketing</a></li>
-                </ul>
-            </li>
-            <li><a href="#" class="text-white hover:text-blue-200">Contact</a></li>
-        </ul>
-        <button class="md:hidden text-white focus:outline-none">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-            </svg>
-        </button>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-2">
+        <a href="/" title="{{__('Blog')}}" lass="block py-2 text-gray-700 hover:text-blue-600">{{__('Blog')}}</a>
+        @if(!empty($categories) && is_object($categories))
+        <!-- Dropdown (Mobile) -->
+        <div>
+            <button id="mobile-dropdown-toggle" class="w-full text-left py-2 text-gray-700 hover:text-gray-600 flex justify-between items-center">
+                {{__('Regionen')}}
+                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" stroke-width="2"
+                     viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+            </button>
+            <div id="mobile-dropdown-menu" class="hidden pl-4">
+                @foreach($categories as $category)
+                <a href="/category/{{$category->name}}" class="block py-1 text-gray-700 hover:text-blue-600">{{$category->name}}</a>
+                @endforeach
+            </div>
+        </div>
+        @endif
+        <a href="/archive" class="block py-2 text-gray-700 hover:text-blue-600" title="{{__('Medien')}}">{{__('Medien')}}</a>
+        <div>
+            <button id="mobile-dropdown-toggle-journey" class="w-full text-left py-2 text-gray-700 hover:text-gray-600 flex justify-between items-center">
+                {{__('Meine Radreisen')}}
+                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+            </button>
+            <div id="mobile-dropdown-menu-journey" class="hidden pl-4">
+                <a href="/journey/basel-nizza" class="block py-1 text-gray-700 hover:text-blue-600">{{__('Von Basel nach Nizza')}}</a>
+            </div>
+        </div>
+        <!-- Suchfeld (Mobile) -->
+        <div>
+            <form action="{{ route('search') }}" method="GET">
+            <input type="text" name="search" placeholder="Suche..." class="w-half px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                <button type="submit"><i class="fa-solid fa-magnifying-glass fa-lg"></i></button>
+            </form>
+        </div>
     </div>
 </nav>
-
-<div class="md:hidden">
-    <ul class="bg-blue-600 space-y-2 p-4">
-        <li><a href="#" class="block text-white hover:text-blue-200">Home</a></li>
-        <li><a href="#" class="block text-white hover:text-blue-200">About</a></li>
-        <li>
-            <a href="#" class="block text-white hover:text-blue-200">Services</a>
-            <ul class="pl-4 mt-2 space-y-2">
-                <li><a href="#" class="block text-white hover:text-blue-200">Web Design</a></li>
-                <li><a href="#" class="block text-white hover:text-blue-200">SEO</a></li>
-                <li><a href="#" class="block text-white hover:text-blue-200">Marketing</a></li>
-            </ul>
-        </li>
-        <li><a href="#" class="block text-white hover:text-blue-200">Contact</a></li>
-    </ul>
-</div>
-
-

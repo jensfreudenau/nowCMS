@@ -38,6 +38,7 @@ export default {
                     13: '#EBCB8B',
                     14: '#A3BE8C',
                     15: '#B48EAD',
+                    16: '#292F3B',
                 },
             },
             fontFamily: {
@@ -45,9 +46,25 @@ export default {
             },
         },
     },
-    safelist: [{
-        pattern: /hljs+/,
-    }],
+    safelist: [
+        'text-nord-0',
+        'text-nord-1',
+        'text-nord-2',
+        'text-nord-3',
+        'text-nord-4',
+        'text-nord-5',
+        'text-nord-6',
+        'text-nord-7',
+        'text-nord-8',
+        'text-nord-9',
+        'text-nord-10',
+        'text-nord-11',
+        'text-nord-12',
+        'text-nord-13',
+        'text-nord-14',
+        'text-nord-15',
+        {pattern: /hljs+/}
+    ],
     plugins: [
         forms, require('tailwind-highlightjs')
     ],

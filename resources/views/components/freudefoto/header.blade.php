@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="h-full">
+<html lang="en" class="h-full bg-nord-0">
 <head>
 
     @stack('meta_after')
@@ -22,7 +22,7 @@
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <!-- End Matomo Code -->
-    @vite(['resources/css/app.css','resources/sass/app.scss', 'resources/js/app.js'])
+    @vite(['resources/sass/app.scss', 'resources/css/app.css','resources/js/app.js'])
     @include('feed::links')
 
 </head>

@@ -2,6 +2,7 @@ import {defineConfig} from 'vite';
 import tailwindcss from '@tailwindcss/vite'
 import laravel from 'laravel-vite-plugin';
 import mkcert from 'vite-plugin-mkcert'
+
 // import basicSsl from '@vitejs/plugin-basic-ssl'
 import dns from 'node:dns'
 
@@ -39,13 +40,13 @@ export default defineConfig(
                 refresh: true,
             }),
         ],
-        css: {
-            preprocessorOptions: {
-                scss: {
-                    sourceMap: true // Aktiviert die Generierung von Source-Maps
-                }
-            }
-        },
+        // css: {
+        //     preprocessorOptions: {
+        //         scss: {
+                    // sourceMap: true // Aktiviert die Generierung von Source-Maps
+        //         }
+        //     }
+        // },
         build: {
             rollupOptions: {
                 output: {
@@ -56,6 +57,6 @@ export default defineConfig(
                     }
                 }
             },
-            sourcemap: true // Aktiviert die Generierung von Source-Maps für den Build
+            // sourcemap: true // Aktiviert die Generierung von Source-Maps für den Build
         }
     });
