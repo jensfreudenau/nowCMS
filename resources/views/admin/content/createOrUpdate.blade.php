@@ -171,7 +171,7 @@
                 let input = document.querySelector('input[name="tags"]');
                 $(function () {
                     $.ajax({
-                        'url': '/tags/tags',
+                        'url': '/admintags/tags',
                         'success': function (data) {
                             tagslist = data;
                             new Tagify(input, {

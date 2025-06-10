@@ -45,7 +45,7 @@
 
 
     </div>
-    @if($single === 'false')
+    @if($single === 'true')
         <div class="p-3 pl-7 pt-16 text-gray-300">
             @foreach($tags as $key => $tag)
                 <x-button-tag class="dark:bg-sky-100 p-0 m-0 bg-gray-800 text-white" href="/tag/{{$tag}}">#{{$tag}}</x-button-tag>
