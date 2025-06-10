@@ -11,7 +11,7 @@
                             {{$tag->contentsAll()->withCount(['tags'])->get()->count()}}
                         </span>
                     </button>
-                    <x-button-tag href="{{ route('tag.edit', $tag->id) }}" class=" text-white font-normal">edit</x-button-tag>
+                    <x-button-tag href="{{ route('admintags.edit', $tag->id) }}" class=" text-white font-normal">edit</x-button-tag>
                 </li>
                 @endforeach
             </ul>

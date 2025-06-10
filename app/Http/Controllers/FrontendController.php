@@ -9,6 +9,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
@@ -56,10 +57,20 @@ class FrontendController extends BaseController
             return redirect('/getCategory/' . $name, 303);
         }
         $content = Content::with('category')->where('slug', $slug)->first();
+        $domain = Config::get('app.base_domain_path');
+
+        if(!str($content->website)->contains($domain)) {
+            return redirect()->to('https://' . $content->website . '/single/' . $slug)
+                ->with(
+                    'message',
+                    'The page you looked for was not found, but you might be interested in this.'
+                );
+        }
+
         if (empty($content)) {
             return redirect('/');
         }
-        $tags = $content?->tags->pluck('name', 'id');
+        $tags = $content->tags->pluck('name', 'id');
         return view(
             config('app.base_domain_path', env('APP_BASE_DOMAIN_NAME')) . '/single',
             compact('content', 'tags')

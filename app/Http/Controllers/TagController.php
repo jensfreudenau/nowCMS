@@ -7,6 +7,7 @@ use App\Models\Tag;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -60,7 +61,7 @@ class TagController extends BaseController
                     'The page you looked for was not found, but you might be interested in this.'
                 )->setStatusCode(308);
         }
-
+        $domain = Config::get('app.base_domain_path');
         $contents = $tag
             ->contentsAll()
             ->with('category')
@@ -68,6 +69,18 @@ class TagController extends BaseController
             ->orderBy('date', 'desc')
             ->where('active', true)
             ->simplePaginate(5);
+        $filtered = $contents->filter(function ($repository) use ($domain) {
+            return str($repository["website"])->contains($domain);
+        });
+
+        if ($filtered->count() === 0) {
+            $content = $contents[0];
+            return redirect()->to('https://' . $content->website . '/tag/' . $tag->name)
+                ->with(
+                    'message',
+                    'The page you looked for was not found, but you might be interested in this.'
+                );
+        }
 
         return view(
             config('app.base_domain_path', env('APP_BASE_DOMAIN_NAME')) . '/tags/index',

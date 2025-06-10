@@ -67,22 +67,18 @@ Route::get('/feed/rss', function () {
     return redirect('/feed', 303);
 });
 Route::get('/tag/{tagId}', [TagController::class, 'tag']);
+Route::get('/tags/{tagId}', [TagController::class, 'tag']);
 Route::get('/blog', [FrontendController::class, 'index'])->name('blog');
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 Route::get('/', [FrontendController::class, 'index'])->name('dashboard');
 Route::get('/journey/{slug}', [JourneyController::class, 'show'])->name('journey.show');
 Route::middleware(['auth'])->group(function () {
-//    Route::get('users/index', function () {
-//        return view('admin/user.index', [
-//            'users' => User::all()
-//        ]);
-//    });
     Route::get('/medias/{id}', [MediaController::class, 'getContent']);
     Route::post('/set_on_frontsite', [MediaController::class, 'setOnFrontsite']);
-    Route::patch('/tags/{tag}', [TagController::class, 'update'])->name('tag.update');
-    Route::get('/tags/index', [TagController::class, 'index'])->name('tags.index');
-    Route::get('/tags/display', [TagController::class, 'display'])->name('tags.display');
-    Route::get('/tags/tags', [TagController::class, 'tags'])->name('tag.tags');
+    Route::patch('/admintags/{tag}', [TagController::class, 'update'])->name('admintags.update');
+    Route::get('/admintags/index', [TagController::class, 'index'])->name('admintags.index');
+    Route::get('/admintags/display', [TagController::class, 'display'])->name('admintags.display');
+    Route::get('/admintags/tags', [TagController::class, 'tags'])->name('admintags.tags');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

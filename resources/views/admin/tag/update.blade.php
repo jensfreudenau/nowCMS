@@ -16,7 +16,7 @@
 
     <script>
         function saveTag(id, name) {
-            fetch(`/tags/${id}`, {
+            fetch(`/admintags/${id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
