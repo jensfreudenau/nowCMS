@@ -59,16 +59,12 @@ class FrontendController extends BaseController
         $content = Content::with('category')->where('slug', $slug)->first();
         $domain = Config::get('app.base_domain_path');
 
-        if(!str($content->website)->contains($domain)) {
-            return redirect()->to('https://' . $content->website . '/single/' . $slug)
-                ->with(
-                    'message',
-                    'The page you looked for was not found, but you might be interested in this.'
-                );
-        }
-
         if (empty($content)) {
             return redirect('/');
+        }
+        $domain = Str::replaceFirst('_', '.', $domain);
+        if(!str($content->website)->contains($domain)) {
+            return redirect()->away('https://' . $content->website . '/single/' . $slug);
         }
         $tags = $content->tags->pluck('name', 'id');
         return view(

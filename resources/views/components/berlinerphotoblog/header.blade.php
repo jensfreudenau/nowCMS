@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="h-full bg-nord-1">
+<html lang="en" class="h-full">
 <head>
 
     <x-feed-links/>

@@ -25,7 +25,6 @@ class AppServiceProvider extends ServiceProvider
         $domain = Request::getHost();
         if($domain === Config::get('domains.domain.freude_now_blog_domain')) {
             Paginator::defaultSimpleView('pagination::simple-blog_freude-now');
-
         }
 
         $this->loadEnvironmentFromDomain();

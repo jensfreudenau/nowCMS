@@ -8,6 +8,7 @@
 @theme {
     --color-custom-yellow-500: #EDAE0A;
     --color-mint-500: oklch(0.72 0.11 178);
+    --color-mint-800: oklch(0.389 0.036 195.781);
     --color-nord-0: #2E3440;
     --color-nord-1: #3B4252;
     --color-nord-2: #434C5E;

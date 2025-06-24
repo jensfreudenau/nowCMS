@@ -1,18 +1,18 @@
-<nav class="bg-white shadow-md">
+<nav class="shadow-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16 items-center">
             <!-- Logo -->
             <div class="flex items-center">
-                <span class="text-xl font-bold text-blue-600"><a href="/" title="Home"><img class="h-8 w-8" src="{{ URL::asset('images/logo.jpg') }}" alt="{{config('domains.titles.freudefoto_title')}} - Home" ></a></span>
+                <span class="text-xl font-bold "><a href="/" title="Home"><img class="h-8 w-8" src="{{ URL::asset('images/logo.jpg') }}" alt="{{config('domains.titles.freudefoto_title')}} - Home" ></a></span>
             </div>
 
             <!-- Desktop Menu -->
             <div class="hidden md:flex items-center space-x-6">
-                <a href="/blog" title="{{__('Blog')}}" class="text-gray-700 hover:text-blue-600">{{__('Blog')}}</a>
+                <a href="/blog" title="{{__('Blog')}}" class="  hover:text-mint-500">{{__('Blog')}}</a>
                 @if(!empty($categories) && is_object($categories))
                     <!-- Dropdown -->
                     <div class="relative group">
-                        <button id="dropdown-button" class="text-gray-700 hover:text-blue-600 flex items-center">
+                        <button id="dropdown-button" class="hover:text-mint-500 flex items-center">
                             {{__('Themen')}}
                             <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
@@ -25,7 +25,7 @@
                         </div>
                     </div>
                 @endif
-                <a href="/archive" class="text-gray-700 hover:text-blue-600" title="{{__('Medien')}}">{{__('Medien')}}</a>
+                <a href="/archive" class="hover:text-mint-500" title="{{__('Medien')}}">{{__('Medien')}}</a>
 
                 <!-- Suchfeld (Desktop) -->
                 <div>

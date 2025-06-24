@@ -68,6 +68,11 @@ class Content extends Model implements HasMedia, Feedable
             ->get();
     }
 
+    public static function active()
+    {
+        return Content::where('active', true)->whereLike('website', config('app.base_domain_path') . '%');
+    }
+
     public function sluggable(): array
     {
         return [

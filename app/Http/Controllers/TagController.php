@@ -43,7 +43,7 @@ class TagController extends BaseController
                         ->with(
                             'message',
                             'The page you looked for was not found, but you might be interested in this.'
-                        )->setStatusCode(308);
+                        );
                 }
             }
             $input = request()->all();
@@ -53,7 +53,7 @@ class TagController extends BaseController
                     ->with(
                         'message',
                         'The page you looked for was not found, but you might be interested in this.'
-                    );
+                    )->setStatusCode(301);
             }
             return redirect()->to('/')
                 ->with(
@@ -75,11 +75,7 @@ class TagController extends BaseController
 
         if ($filtered->count() === 0) {
             $content = $contents[0];
-            return redirect()->to('https://' . $content->website . '/tag/' . $tag->name)
-                ->with(
-                    'message',
-                    'The page you looked for was not found, but you might be interested in this.'
-                );
+            return redirect()->away('https://' . $content->website . '/tag/' . $tag->name);
         }
 
         return view(

@@ -13,7 +13,7 @@
             </li>
 
             <li class="grid gap-2 sm:grid-cols-[auto_1fr] sm:[&amp;_q]:col-start-1">
-                <x-link  class="pl-3" href="https://streetphotoberlin.com/">Stret photos from Berlin</x-link>
+                <x-link  class="pl-3" href="https://streetphotoberlin.com/">Street photos from Berlin</x-link>
             </li>
             <li class="grid gap-2 sm:grid-cols-[auto_1fr] sm:[&amp;_q]:col-start-1">
                 <x-link  class="pl-3" href="https://freudefoto.de/">Jens' Reisefotos</x-link>

@@ -9,16 +9,20 @@ use App\Http\Controllers\JourneyController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QueuesController;
+use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 use App\Models\Content;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 Route::get('/blog', [FrontendController::class, 'index'])->name('blog');
-
+Route::get('sitemap.xml', [SitemapController::class, 'index']);
+Route::get('sitemap-content.xml', [SitemapController::class, 'content']);
+//Route::get('sitemapcontent.xml', [SitemapController::class, 'content']);
+Route::get('sitemap-categories.xml', [SitemapController::class, 'categories']);
+Route::get('sitemap-images.xml', [SitemapController::class, 'images']);
 Route::domain(config('domains.domain.berliner_photo_blog_domain'))->group(function () {
     Route::get('/', [BerlinerPhotoblogController::class, 'index']);
     Route::get('/', [BerlinerPhotoblogController::class, 'index']);

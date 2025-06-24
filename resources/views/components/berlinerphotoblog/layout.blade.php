@@ -1,8 +1,8 @@
 <x-berlinerphotoblog.header />
 <x-slot:meta>{{config('domains.titles.berliner_photo_blog_title')}}</x-slot:meta>
-<body class="h-full text-white">
+<body class="h-full text-white bg-mint-800">
 <div class="min-h-screen ">
-    <header class="bg-nord-5">
+    <header class="">
         <div class="mx-auto max-w-5xl px-4 py-6 sm:px-6 lg:px-1">
             <h1 class="font-thin text-7xl text-center text-black">
                 <a href="/">{{config('domains.titles.berliner_photo_blog_title')}}</a>
@@ -11,7 +11,7 @@
     </header>
     <x-berlinerphotoblog.main-nav />
 
-    <main class="bg-nord-5">
+    <main class="">
         <div class="mx-auto max-w-7xl py-2 sm:px-6 lg:px-8 text-lg">
             <div class="space-y-4">
                 <div class="flex flex-row">

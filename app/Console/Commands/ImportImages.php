@@ -27,6 +27,7 @@ class ImportImages extends Command
      * @var string
      */
     protected $signature = 'app:import-images';
+    protected array $data;
 
     /**
      * The console command description.
@@ -44,10 +45,8 @@ class ImportImages extends Command
     {
         $files = Storage::files(config('app.import_path'));
         Log::debug('Count Files to Import: ' . count($files));
-        $contentDate = Content::latest('date')->first()->date;
-        $lastDate = Carbon::createFromFormat('Y-m-d', $contentDate);
         $category = new Category();
-        foreach ($files as $key => $file) {
+        foreach ($files as $file) {
             $type = Storage::mimeType($file);
             if (!$type) {
                 $this->error('no type in image ' . $file);
@@ -56,26 +55,26 @@ class ImportImages extends Command
             $path = Storage::path($file);
             $baseFileName = basename($file);
             try {
-                $data = $this->setData($path, $baseFileName, $key, $category, $lastDate);
+                $this->setData($path, $baseFileName, $category);
             } catch (ImportException $exception) {
                 $adminUser = User::where('is_admin', true)->first();
                 Notification::send($adminUser, new ErrorNotification($exception));
                 $this->error('no header in image ' . $path);
                 continue;
             }
-            $content = Content::where('header', $data['header'])->first();
+            $content = Content::where('header', $this->data['header'])->first();
             if (!$content) {
-                $content = Content::create($data);
+                $content = Content::create($this->data);
             }
             $mediaItem = $content->addMedia(
                 Storage::disk('public')->path('/import/') . $baseFileName
             )->toMediaCollection('images');
-            $mediaItem->meta = $data['header'];
-            $mediaItem->headline = $data['header'];
-            $mediaItem->description = $data['metadescription'];
-            $mediaItem->keywords = $data['keywords'];
-            $mediaItem->date = $data['date'];
-            $mediaItem->website = $data['website'];
+            $mediaItem->meta = $this->data['header'];
+            $mediaItem->headline = $this->data['header'];
+            $mediaItem->description = $this->data['metadescription'];
+            $mediaItem->keywords = $this->data['keywords'];
+            $mediaItem->date = $this->data['date'];
+            $mediaItem->website = $this->data['website'];
             $mediaItem->save();
 
             $tags = $this->createTags($mediaItem->keywords);
@@ -90,58 +89,38 @@ class ImportImages extends Command
     /**
      * @param string $path
      * @param string $baseFileName
-     * @param $key
      * @param Category $category
-     * @param $lastDate
-     * @return array
+     * @return void
      * @throws ImportException
      */
-    public function setData(string $path, string $baseFileName, $key, Category $category, $lastDate): array
+    public function setData(string $path, string $baseFileName, Category $category): void
     {
-//        $data['header'] = ImageService::parseData('Headline', $path);
-//        if (empty($data['header'])) {
-            $data['header'] = ImageService::parseObjectName($path);
-            if (empty($data['header'])) {
-                Resend::emails()->send([
-                    'from' => 'info@freudefoto.de',
-                    'to' => ['jens@freude-now.de'],
-                    'subject' => 'Import Image Problem',
-                    'html' => 'no header in image ' . $path,
-                ]);
-
-                throw new ImportException('no header in image ' . $path);
+        $this->setHeader($path);
+        $this->data['website'] = ImageService::parseData('*URL*', $path);
+        if (empty($this->data['website'])) {
+            $this->data['website'] = ImageService::parseSourceName($path);
+            if (empty($this->data['website'])) {
+                $this->data['website'] = 'berlinerphotoblog.de';
             }
-//        }
-
-        $data['website'] = ImageService::parseData('*URL*', $path);
-
-        if (empty($data['website'])) {
-            $data['website'] = ImageService::parseSourceName($path);
-            if (empty($data['website'])) {
-                $data['website'] = 'berlinerphotoblog.de';
-            }
-            $data['website'] = Str::of($data['website'])->chopStart(['https://', 'http://']);
+            $this->data['website'] = Str::of($this->data['website'])->chopStart(['https://', 'http://']);
         }
 
-        $data['file_name'] = $baseFileName;
-
-        $data['height'] = ImageService::parseData('ImageHeight', $path);
-        $data['width'] = ImageService::parseData('ImageWidth', $path);
-        $data['category_id'] = 1;
+        $this->data['file_name'] = $baseFileName;
+        $this->data['height'] = ImageService::parseData('ImageHeight', $path);
+        $this->data['width'] = ImageService::parseData('ImageWidth', $path);
+        $this->data['category_id'] = 1;
         $cat = $category::whereTranslation('short', ImageService::parseData('Category', $path))->first();
         if (is_object($cat) !== false) {
-            $data['category_id'] = $cat?->id;
+            $this->data['category_id'] = $cat?->id;
         }
-        $data['metadescription'] = $data['header'];
-        $data['meta'] = $data['header'];
-        $data['single'] = 0;
-        $data['active'] = 1;
-        $data['date'] = $lastDate->addDays($key)->format('Y-m-d');
+        $this->data['metadescription'] = $this->data['header'];
+        $this->data['meta'] = $this->data['header'];
+        $this->data['single'] = 0;
+        $this->data['active'] = 1;
+        $this->data['date'] = $this->setContentDate();
         $text = ImageService::parseData('Description', $path);
-        $data['text'] = ImageService::parseText($text);
-        $data['keywords'] = Str::remove(',', ImageService::parseData('Keywords', $path));
-
-        return $data;
+        $this->data['text'] = ImageService::parseText($text);
+        $this->data['keywords'] = Str::remove(',', ImageService::parseData('Keywords', $path));
     }
 
     /**
@@ -157,5 +136,36 @@ class ImportImages extends Command
         return collect($tagsArray)->map(function (string $tag) {
             return Tag::firstOrCreate(['name' => $tag])->id;
         })->all();
+    }
+
+    /**
+     * @return string
+     */
+    public function setContentDate(): string
+    {
+        $contentDate = Content::latest('date')->first()->date;
+        $today = Carbon::now();
+        $lastCreatedDate = Carbon::createFromDate($contentDate);
+        return $today->max($lastCreatedDate)->addDay(5)->format('Y-m-d');
+    }
+
+    /**
+     * @throws ImportException
+     */
+    private function setHeader($path)
+    {
+        $this->data['header'] = ImageService::parseObjectName($path);
+        if (empty($this->data['header'])) {
+            $this->data['header'] = ImageService::parseData('*Headline*', $path);
+            if (empty($this->data['header'])) {
+                Resend::emails()->send([
+                    'from' => 'info@freudefoto.de',
+                    'to' => ['jens@freude-now.de'],
+                    'subject' => 'Import Image Problem',
+                    'html' => 'no header in image ' . $path,
+                ]);
+                throw new ImportException('no header in image ' . $path);
+            }
+        }
     }
 }
