@@ -1,52 +1,25 @@
-@php
-use Illuminate\Support\Str;
-@endphp
-
+@php use Carbon\Carbon; use Illuminate\Support\Str; @endphp
 @push('meta_after')
     <meta name="description" content="berlinerphotoblog category {{$categoryName}}">
     <link rel="canonical" href="{{ canonical() }}"/>
     <title>{{config('domains.titles.berliner_photo_blog_title')}} - {{ __('Kategorie') }} - {{$categoryName}}</title>
 @endpush
 <x-berlinerphotoblog.layout>
-    <div class="m-4 p-6 header_category  border border-gray-300 shadow-sm">
-        <h2 class="font-thin text-5xl tracking-tight text-gray-900" >{{$categoryName}}</h2>
-    </div>
-    <div class="">
-        <div class="p-5 sm:p-8">
+    <h2 class="border-b-1 " >{{$categoryName}}</h2>
+    <div class="space-y-4  text-sm max-w-5xl pt-10 grid grid-cols-2 gap-4 border-b-1 border-black">
 
-                @foreach($contents as $content)
-                    @if(Str::before($content->website, '.') === Str::before(config('app.base_domain', env('APP_BASE_DOMAIN')), '.'))
-                        @php $imageItems = $content->getMedia('images'); @endphp
-                        @if(count($imageItems))
-                            <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-                            @foreach($imageItems as $imageItem)
-                                <a
-                                    class="my-image-links"
-                                    title="{{$imageItem->headline}}"
-                                    data-overlay="#ffffff"
-                                    data-maxwidth="1000px"
-                                    data-gall="{{$categoryName}}"
-                                    href="{{asset('storage/')}}/{{$imageItem->getPathRelativeToRoot()}}">
-                                    <div class="group relative">
-                                        <img
-                                            class=""
-                                            src="{{asset('storage/')}}/{{$imageItem->getPathRelativeToRoot('big_thumb_square')}}"
-                                            alt="{{$imageItem->headline}}"
-                                        />
-
-                                    </div>
-                                </a>
-                            @endforeach
-                        @else
-
-                        @endif
-                    @endif
+        @foreach($contents as $keyContent => $content)
+            @php $imageItems = $content->getMedia('images'); @endphp
+            @foreach($imageItems as $key => $media)
+                <div class="p-2">
+                    <x-berlinerphotoblog.imageLink :media="$media" square="big_square" :content="$content" />
+                    <div class="mb-5 container px-5 py-2">
+                        <span>{{ Carbon::parse($content->date)->format('d.m.Y')}}</span>
+                        <h2 class="pb-1 text-base"><a href="/single/{{$content->slug}}" >{{$content->header}}</a></h2>
+                    </div>
                 </div>
-                @endforeach
-{{--                <div>--}}
-{{--                    {{ $contents->links() }}--}}
-{{--                </div>--}}
-        </div>
+            @endforeach
+        @endforeach
     </div>
 
         @push('js_after')
