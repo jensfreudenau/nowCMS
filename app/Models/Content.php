@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Str;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
 use Spatie\Image\Enums\Fit;
@@ -47,6 +48,24 @@ class Content extends Model implements HasMedia, Feedable
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function previous()
+    {
+        return $this->orderBy('date')
+            ->where('active', true)
+            ->whereLike('website', Str::before(config('app.base_domain'), '.') . '%')
+            ->where('id', '>', $this->id)
+            ->first();
+    }
+
+    public function next()
+    {
+        return $this->orderByDesc('date')
+            ->where('active', true)
+            ->whereLike('website', Str::before(config('app.base_domain'), '.') . '%')
+            ->where('id', '<', $this->id)
+            ->first();
     }
 
     public function toFeedItem(): FeedItem

@@ -152,7 +152,7 @@ class ImportImages extends Command
     /**
      * @throws ImportException
      */
-    private function setHeader($path)
+    private function setHeader($path): void
     {
         $this->data['header'] = ImageService::parseObjectName($path);
         if (empty($this->data['header'])) {
@@ -167,5 +167,6 @@ class ImportImages extends Command
                 throw new ImportException('no header in image ' . $path);
             }
         }
+        Log::debug('header: '. $this->data['header']);
     }
 }

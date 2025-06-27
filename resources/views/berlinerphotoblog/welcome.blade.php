@@ -7,8 +7,7 @@
     <div class="space-y-4 text-gray-700">
         <div class="grid grid-cols-2 md:grid-cols-3 gap-4 p-4">
             @foreach($images as $image)
-             
-                <div class=" mx-4 py-0 " style="border: 1px solid red;">
+                <div class=" mx-4 py-0 ">
                     <a
                         class="my-image-links"
                         title="{{$image['headline']}}"

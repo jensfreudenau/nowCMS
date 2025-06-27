@@ -34,11 +34,11 @@
                 checked = 'checked';
             }
             let html = '<div class="flex flex-col items-center space-y-2">' +
-                '<img src="' + value.url + '" class="w-32 h-32 object-cover rounded-lg shadow-lg">' +
+                '<img src="' + value.thumb + '" class="w-32 h-32 object-cover rounded-lg shadow-lg">' +
                 '<label class="items-center space-x-2 ">' +
                 '<input type="checkbox" ' + checked + ' onclick="sel(' + value.id + ')" class="w-5 h-5 text-blue-500 rounded border-gray-300 focus:ring focus:ring-blue-300">' +
                 '<span class="text-gray-700">auf der Startseite</span>' +
-                '<br><a href="' + value.preview + '">preview</a>' +
+                '<br><a href="' + value.url + '" target="_blank">preview</a>' +
                 '<br><span class="text-gray-700">' + value.date + '</span>' +
                 '</label></div>';
             document.getElementById("content").innerHTML += html;

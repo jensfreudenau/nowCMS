@@ -1,13 +1,8 @@
-<nav class="shadow-md">
+<nav>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16 items-center">
-            <!-- Logo -->
-            <div class="flex items-center">
-                <span class="text-xl font-bold "><a href="/" title="Home"><img class="h-8 w-8" src="{{ URL::asset('images/logo.jpg') }}" alt="{{config('domains.titles.freudefoto_title')}} - Home" ></a></span>
-            </div>
-
             <!-- Desktop Menu -->
-            <div class="hidden md:flex items-center space-x-6">
+            <div class=" md:flex items-center space-x-6">
                 <a href="/blog" title="{{__('Blog')}}" class="  hover:text-mint-500">{{__('Blog')}}</a>
                 @if(!empty($categories) && is_object($categories))
                     <!-- Dropdown -->
@@ -25,7 +20,7 @@
                         </div>
                     </div>
                 @endif
-                <a href="/archive" class="hover:text-mint-500" title="{{__('Medien')}}">{{__('Medien')}}</a>
+
 
                 <!-- Suchfeld (Desktop) -->
                 <div>
@@ -67,7 +62,6 @@
                 </div>
             </div>
         @endif
-        <a href="/archive" class="block py-2 text-gray-700 hover:text-blue-600" title="{{__('Medien')}}">{{__('Medien')}}</a>
 
         <!-- Suchfeld (Mobile) -->
         <div>

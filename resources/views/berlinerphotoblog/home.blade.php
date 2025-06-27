@@ -5,15 +5,11 @@
     <title>{{config('domains.titles.berliner_photo_blog_title')}} - Home</title>
 @endpush
 <x-berlinerphotoblog.layout>
-
-    <div class="space-y-4 text-gray-700 max-w-5xl">
-        @foreach($contents as $content)
-            @php
-                $words = Str::of($content['text'])->wordCount();
-//                $tags = $content?->tags->pluck('name', 'id');
-            @endphp
-            <x-berlinerphotoblog.article :content="$content" :single="false"></x-berlinerphotoblog.article>
-        @endforeach
+    <h2 class="border-b-1 " >Blog</h2>
+    <div class="space-y-4 pt-5 border-b-1  border-black ">
+        @foreach($contents as $key => $content)
+            <x-berlinerphotoblog.article :content="$content" :single="false" > </x-berlinerphotoblog.article>
+         @endforeach
         <div>
             {{ $contents->links() }}
         </div>

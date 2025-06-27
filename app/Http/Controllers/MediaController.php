@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\Websites;
 use App\Models\Category;
 use App\Models\Content;
 use Illuminate\Contracts\View\Factory;
@@ -13,7 +12,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
@@ -73,7 +71,6 @@ class MediaController extends BaseController
     public function getContent($id)
     {
         $img = [];
-
         $contents = Content::where('website', 'like', $id . '%')->orderBy('date', 'desc')->get();
         if (!$contents) {
             return response()->json(['message' => 'Content not found'], 404);
@@ -83,10 +80,11 @@ class MediaController extends BaseController
             foreach ($imageItems as $imageItem) {
                 $img[$content->id][$imageItem->id]['date'] = $imageItem->date;
                 $img[$content->id][$imageItem->id]['slug'] = $content->slug;
+                $img[$content->id][$imageItem->id]['url'] = 'https://' . $content->website . '/single/' . $content->slug;
                 $img[$content->id][$imageItem->id]['id'] = $imageItem->id;
                 $img[$content->id][$imageItem->id]['on_frontsite'] = $imageItem->on_frontsite;
                 $img[$content->id][$imageItem->id]['preview'] = $imageItem->getUrl('preview');
-                $img[$content->id][$imageItem->id]['url'] = $imageItem->getUrl('thumb_square');
+                $img[$content->id][$imageItem->id]['thumb'] = $imageItem->getUrl('thumb_square');
             }
         }
 

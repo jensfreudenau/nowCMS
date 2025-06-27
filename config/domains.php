@@ -13,7 +13,6 @@ return [
         'freude_now_blog_domain' => env('APP_FREUDE_NOW_BLOG_DOMAIN_NAME'),
         'street_photo_blog_domain' => env('APP_STREET_PHOTO_BLOG_DOMAIN_NAME'),
         'freude_foto_domain' => env('APP_FREUDE_FOTO_DOMAIN_NAME'),
-        'travle_now_domain' => env('APP_TRAVEL_NOW_DOMAIN_NAME'),
         'berliner_photo_blog_domain' => env('APP_BERLINER_PHOTO_BLOG_DOMAIN_NAME'),
     ],
     'domain' => [

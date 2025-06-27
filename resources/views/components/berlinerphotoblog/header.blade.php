@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en" class="h-full">
 <head>
-
     <x-feed-links/>
     <!-- Matomo -->
     <script>
