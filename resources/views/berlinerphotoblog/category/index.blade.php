@@ -6,22 +6,14 @@
 @endpush
 <x-berlinerphotoblog.layout>
     <h2 class="border-b-1" >{{$categoryName}}</h2>
-    <div class="pt-5 pl-2 pr-1 grid grid-cols-2 gap-4 border-b-1  border-black text-sm">
+    <div class="space-y-4 pt-5">
         @foreach($contents as $keyContent => $content)
-            @php $imageItems = $content->getMedia('images'); @endphp
-            @foreach($imageItems as $key => $media)
-                <div class="pt-4 mb-4">
-                    <x-berlinerphotoblog.imageLink :media="$media" square="big_square" :content="$content" />
-                </div>
-                <div class="m-1 mb-5 px-5 py-4">
-                    <span>{{ Carbon::parse($content->date)->format('d.m.Y')}}</span>
-                    <h2 class="text-base"><a href="/single/{{$content->slug}}" >{{$content->header}}</a></h2>
-                    @if(!empty($content->text))
-                        <p class="mb-4"> {!!  Str::words(Str::markdown($content->text), 100, ' ...')!!} </p>
-                    @endif
-                </div>
-             @endforeach
+            <x-berlinerphotoblog.article :content="$content" :single="false" > </x-berlinerphotoblog.article>
         @endforeach
+            <div class="mt-24 pt-0"></div>
+            <div>
+                {{ $contents->links() }}
+            </div>
     </div>
 
         @push('js_after')

@@ -26,7 +26,9 @@ class AppServiceProvider extends ServiceProvider
         if($domain === Config::get('domains.domain.freude_now_blog_domain')) {
             Paginator::defaultSimpleView('pagination::simple-blog_freude-now');
         }
-
+        if($domain === Config::get('domains.domain.berliner_photo_blog_domain')) {
+            Paginator::defaultSimpleView('pagination::simple-berlinerphotoblog');
+        }
         $this->loadEnvironmentFromDomain();
 //        Model::preventLazyLoading();
     }

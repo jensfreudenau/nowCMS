@@ -5,6 +5,6 @@
     data-maxwidth="1400px"
     data-gall="{{$content->category?->name}}"
     href="{{asset('storage/')}}/{{$media->getPathRelativeToRoot()}}">
-    <img class="" src="{{asset('storage/')}}/{{$media->getPathRelativeToRoot($square)}}" alt="{{$media->headline}}" />
+    <img class="{{$class}}" src="{{asset('storage/')}}/{{$media->getPathRelativeToRoot($square)}}" alt="{{$media->headline}}" />
 </a>
 

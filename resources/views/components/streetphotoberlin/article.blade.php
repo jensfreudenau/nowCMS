@@ -9,7 +9,7 @@
             $media = $content->getFirstMedia('images');
         @endphp
         @if($media)
-            <x-berlinerphotoblog.imageLink :media="$media" :content="$content"></x-berlinerphotoblog.imageLink>
+            <x-streetphotoberlin.imageLink :media="$media" :content="$content"></x-streetphotoberlin.imageLink>
         @endif
     </div>
     @php
@@ -24,9 +24,9 @@
         <div class="container mx-auto px-5 py-2">
             <div class="-m-1 flex flex-wrap ">
                 @if($numberOfImages === 2)
-                    <x-berlinerphotoblog.twoAdditionalImages :content="$content" :mediaItemsAll="$mediaItemsAll"></x-berlinerphotoblog.twoAdditionalImages>
+                    <x-streetphotoberlin.twoAdditionalImages :content="$content" :mediaItemsAll="$mediaItemsAll"></x-streetphotoberlin.twoAdditionalImages>
                 @else
-                    <x-berlinerphotoblog.multipleAdditionalImages :content="$content" :mediaItemsAll="$mediaItemsAll"></x-berlinerphotoblog.multipleAdditionalImages>
+                    <x-streetphotoberlin.multipleAdditionalImages :content="$content" :mediaItemsAll="$mediaItemsAll"></x-streetphotoberlin.multipleAdditionalImages>
                 @endif
             </div>
             @if($single === 'true')

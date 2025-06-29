@@ -5,18 +5,19 @@
 @endpush
 <x-berlinerphotoblog.layout>
     <h2 class="border-b-1" >{{$content->header}}</h2>
-    <div class="pt-5 pl-2 pr-1 gap-4 border-b-1  border-black text-sm">
+    <div class="pt-5 gap-4 text-sm">
          <x-berlinerphotoblog.article :content="$content" single="true"></x-berlinerphotoblog.article>
-        <div class="flex justify-between">
+        <div class="mt-24 pt-0 border-b-1 border-gray-400 "></div>
+        <div class="flex justify-between  pl-2 pr-1 py-1 ">
             <div>
-        @if($content->previous()?->slug)
-            <a href="/single/{{$content->previous()?->slug}}">previous</a>
-        @endif
+                @if($content->previous()?->slug)
+                    <a href="/single/{{$content->previous()?->slug}}">previous</a>
+                @endif
             </div>
             <div>
-        @if($content->next()?->slug)
-            <a href="/single/{{$content->next()?->slug}}">next</a>
-        @endif
+                @if($content->next()?->slug)
+                    <a href="/single/{{$content->next()?->slug}}">next</a>
+                @endif
             </div>
         </div>
     </div>
