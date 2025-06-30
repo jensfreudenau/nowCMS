@@ -37,6 +37,7 @@ class Content extends Model implements HasMedia, Feedable
         'date',
         'category_id',
         'website',
+        'is_text',
         'updated_at'
     ];
 

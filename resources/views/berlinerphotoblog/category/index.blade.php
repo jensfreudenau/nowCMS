@@ -8,26 +8,29 @@
     <h2 class="border-b-1" >{{$categoryName}}</h2>
     <div class="space-y-4 pt-5">
         @foreach($contents as $keyContent => $content)
-            <x-berlinerphotoblog.article :content="$content" :single="false" :gallery="$categoryName" />
+            @if($content->is_text)
+                <x-berlinerphotoblog.article :content="$content" :single="false"/>
+            @else
+                <x-berlinerphotoblog.gallery :content="$content" :single="false" :gallery="$categoryName" />
+                @push('js_after')
+                    <script type="module">
+                        new VenoBox({
+                            toolsColor: '#944349',
+                            selector: '.my-image-links',
+                            numeration: true,
+                            infinigall: true,
+                            share: false,
+                            maxWidth: "1400px",
+                            spinner: 'rotating-plane',
+                            titlePosition: 'bottom'
+                        });
+                    </script>
+                @endpush
+            @endif
         @endforeach
             <div class="mt-24 pt-0"></div>
             <div>
                 {{ $contents->links() }}
             </div>
     </div>
-
-        @push('js_after')
-            <script type="module">
-                new VenoBox({
-                    toolsColor: '#944349',
-                    selector: '.my-image-links',
-                    numeration: true,
-                    infinigall: true,
-                    share: false,
-                    maxWidth: "1400px",
-                    spinner: 'rotating-plane',
-                    titlePosition: 'bottom'
-                });
-            </script>
-        @endpush
 </x-berlinerphotoblog.layout>

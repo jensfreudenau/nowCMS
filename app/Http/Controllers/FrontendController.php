@@ -24,7 +24,7 @@ class FrontendController extends BaseController
             ->where('active', true)
             ->whereDate('date', '<=', Carbon::now('Europe/Berlin'))
             ->whereLike('website', config('app.base_domain_path') . '%')
-            ->orderByDesc('created_at')
+            ->orderByDesc('date')
             ->simplePaginate(config('app.blog_entries_per_page'));
 
         $heading = $meta = 'Reisen';

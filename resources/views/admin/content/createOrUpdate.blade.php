@@ -92,6 +92,16 @@
                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">{{ __('Einzelseite')}}
             </label>
         </div>
+        <div class="px-12 pt-10">
+            <input type="checkbox"
+                   name="is_text"
+                   id="is_text"
+                   class="rounded"
+                @checked(old('is_text', $content->is_text ?? '')) />
+            <label for="is_text"
+                   class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">{{ __('Text Content')}}
+            </label>
+        </div>
         <div class="p-12">
             <input type="checkbox"
                    name="active"

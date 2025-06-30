@@ -3,7 +3,7 @@
         <div class="flex justify-between h-16 items-center">
             <!-- Desktop Menu -->
             <div class=" md:flex items-center space-x-6">
-                <a href="/blog" title="{{__('Blog')}}" class="  hover:text-mint-500">{{__('Blog')}}</a>
+                <a href="/blog" title="{{__('Blog')}}" class="hover:text-mint-500">{{__('Blog')}}</a>
                 @if(!empty($categories) && is_object($categories))
                     <!-- Dropdown -->
                     <div class="relative group">
@@ -15,7 +15,7 @@
                         </button>
                         <div id="dropdown-menu" class="absolute top-6 left-0 bg-white shadow-lg rounded-md hidden group-hover:block z-50 min-w-[150px]">
                             @foreach($categories as $category)
-                                <a href="/category/{{$category->name}}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">{{$category->name}}</a>
+                                <a href="/category/{{$category->name}}" class="block px-4 py-2 text-gray-700 hover:text-mint-500">{{$category->name}}</a>
                             @endforeach
                         </div>
                     </div>

@@ -88,6 +88,7 @@ class ContentController extends BaseController
         ]);
         $request->merge(['active' => $request->has('active')]);
         $request->merge(['single' => $request->has('single')]);
+        $request->merge(['is_text' => $request->has('is_text')]);
         $content = Content::find($id);
         $content->update($request->all());
 

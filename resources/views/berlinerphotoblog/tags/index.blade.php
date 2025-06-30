@@ -5,7 +5,7 @@
 @endpush
 <x-berlinerphotoblog.layout>
     @foreach($contents as $content)
-        <x-berlinerphotoblog.article :content="$content" single="false" :gallery="$tag->name"/>
+        <x-berlinerphotoblog.gallery :content="$content" single="false" :gallery="$tag->name"/>
     @endforeach
     <div>
         {{ $contents->links() }}
