@@ -61,21 +61,21 @@ class TagController extends BaseController
                     'The page you looked for was not found, but you might be interested in this.'
                 )->setStatusCode(308);
         }
-        $domain = Config::get('app.base_domain_path');
-        $contents = $tag
+        $domain = Config::get('app.base_domain');
+        $allContents = $tag
             ->contentsAll()
             ->with('category')
             ->whereDate('date', '<=', Carbon::now('Europe/Berlin'))
             ->orderBy('date', 'desc')
             ->where('active', true)
-            ->simplePaginate(5);
-        $filtered = $contents->filter(function ($repository) use ($domain) {
+            ->simplePaginate(25);
+        $contents = $allContents->filter(function ($repository) use ($domain) {
             return str($repository["website"])->contains($domain);
         });
 
-        if ($filtered->count() === 0) {
-            $content = $contents[0];
-            return redirect()->away('https://' . $content->website . '/tag/' . $tag->name);
+        if ($contents->count() === 0) {
+            $content = $allContents[0];
+            return redirect()->away('https://' . $content->website);
         }
 
         return view(
