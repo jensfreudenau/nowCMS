@@ -12,7 +12,7 @@
     @if($mediaFirst)
         <div class="px-2 grid grid-cols-2 gap-4 pb-8">
             <div>
-                <x-berlinerphotoblog.imageLink :media="$mediaFirst" :class="$imgClass" :content="$content" square="big_square" />
+                <x-berlinerphotoblog.imageLink :media="$mediaFirst" :class="$imgClass" :content="$content" square="big_square" :gallery="$gallery"/>
             </div>
             <div class="container ml-3 px-0 border-b-1">
                 <div class="relative mb-5 min-h-[570px]">
@@ -36,7 +36,7 @@
                         <div class="absolute bottom-0 left-0 right-0  gap-1">
                             <div class="text-gray-300">
                                 @foreach($tags as $key => $tag)
-                                    <x-berlinerphotoblog.button-tag class=" text-gray-400" href="/tag/{{$tag}}">#{{$tag}}</x-berlinerphotoblog.button-tag>
+                                    <x-berlinerphotoblog.button-tag class=" text-gray-400" href="/tag/{{$tag}}">#{{strtolower($tag)}}</x-berlinerphotoblog.button-tag>
                                 @endforeach
                             </div>
                         </div>
@@ -49,7 +49,7 @@
                                     if($i > 4) continue;
                                 @endphp
                                 <div>
-                                    <x-berlinerphotoblog.imageLink :media="$media" :class="$imgClass" :content="$content" square="thumb_square" />
+                                    <x-berlinerphotoblog.imageLink :media="$media" :class="$imgClass" :content="$content" square="thumb_square" :gallery="$gallery"/>
                                 </div>
                             @endforeach
                         </div>
@@ -63,7 +63,7 @@
         @php $i = 0; $imgClass = "object-contain"; @endphp
         @foreach( $mediaItemsAll->all() as $key => $media)
             <div>
-                <x-berlinerphotoblog.imageLink :media="$media" :class="$imgClass" :content="$content" square="thumb_square" />
+                <x-berlinerphotoblog.imageLink :media="$media" :class="$imgClass" :content="$content" square="thumb_square" :gallery="$gallery"/>
             </div>
         @endforeach
     </div>

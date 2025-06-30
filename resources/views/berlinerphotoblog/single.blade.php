@@ -6,7 +6,7 @@
 <x-berlinerphotoblog.layout>
     <h2 class="border-b-1" >{{$content->header}}</h2>
     <div class="pt-5 gap-4 text-sm">
-         <x-berlinerphotoblog.article :content="$content" single="true"></x-berlinerphotoblog.article>
+         <x-berlinerphotoblog.article :content="$content" single="true" :gallery="$content->category?->name"/>
         <div class="mt-24 pt-0 border-b-1 border-gray-400 "></div>
         <div class="flex justify-between  pl-2 pr-1 py-1 ">
             <div>

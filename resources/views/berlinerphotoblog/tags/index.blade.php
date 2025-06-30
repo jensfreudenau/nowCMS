@@ -5,9 +5,23 @@
 @endpush
 <x-berlinerphotoblog.layout>
     @foreach($contents as $content)
-        <x-berlinerphotoblog.article :content="$content" single="false"></x-berlinerphotoblog.article>
+        <x-berlinerphotoblog.article :content="$content" single="false" :gallery="$tag->name"/>
     @endforeach
     <div>
         {{ $contents->links() }}
     </div>
+        @push('js_after')
+            <script type="module">
+                new VenoBox({
+                    toolsColor: '#944349',
+                    selector: '.my-image-links',
+                    numeration: true,
+                    infinigall: true,
+                    share: false,
+                    maxWidth: "1400px",
+                    spinner: 'rotating-plane',
+                    titlePosition: 'bottom'
+                });
+            </script>
+        @endpush
 </x-berlinerphotoblog.layout>

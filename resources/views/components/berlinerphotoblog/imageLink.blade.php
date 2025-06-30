@@ -3,7 +3,7 @@
     title="{{$content->header}}"
     data-overlay="#ffffff"
     data-maxwidth="1400px"
-    data-gall="{{$content->category?->name}}"
+    data-gall="{{$gallery}}"
     href="{{asset('storage/')}}/{{$media->getPathRelativeToRoot()}}">
     <img class="{{$class}}" src="{{asset('storage/')}}/{{$media->getPathRelativeToRoot($square)}}" alt="{{$media->headline}}" />
 </a>

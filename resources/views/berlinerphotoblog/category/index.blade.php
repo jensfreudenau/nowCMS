@@ -8,7 +8,7 @@
     <h2 class="border-b-1" >{{$categoryName}}</h2>
     <div class="space-y-4 pt-5">
         @foreach($contents as $keyContent => $content)
-            <x-berlinerphotoblog.article :content="$content" :single="false" > </x-berlinerphotoblog.article>
+            <x-berlinerphotoblog.article :content="$content" :single="false" :gallery="$categoryName" />
         @endforeach
             <div class="mt-24 pt-0"></div>
             <div>

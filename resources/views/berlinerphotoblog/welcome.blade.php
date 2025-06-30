@@ -13,7 +13,7 @@
                         title="{{$image['headline']}}"
                         data-overlay="#ffffff"
                         data-maxwidth="1000px"
-                        data-gall="categoryName"
+                        data-gall="start"
                         href="{{$image['url']}}">
                         <img src="{{$image['big_square']}}" alt="{{$image['headline']}}" class="w-full h-full"></a>
 
