@@ -21,7 +21,7 @@
             {{ __('Gib dem eine Überschrift.') }}
         </div>
         @error('header')
-        <div class="invalid-feedback">
+        <div class="invalid-feedback text-red-500">
             {{ __('eine gültige Überschrift ist erforderlich') }}
         </div>
         @enderror
@@ -33,8 +33,8 @@
                id="date"
                value="{{ old('date', $content->date ?? '') }}"
                class="mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black">
-        @error('start_date')
-        <div class="invalid-feedback">
+        @error('date')
+        <div class="invalid-feedback text-red-500">
             {{ __('ein gültiges Datum ist erforderlich') }}
         </div>
         @enderror

@@ -48,11 +48,15 @@ class ContentController extends BaseController
 
     public function store(Request $request): RedirectResponse
     {
+        $validated = $request->validate([
+            'date' => 'required',
+            'header' => 'required',
+        ]);
         $slug = Str::slug($request->header);
         $request->merge(['slug' => $slug]);
         $request->merge(['active' => $request->has('active')]);
         $request->merge(['single' => $request->has('single')]);
-
+        $request->merge(['is_text' => $request->has('is_text')]);
         $content = Content::create($request->all());
         $tags = TagService::createTags($request->input('tags'));
         StorageService::saveToStorage($request, $content);
@@ -82,9 +86,9 @@ class ContentController extends BaseController
 
     public function update(Request $request, $id): Application|Redirector|RedirectResponse
     {
-        request()->validate([
-            'header' => ['required'],
-            'date' => ['required'],
+        $validated = $request->validate([
+            'date' => 'required',
+            'header' => 'required',
         ]);
         $request->merge(['active' => $request->has('active')]);
         $request->merge(['single' => $request->has('single')]);
