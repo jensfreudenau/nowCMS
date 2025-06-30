@@ -4,51 +4,51 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Content;
-use App\Models\Tag;
+use Carbon\Carbon;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Str;
 
 class SitemapController extends Controller
 {
     public function index(): Response
     {
-        $contents = Content::active()->get();
         $domain = Request::getHost();
         return response()->view('sitemaps/sitemap', [
             'domain' => $domain,
-        ])->header('Content-Type', 'text/xml');
+        ])->header('Content-Type', 'application/xml');
     }
+
     public function content(): Response
     {
-        $contents = Content::active()->get();
+        $contents = Content::canShow()->get();
         $domain = Request::getHost();
         return response()->view('sitemaps/sitemap-content', [
             'contents' => $contents,
             'domain' => $domain,
-        ])->header('Content-Type', 'text/xml');
+        ])->header('Content-Type', 'application/xml');
     }
+
     public function categories(): Response
     {
         $categories = Category::whereHas('contents', function ($q) {
-            $q->where('active', true)
+            $q
+                ->where('active', true)
                 ->whereLike('contents.website', config('app.base_domain_path') . '%');
         })->orderBy('name')->get();
         $domain = Request::getHost();
         return response()->view('sitemaps/sitemap-categories', [
             'categories' => $categories,
-            'domain' => $domain,
-        ])->header('Content-Type', 'text/xml');
+            'domain' => Request::getHost(),
+        ])->header('Content-Type', 'application/xml');
     }
+
     public function images(): Response
     {
-        $categories = Category::whereHas('contents', function ($q) {
-            $q->where('active', true)
-                ->whereLike('contents.website', config('app.base_domain_path') . '%');
-        })->orderBy('name')->get();
+        $contents = Content::canShow()->get();
         return response()->view('sitemaps/sitemap-images', [
-            'categories' => $categories,
-            'domain' =>  Request::getHost(),
-        ])->header('Content-Type', 'text/xml');
+            'contents' => $contents,
+            'domain' => Request::getHost(),
+        ])->header('Content-Type', 'application/xml');
     }
 }

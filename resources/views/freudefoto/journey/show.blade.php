@@ -48,15 +48,11 @@
         @push('js_after')
 
             <script type="module">
-                console.log('line_data');
                 readFile('{{$url}}/line.js', setLine);
                 readFile('{{$url}}/marker.js', setMarker);
 
                 function setMarker(line_data) {
-                    console.log('line_data');
-                    console.log(line_data);
                     let geoJson = createMarkerGeoJson(line_data);
-                    console.log(geoJson);
                     for (const marker of geoJson.features) {
                         let iconurl = '{{$url}}' + '/' + marker.properties.icon.iconUrl;
                         let el = document.createElement('div');

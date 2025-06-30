@@ -8,6 +8,4 @@
     <x-freudefoto.single-article :content="$content" :words="$words" :tags="$tags"></x-freudefoto.single-article>
 @endforeach
 </div>
-<div class="mt-4">
-    {{ $contents->links() }}
-</div>
+

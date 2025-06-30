@@ -5,4 +5,7 @@
 @endpush
 <x-freudefoto.layout>
     <x-freudefoto.article :contents="$contents"></x-freudefoto.article>
+    <div class="mt-4">
+        {{ $contents->links() }}
+    </div>
 </x-freudefoto.layout>

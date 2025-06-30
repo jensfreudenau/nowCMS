@@ -13,15 +13,11 @@
     @endpush
     <x-slot:heading></x-slot:heading>
         <x-freudefoto.single-article :content="$content" :words="$words" :tags="$tags"></x-freudefoto.single-article>
-
-            @if (auth()->user())
-                <div class="py-5">
-                    <x-button-edit href="{{ route('contents.update', $content->id) }}" target="_blank">Edit</x-button-edit>
-                </div>
-            @endif
-
-
-
+        @if (auth()->user())
+            <div class="py-5">
+                <x-button-edit href="{{ route('contents.update', $content->id) }}" target="_blank">Edit</x-button-edit>
+            </div>
+        @endif
         @push('js_after')
             <script type="module">
                 new VenoBox({

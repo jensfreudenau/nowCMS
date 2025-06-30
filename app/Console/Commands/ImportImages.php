@@ -28,7 +28,7 @@ class ImportImages extends Command
      */
     protected $signature = 'app:import-images';
     protected array $data;
-
+    public const int NEXT_DAY = 3;
     /**
      * The console command description.
      *
@@ -146,7 +146,7 @@ class ImportImages extends Command
         $contentDate = Content::latest('date')->first()->date;
         $today = Carbon::now();
         $lastCreatedDate = Carbon::createFromDate($contentDate);
-        return $today->max($lastCreatedDate)->addDay(5)->format('Y-m-d');
+        return $today->max($lastCreatedDate)->addDays(self::NEXT_DAY)->format('Y-m-d');
     }
 
     /**

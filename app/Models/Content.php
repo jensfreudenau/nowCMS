@@ -88,9 +88,11 @@ class Content extends Model implements HasMedia, Feedable
             ->get();
     }
 
-    public static function active()
+    public static function canShow()
     {
-        return Content::where('active', true)->whereLike('website', config('app.base_domain_path') . '%');
+        return Content::where('active', true)
+            ->whereLike('website', config('app.base_domain_path') . '%')
+            ->whereDate('date', '<=', Carbon::now('Europe/Berlin'));
     }
 
     public function sluggable(): array
